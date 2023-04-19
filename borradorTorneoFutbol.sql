@@ -36,7 +36,7 @@ CREATE TABLE Jugador (
 	direccion VARCHAR(100),
 	fecha_nacimiento DATE
 )
-
+select * from Tecnico
 CREATE TABLE Tecnico (
 	id_tecnico INT PRIMARY KEY IDENTITY(1,1),
 	nombre VARCHAR(50),
@@ -61,6 +61,8 @@ CREATE TABLE UbicacionEstadio (
 CREATE TABLE Dirigente (
 	id_dirigente INT PRIMARY KEY IDENTITY(1,1),
 	nombre VARCHAR(50),
+	apellido_paterno VARCHAR(50),
+	apellido_materno VARCHAR(50)
 )
 
 CREATE TABLE Torneo (
@@ -182,19 +184,17 @@ foreign key (id_equipo) references Equipo(id_equipo),
 foreign key (id_posicion) references Posicion(id_posicion),
 foreign key (id_torneo) references Torneo(id_torneo)
 );
-
+select * from Alineacion
 create table Alineacion(
 id_alineacion int primary key identity(1,1),
-titular varchar(50),
-suplente varchar(50),
-posicion varchar(50),
-id_tecnico int,
 id_dirigente int,
 id_equipo int,
-foreign key (id_tecnico) references Tecnico(id_tecnico),
 foreign key (id_dirigente) references Dirigente(id_dirigente),
 foreign key (id_equipo) references Equipo(id_equipo)
 );
+
+ALTER TABLE Alineacion
+DROP constraint id_tecnico;
 
 create table ProgramaPartido(
 id_programa_partido int primary key identity(1,1),
@@ -537,6 +537,175 @@ END;
 EXEC generar_fecha_carrera;
 
 
+ALTER TABLE Equipo DROP column comentario;
+
+DELETE FROM Equipo
+WHERE nombre_equipo IS NULL;
+
+
+alter table Posicion
+alter column posicion_torneo VARCHAR(50)
+
+alter table Posicion
+alter column partidos_jugados VARCHAR(50)
+
+ALTER PROCEDURE GenerarTorneos (@FechaInicio DATETIME)
+AS
+BEGIN
+    DECLARE @Fecha DATETIME
+    SET @Fecha = @FechaInicio
+    
+    DECLARE @Contador INT
+    SET @Contador = 0
+    
+    WHILE @Contador < 20
+    BEGIN
+        DECLARE @Anio INT
+        SET @Anio = DATEPART(YEAR, @Fecha)
+        
+        DECLARE @MesInicio INT
+        DECLARE @MesFin INT
+		DECLARE @MesI DATE
+		DECLARE @MesF DATE
+		DECLARE @NumeroInicio INT
+		DECLARE @NumeroFinal INT
+
+        
+        IF @Contador % 2 = 0
+        BEGIN
+            SET @MesInicio = 1
+            SET @MesFin = 6
+        END
+        ELSE
+        BEGIN
+            SET @MesInicio = 7
+            SET @MesFin = 12
+        END
+
+        DECLARE @NombreTorneo NVARCHAR(50)
+        SET @NombreTorneo = 'Torneo ' + CONVERT(NVARCHAR(2), @Contador + 1)
+		
+		SET @numeroInicio = ROUND(RAND() * 29 + 1, 0)
+		SET @numeroFinal = ROUND(RAND() * 29 + 1, 0)
+    
+		set @MesI =  CAST(DATEFROMPARTS(@Anio, @MesInicio, @numeroInicio) AS DATE)
+		set @MesF = CAST(DATEFROMPARTS(@Anio, @MesFin, @numeroFinal) AS DATE)
+    		
+		INSERT INTO Torneo (nombre_torneo, fecha_inicio, fecha_finalizacion)
+        
+		VALUES (@NombreTorneo, @MesI, @MesF)
+
+        IF @MesInicio = 7
+		BEGIN
+			SET @Fecha = DATEADD(YEAR, 1, @Fecha)
+		END
+        SET @Contador = @Contador + 1
+    END
+END
+
+
+
+EXEC GenerarTorneos '2013-01-01'
+
+
+
+CREATE PROCEDURE generar_alineaciones_por_equipo 
+AS
+BEGIN
+    DECLARE @id_equipo INT, @num_alineaciones INT, @i INT
+    
+    -- Obtener el ID y nombre de cada equipo de la tabla "equipos"
+    DECLARE equipos_cursor CURSOR FOR 
+        SELECT id_equipo FROM Equipo
+        
+    OPEN equipos_cursor  
+    FETCH NEXT FROM equipos_cursor INTO @id_equipo
+    
+    -- Recorrer cada equipo y generar de 11 a 27 alineaciones aleatorias
+    WHILE @@FETCH_STATUS = 0  
+    BEGIN  
+        SET @num_alineaciones = ROUND(RAND() * 16, 0) + 11 -- Generar un número aleatorio entre 11 y 27
+        SET @i = 1
+        
+        WHILE (@i <= @num_alineaciones)
+        BEGIN
+            -- Generar una alineación aleatoria para el equipo actual
+            INSERT INTO Alineacion (id_equipo)           
+			VALUES (@id_equipo)
+
+            SET @i = @i + 1
+        END
+        
+        FETCH NEXT FROM equipos_cursor INTO @id_equipo
+    END  
+    
+    CLOSE equipos_cursor  
+    DEALLOCATE equipos_cursor  
+END
+
+
+EXEC generar_alineaciones_por_equipo	
+
+
+CREATE PROCEDURE generar_partidos_todos_contra_todos
+AS
+BEGIN
+    DECLARE @num_equipos INT = 12
+    DECLARE @num_jornadas INT = @num_equipos - 1
+    DECLARE @partidos_por_jornada INT = @num_equipos / 2
+    DECLARE @fecha_inicio DATE = '2023-05-01'
+    DECLARE @hora_inicio TIME = '08:00:00'
+    DECLARE @dias_entre_jornadas INT = 7
+
+    DECLARE @tabla_partidos TABLE (
+        id_partido INT IDENTITY(1,1),
+        id_equipo_local INT,
+        id_equipo_visitante INT,
+        fecha_partido DATETIME
+    )
+
+    DECLARE @fecha_jornada DATETIME = DATEADD(DAY, 1, @fecha_inicio)
+
+    DECLARE @id_equipo_local INT
+    DECLARE @id_equipo_visitante INT
+
+    -- Generar partidos para cada jornada
+    DECLARE @jornada INT = 1
+    WHILE (@jornada <= @num_jornadas)
+    BEGIN
+        SET @id_equipo_local = 1
+        WHILE (@id_equipo_local <= @num_equipos)
+        BEGIN
+            SET @id_equipo_visitante = @id_equipo_local + @jornada
+
+            -- Ajustar id del equipo visitante si es mayor que la cantidad de equipos
+            IF (@id_equipo_visitante > @num_equipos)
+            BEGIN
+                SET @id_equipo_visitante = @id_equipo_visitante - @num_equipos + 1
+            END
+
+            INSERT INTO @tabla_partidos (id_equipo_local, id_equipo_visitante, fecha_partido)
+            VALUES (@id_equipo_local, @id_equipo_visitante, DATEADD(HOUR, @id_equipo_local, DATEADD(DAY, (@jornada-1)*7, CAST(CONVERT(VARCHAR(10), @fecha_jornada, 120) + ' ' + CONVERT(VARCHAR(10), @hora_inicio, 108) AS DATETIME))))
+
+            SET @id_equipo_local = @id_equipo_local + 1
+        END
+
+        SET @jornada = @jornada + 1
+    END
+
+    -- Mostrar los partidos generados
+    SELECT * FROM @tabla_partidos ORDER BY fecha_partido
+END
+
+EXEC generar_partidos_todos_contra_todos
+
+
+------------------------------------------------------------------------------------------------
+
+
+
+select * from Alineacion
+
 select * from Equipo
 
 select * from Tecnico
@@ -566,16 +735,4 @@ select * from Rol
 select * from Arbitro
 
 select * from TipoTecnico
-
-ALTER TABLE Equipo DROP column comentario;
-
-DELETE FROM Equipo
-WHERE nombre_equipo IS NULL;
-
-
-alter table Posicion
-alter column posicion_torneo VARCHAR(50)
-
-alter table Posicion
-alter column partidos_jugados VARCHAR(50)
 
