@@ -1,10 +1,11 @@
 CREATE DATABASE TorneoFutbol;
 
-USE master;
-DROP DATABASE TorneoFutbol;
+--USE master;
+--DROP DATABASE TorneoFutbol;
 
+go
 USE TorneoFutbol;
-
+go
 -- Crear 
 -- 30 equipos
 -- 600 jugadores
@@ -22,9 +23,19 @@ CREATE TABLE TipoTecnico (
 	tipo VARCHAR(30)
 )
 
+create table ClubFutbol(
+id_club_futbol int primary key identity(1,1),
+nombre varchar(50),
+logo varchar(200),
+descripcion varchar(300),
+fecha_creacion date
+)
+
 CREATE TABLE Equipo (
     id_equipo INT PRIMARY KEY IDENTITY(1,1),
-    nombre_equipo VARCHAR(50),		
+    nombre_equipo VARCHAR(50),	
+	id_club_futbol INT,
+	FOREIGN KEY (id_club_futbol) REFERENCES ClubFutbol (id_club_futbol)
 )
 
 CREATE TABLE Jugador (
@@ -36,7 +47,7 @@ CREATE TABLE Jugador (
 	direccion VARCHAR(100),
 	fecha_nacimiento DATE
 )
-select * from Tecnico
+
 CREATE TABLE Tecnico (
 	id_tecnico INT PRIMARY KEY IDENTITY(1,1),
 	nombre VARCHAR(50),
@@ -57,7 +68,7 @@ CREATE TABLE UbicacionEstadio (
 	id_ciudad_estadio INT,
 	FOREIGN KEY (id_ciudad_estadio) REFERENCES CiudadEstadio(id_ciudad_estadio)
 )
-----------------------------------------------------------------
+
 CREATE TABLE Dirigente (
 	id_dirigente INT PRIMARY KEY IDENTITY(1,1),
 	nombre VARCHAR(50),
@@ -68,13 +79,16 @@ CREATE TABLE Dirigente (
 CREATE TABLE Torneo (
 	id_torneo INT PRIMARY KEY IDENTITY(1,1),
 	nombre_torneo VARCHAR(50),
-	fecha_inicio DATE,
-	fecha_finalizacion DATE
+	fecha_inicio_torneo DATE,
+	fecha_fin_torneo DATE,
+	monto_inscripcion INT,
+	fecha_inicio_inscripcion DATE,
+	fecha_fin_inscripcion DATE,
 )
 
 CREATE TABLE EstadoJugador (
 	id_estado_jugador INT PRIMARY KEY IDENTITY(1,1),
-	tipo INT
+	tipo_estado VARCHAR(30)
 )
 
 CREATE TABLE TipoUsuario (
@@ -99,7 +113,7 @@ CREATE TABLE EstadoPartido (
 
 CREATE TABLE Rol (
 	id_rol INT PRIMARY KEY IDENTITY(1,1),
-	nombre VARCHAR(50)
+	nombre_rol VARCHAR(50)
 )
 
 CREATE TABLE Arbitro (
@@ -109,15 +123,10 @@ CREATE TABLE Arbitro (
 	direccion VARCHAR(70)
 )
 
-
-
-
--------------------------Ericka----------------------------
-----------------------------------------------------------------
 create table Nacionalidad(
 id_nacionalidad int primary key identity(1,1),
 pais varchar(50)
-);
+)
 
 create table CambioEstado(
 id_cambio_estado int primary key identity(1,1),
@@ -126,16 +135,7 @@ id_estado_jugador int,
 id_jugador int, 
 foreign key (id_estado_jugador) references EstadoJugador(id_estado_jugador),
 foreign key (id_jugador) references Jugador(id_jugador)
-);
-
-create table ClubFutbol(
-id_club_futbol int primary key identity(1,1),
-nombre varchar(50),
-logo varchar(200),
-descripcion varchar(300),
-fecha_creacion date
-);
-
+)
 
 create table EstadisticaClub(
 id_estadistica_club int primary key identity(1,1),
@@ -145,25 +145,27 @@ tarjetas_amarillas int,
 goles_marcados int,
 id_club_futbol int, 
 foreign key (id_club_futbol) references ClubFutbol(id_club_futbol)
-);
-
+)
 
 create table Usuario(
 id_usuario int primary key identity(1,1),
-nombre varchar(50),
+nombre_usuario varchar(50),
 contraseña varchar(50),
 id_tipo_usuario int,
 foreign key (id_tipo_usuario) references TipoUsuario(id_tipo_usuario)
-);
+)
 
-
-create table Inscripcion(
-id_inscripcion int primary key identity(1,1),
-monto int,
-fecha_inscripcion date,
-id_usuario int,
-foreign key (id_usuario) references Usuario(id_usuario)
-);
+CREATE TABLE PlanillaEquipo(
+	id_planilla_equipo INT PRIMARY KEY IDENTITY(1,1),
+	forma_pago VARCHAR(50),
+	fecha_inscrito DATE,
+	id_equipo INT,
+	id_usuario INT,
+	id_torneo INT,
+	FOREIGN KEY (id_equipo) REFERENCES Equipo(id_equipo),
+	FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+	FOREIGN KEY (id_torneo) REFERENCES Torneo(id_torneo),
+)
 
 create table TorneoEquipoJugador(
 id_torneo_equipo_jugador int primary key identity(1,1),
@@ -173,7 +175,7 @@ id_equipo int,
 foreign key (id_jugador) references Jugador(id_jugador),
 foreign key (id_torneo) references Torneo(id_torneo),
 foreign key (id_equipo) references Equipo(id_equipo)
-);
+)
 
 create table PosicionEquipoTorneo(
 id_posicion_equipo_torneo int primary key identity(1,1),
@@ -183,44 +185,40 @@ id_torneo int,
 foreign key (id_equipo) references Equipo(id_equipo),
 foreign key (id_posicion) references Posicion(id_posicion),
 foreign key (id_torneo) references Torneo(id_torneo)
-);
-select * from Alineacion
+)
+
 create table Alineacion(
 id_alineacion int primary key identity(1,1),
 id_dirigente int,
 id_equipo int,
 foreign key (id_dirigente) references Dirigente(id_dirigente),
 foreign key (id_equipo) references Equipo(id_equipo)
-);
-
-ALTER TABLE Alineacion
-DROP constraint id_tecnico;
+)
 
 create table ProgramaPartido(
 id_programa_partido int primary key identity(1,1),
-fecha_hora_programada date,
+fecha_programada date,
 hora_programada time,
 marcador_local int,
 marcador_visitante int,
-id_ganador int,
-id_perdedor int,
+equipo_ganador varchar(50),
+equipo_perdedor varchar(50),
 id_torneo int,
+tarjetas_amarillas int,
+tarjetas_rojas int,
 id_alineacion_local int,
 id_alineacion_visitante int,
 id_estado_partido int,
 id_ubicacion_estadio int,
-foreign key (id_ganador) references Equipo(id_equipo),
-foreign key (id_perdedor) references Equipo(id_equipo),
 foreign key (id_torneo) references Torneo(id_torneo),
 foreign key (id_alineacion_local) references Alineacion(id_alineacion),
 foreign key (id_alineacion_visitante) references Alineacion(id_alineacion),
 foreign key (id_estado_partido) references EstadoPartido(id_estado_partido),
 foreign key (id_ubicacion_estadio) references UbicacionEstadio(id_ubicacion_estadio)
-);
+)
 
-----------------------------------------------------------------
 CREATE TABLE Designacion (
-	id_entrenador INT PRIMARY KEY IDENTITY(1,1),	
+	id_designacion INT PRIMARY KEY IDENTITY(1,1),	
 	fecha DATE,
 	id_arbitro INT,
 	id_rol INT,
@@ -230,24 +228,41 @@ CREATE TABLE Designacion (
 	FOREIGN KEY (id_arbitro) REFERENCES Arbitro(id_arbitro)
 )
 
-CREATE TABLE Tarjeta (
-	id_tarjeta INT PRIMARY KEY IDENTITY(1,1),
-	color_tarjeta INT,
-	id_estadistica_club INT,
-	id_torneo_equipo_jugador INT,
-	FOREIGN KEY (id_estadistica_club) REFERENCES EstadisticaClub(id_estadistica_club),
-	FOREIGN KEY (id_torneo_equipo_jugador) REFERENCES TorneoEquipoJugador(id_torneo_equipo_jugador)
+CREATE TABLE DetalleAlineacion(
+	id_detalle_alineacion INT PRIMARY KEY IDENTITY(1,1),
+	posicion VARCHAR(70),
+	id_jugador INT,
+	id_alineacion INT,
+	FOREIGN KEY (id_jugador) REFERENCES Jugador(id_jugador),
+	FOREIGN KEY (id_alineacion) REFERENCES Alineacion(id_alineacion)
 )
 
-CREATE TABLE Sancion (
-	id_sancion INT PRIMARY KEY IDENTITY(1,1),
+CREATE TABLE Evento(
+	id_evento INT PRIMARY KEY IDENTITY(1,1),
+	tiempo_jugado INT,
+	cantidad_pases INT,
+	id_detalle_alineacion INT,
+	FOREIGN KEY (id_detalle_alineacion) REFERENCES DetalleAlineacion(id_detalle_alineacion)
+)
+
+CREATE TABLE Tarjeta (
+	id_tarjeta INT PRIMARY KEY IDENTITY(1,1),
+	color_tarjeta VARCHAR(25),
+)
+
+CREATE TABLE TipoFalta (
+	id_tipo_falta INT PRIMARY KEY IDENTITY(1,1),
+	tip_falta VARCHAR(75),
+)
+
+CREATE TABLE Falta (
+	id_falta INT PRIMARY KEY IDENTITY(1,1),
 	minuto INT,
-	fecha_sancion DATE,
-	id_programa_partido INT,
-	id_jugador INT,
+	id_tipo_falta INT,
 	id_tarjeta INT,
-	FOREIGN KEY (id_programa_partido) REFERENCES ProgramaPartido(id_programa_partido),
-	FOREIGN KEY (id_jugador) REFERENCES Jugador(id_jugador),
+	id_detalle_alineacion INT,
+	FOREIGN KEY (id_detalle_alineacion) REFERENCES DetalleAlineacion(id_detalle_alineacion),
+	FOREIGN KEY (id_tipo_falta) REFERENCES TipoFalta(id_tipo_falta),
 	FOREIGN KEY (id_tarjeta) REFERENCES Tarjeta(id_tarjeta)
 )
 
@@ -260,48 +275,42 @@ CREATE TABLE NacionalidadJugador(
 	FOREIGN KEY (id_nacionalidad) REFERENCES Nacionalidad(id_nacionalidad)
 )
 
-CREATE TABLE AlineacionJugador(
-	id_alineacion_jugador INT PRIMARY KEY IDENTITY(1,1),
-	minuto_entrada INT,
-	minuto_salida INT,
-	fecha DATE,
-	id_jugador INT,
-	id_alineacion INT,
-	FOREIGN KEY (id_jugador) REFERENCES Jugador(id_jugador),
-	FOREIGN KEY (id_alineacion) REFERENCES Alineacion(id_alineacion)
-)
-
 CREATE TABLE Goleo(
 	id_goleo INT PRIMARY KEY IDENTITY(1,1),
 	minuto INT,
-	id_alineacion_jugador INT,
-	id_programa_partido INT,
-	FOREIGN KEY (id_alineacion_jugador) REFERENCES AlineacionJugador(id_alineacion_jugador),
-	FOREIGN KEY (id_programa_partido) REFERENCES ProgramaPartido(id_programa_partido)
+	id_detalle_alineacion INT,
+	FOREIGN KEY (id_detalle_alineacion) REFERENCES DetalleAlineacion(id_detalle_alineacion),	
 )
 
-CREATE TABLE DetalleJugador(
-	id_detalle_jugador INT PRIMARY KEY IDENTITY(1,1),
-	tiempo_jugado INT,
-	cantidad_pases INT,
-	goles_anotados INT,
-	id_jugador INT,
-	id_programa_partido INT,
-	FOREIGN KEY (id_jugador) REFERENCES Jugador(id_jugador),
-	FOREIGN KEY (id_programa_partido) REFERENCES ProgramaPartido(id_programa_partido)
+CREATE TABLE AlineacionTecnico(
+	id_alineacion_tecnico INT PRIMARY KEY IDENTITY(1,1),
+	fecha DATE,
+	id_alineacion INT,
+	id_tecnico INT,
+	FOREIGN KEY (id_alineacion) REFERENCES Alineacion(id_alineacion),
+	FOREIGN KEY (id_tecnico) REFERENCES Tecnico(id_tecnico)	
+)
+
+CREATE TABLE CambioJugador(
+	id_cambio_juagador INT PRIMARY KEY IDENTITY(1,1),
+	minuto_entrada INT,
+	minuto_salida INT,
+	id_jugador_entrada INT,
+	id_jugador_salida INT
+	FOREIGN KEY (id_jugador_entrada) REFERENCES DetalleAlineacion(id_detalle_alineacion),
+	FOREIGN KEY (id_jugador_salida) REFERENCES DetalleAlineacion(id_detalle_alineacion)
 )
 
 
---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
-ALTER TABLE Tecnico
-add id_tipo_tecnico int
-FOREIGN KEY (id_tipo_tecnico) REFERENCES TipoTecnico(id_tipo_tecnico);
+--INSERT INTO Jugador (nombre, apellido_paterno, apellido_materno)
+--SELECT nombre, apellido_paterno, apellido_materno FROM Nombres$
 
--------------------------POBLAR---------------------------
+--alter table TipoTecnico
+--alter column tipo VARCHAR(30)
 
-INSERT INTO Jugador (nombre, apellido_paterno, apellido_materno)
-SELECT nombre, apellido_paterno, apellido_materno FROM Nombres$
+---------------------------------------POBLAR------------------------------------------
 
 INSERT INTO CiudadEstadio (nombre)
 VALUES
@@ -318,8 +327,6 @@ VALUES
 	('Ciudad de Panamá, Panamá'),
 	('San José, Costa Rica'),
 	('Bogotá, Colombia')
-
-select * from CiudadEstadio
 
 INSERT INTO UbicacionEstadio (nombre_ubicacion, direccion, telefono, id_ciudad_estadio) 
 VALUES 
@@ -339,13 +346,6 @@ VALUES
 	('Estadio Nemesio Camacho "El Campín"', 'Cra. 30 #57-61, Bogotá, Colombia', '(1) 9348362', 13),
 	('Estadio Monumental de la U', 'Av. Marathon 5300, Macul, Región Metropolitana, Chile','(2) 8224-2893', 4)
 
-
-alter table TipoTecnico
-alter column tipo VARCHAR(30)
-
-
-
-
 INSERT INTO TipoTecnico (tipo)
 VALUES
 	('Entrenador Principal'),
@@ -355,7 +355,26 @@ VALUES
 	('Analista Táctico'),
 	('Scout')
 
-select * from TipoTecnico
+INSERT INTO Tarjeta (color_tarjeta)
+VALUES
+	('Tarjeta Roja'),
+	('Tarjeta Amarilla')
+
+INSERT INTO TipoFalta (tip_falta)
+VALUES
+	('Falta directa'),
+	('Falta indirecta'),
+	('Falta táctica'),
+	('Falta violenta'),
+	('Mano'),
+	('Fuera de juego'),
+	('Simulación o fingir una falta'),
+	('Retrasar el juego'),
+	('Conducta antideportiva'),
+	('Falta de respeto al arbitro'),
+
+
+---------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE generar_correos
 AS
@@ -720,13 +739,11 @@ select * from Torneo
 
 select * from EstadoJugador
 
-select * from PosicionJuego
-
 select * from TipoUsuario
 
 select * from Posicion
 
-select * from Ciudad
+select * from CiudadEstadio
 
 select * from EstadoPartido
 
