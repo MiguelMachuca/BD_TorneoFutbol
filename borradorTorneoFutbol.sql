@@ -1709,9 +1709,8 @@ BEGIN
 	FETCH NEXT FROM cursor_torneo INTO @id_torneo
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		DECLARE @numero INT = CAST((RAND()*(16-8)+8) AS INT)
 			
-		EXEC generar_partidos_todos_contra_todos @numero, @id_torneo
+		EXEC AgregarPartidoProgramadoA @id_torneo
 		
 	FETCH NEXT FROM cursor_torneo INTO @id_torneo;
 	END

@@ -2857,7 +2857,7 @@ BEGIN
 				SET @c = @c + 1
 			END
 			set @id_alineacion = @id_alineacion + 1
-			select * from @DetalleAlineacion
+			-- select * from @DetalleAlineacion
 		
 			INSERT INTO DetalleAlineacion (posicion, id_jugador, id_alineacion)
 			SELECT posicion, id_jugador, id_alineacion
@@ -2914,7 +2914,7 @@ BEGIN
 	DEALLOCATE cursor_evento;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarPartidoProgramadoA]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarPartidoProgramadoA]    Script Date: 19/05/2023 8:52:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2922,8 +2922,10 @@ GO
 CREATE PROCEDURE [dbo].[AgregarPartidoProgramadoA] (@id_torneo INT)
 AS
 BEGIN	
-	DECLARE @id_alineacion_local INT, @id_alineacion_visitante INT, @fecha_programada DATE, @dias INT	
-	DECLARE @id_equipo1 INT, @id_equipo2 INT, @cantidad INT, @fecha_inicio DATE, @fecha_fin DATE 
+	DECLARE @id_alineacion_local INT, @id_alineacion_visitante INT, @fecha_programada DATE, @dias INT,
+	@id_equipo1 INT, @id_equipo2 INT, @cantidad INT, @fecha_inicio DATE, @fecha_fin DATE, 
+	@id_programa_partido INT
+	
 	------------------------------------------------------------------------------	
 	SELECT @fecha_inicio = fecha_inicio_torneo, @fecha_fin = fecha_fin_torneo 
 	FROM Torneo WHERE id_torneo = @id_torneo
@@ -2957,6 +2959,8 @@ BEGIN
 			-------------------------------------------------------------------------------------------------------------
             INSERT INTO ProgramaPartido(id_alineacion_local, id_alineacion_visitante, fecha_programada, id_torneo)
             VALUES (@id_alineacion_local, @id_alineacion_visitante, @fecha_programada, @id_torneo)
+			SET @id_programa_partido = SCOPE_IDENTITY();
+			EXEC AgregarPartidoProgramadoB @id_programa_partido
 			-------------------------------------------------------------------------------------------------------------
 			SELECT @fecha_programada = DATEADD(day, CAST(RAND()*(@dias) AS int), @fecha_inicio)			
 			
@@ -2967,6 +2971,8 @@ BEGIN
 			-------------------------------------------------------------------------------------------------------------
 			INSERT INTO ProgramaPartido(id_alineacion_local, id_alineacion_visitante, fecha_programada, id_torneo)
             VALUES (@id_alineacion_local, @id_alineacion_visitante, @fecha_programada, @id_torneo)
+			SET @id_programa_partido = SCOPE_IDENTITY();
+			EXEC AgregarPartidoProgramadoB @id_programa_partido
 			-------------------------------------------------------------------------------------------------------------
 			FETCH NEXT FROM cursorB INTO @id_equipo2;
 		END
@@ -2976,6 +2982,59 @@ BEGIN
 	END
 	CLOSE cursorA;
 	DEALLOCATE cursorA;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AgregarPartidoProgramadoB]    Script Date: 19/05/2023 8:52:20 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[AgregarPartidoProgramadoB] (@id_programa_partido INT)
+AS
+BEGIN		
+    DECLARE @hora_programada TIME, @marcador_local INT, @marcador_visitante INT, @equipo_ganador varchar(50), 
+	@equipo_perdedor varchar(50), @tarjetas_amarillas INT, @tarjetas_rojas INT, @id_ubicacion_estadio INT, 
+	@id_estado_partido INT = 1, @faltas INT, @cambios INT, @id_alineacion_visitante INT, @id_alineacion_local INT,
+	@pases INT, @penales INT, @tiros_libres INT, @duracion_partido INT, @identificador_marcador INT
+
+	SELECT TOP 1 @id_ubicacion_estadio = id_ubicacion_estadio FROM UbicacionEstadio ORDER BY NEWID()	
+	SET @tarjetas_amarillas = FLOOR(2 + (RAND() * (4 - 2 + 1)))
+	SET @tarjetas_rojas = FLOOR(0 + (RAND() * (1 - 0 + 1)))			
+	SET @marcador_local = FLOOR(0 + (RAND() * (4 - 0 + 1)))
+	SET @marcador_visitante = FLOOR(0 + (RAND() * (4 - 0 + 1)))
+	SET @faltas = CAST(RAND() * 5 + 15 AS INT)
+	SET @cambios = CAST(RAND() * 3 + 4 AS INT)
+	SET @hora_programada = RIGHT(DATEADD(hour, CAST(RAND() * 9 AS int), '08:00'), 7)
+	SET @pases = 400 + CAST((RAND() * (600 - 400 + 1)) AS INT)
+	SET @penales = FLOOR(0 + (RAND() * (1 - 0 + 1)))
+	SET @tiros_libres = 10 + (RAND() * (15 - 10))
+	SET @duracion_partido = 95 + (RAND() * (100 - 95))
+
+	SELECT @id_alineacion_local = id_alineacion_local, @id_alineacion_visitante = id_alineacion_visitante
+	FROM ProgramaPartido
+	WHERE id_programa_partido = @id_programa_partido 
+
+	IF @marcador_local > @marcador_visitante
+	BEGIN
+		SET @identificador_marcador = 0
+	END
+	IF @marcador_local < @marcador_visitante
+	BEGIN
+		SET @identificador_marcador = 1
+	END
+	IF @marcador_local = @marcador_visitante
+	BEGIN
+		SET @identificador_marcador = 2
+	END
+
+	UPDATE ProgramaPartido
+	SET hora_programada = @hora_programada, marcador_local = @marcador_local, marcador_visitante = @marcador_visitante,
+	tarjetas_amarillas = @tarjetas_amarillas, tarjetas_rojas = @tarjetas_rojas, cambios = @cambios, faltas = @faltas, 
+	id_estado_partido = @id_estado_partido, id_ubicacion_estadio = @id_ubicacion_estadio, pases = @pases, 
+	penales = @penales, tiros_libres = @tiros_libres, duracion_partido = @duracion_partido, 
+	identificador_marcador = @identificador_marcador
+
+	WHERE id_programa_partido = @id_programa_partido
 END
 GO
 /****** Object:  StoredProcedure [dbo].[AgregarPlanillaEquipoA]    Script Date: 18/05/2023 20:10:29 ******/
@@ -2997,7 +3056,7 @@ BEGIN
 	WHILE @@FETCH_STATUS = 0	
 	BEGIN
 		SET @menor = 5 
-		SET @mayor = 15		
+		SET @mayor = 13		
 		SET @numero_equipo = CAST((RAND() * (@mayor - @menor + 1) + @menor) AS INT);
 		SET @mayor = CAST((RAND() * (30 - @numero_equipo + 1) + @numero_equipo) AS INT); 
 		SET @menor = (@mayor - @numero_equipo) + 1
@@ -3255,6 +3314,33 @@ BEGIN
 	END
 	CLOSE cursor_planilla;
 	DEALLOCATE cursor_planilla;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AgregarTorneos]    Script Date: 19/05/2023 9:11:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[AgregarTorneos]
+AS 
+BEGIN
+	DECLARE @id_torneo INT
+	DECLARE cursor_torneo CURSOR FOR
+	SELECT id_torneo
+	FROM Torneo;
+
+	OPEN cursor_torneo;
+
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+			
+		EXEC AgregarPartidoProgramadoA @id_torneo
+		
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo;
+	END
+	CLOSE cursor_torneo;
+	DEALLOCATE cursor_torneo;
 END
 GO
 /****** Object:  StoredProcedure [dbo].[generar_alineacion_tecnico]    Script Date: 18/05/2023 20:10:29 ******/
@@ -3721,57 +3807,6 @@ END
 GO
 ALTER TABLE [dbo].[PosicionEquipoTorneo] ENABLE TRIGGER [ActualizarEstadisticaClubParteUno]
 GO
-/****** Object:  Trigger [dbo].[AgregarPartidoProgramadoB]    Script Date: 18/05/2023 20:10:29 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TRIGGER [dbo].[AgregarPartidoProgramadoB]
-ON [dbo].[ProgramaPartido]
-AFTER INSERT
-AS
-BEGIN		
-    DECLARE @hora_programada TIME, @marcador_local INT, @marcador_visitante INT, @equipo_ganador varchar(50), 
-	@equipo_perdedor varchar(50), @tarjetas_amarillas INT, @tarjetas_rojas INT, @id_ubicacion_estadio INT, 
-	@id_estado_partido INT = 1, @faltas INT, @cambios INT, @id_programa_partido INT, @id_alineacion_visitante INT,
-	@id_alineacion_local INT
-
-	SELECT TOP 1 @id_ubicacion_estadio = id_ubicacion_estadio FROM UbicacionEstadio ORDER BY NEWID()	
-	SET @tarjetas_amarillas = FLOOR(2 + (RAND() * (4 - 2 + 1)))
-	SET @tarjetas_rojas = FLOOR(0 + (RAND() * (1 - 0 + 1)))			
-	SET @marcador_local = FLOOR(0 + (RAND() * (4 - 0 + 1)))
-	SET @marcador_visitante = FLOOR(0 + (RAND() * (4 - 0 + 1)))
-	SET @faltas = CAST(RAND() * 5 + 15 AS INT)
-	SET @cambios = CAST(RAND() * 3 + 4 AS INT)
-	SET @hora_programada = RIGHT(DATEADD(hour, CAST(RAND() * 9 AS int), '08:00'), 7)
-	
-	SELECT @id_programa_partido = id_programa_partido, 
-	@id_alineacion_local = id_alineacion_local, @id_alineacion_visitante = id_alineacion_visitante
-	FROM inserted
-
-	IF @marcador_local > @marcador_visitante
-	BEGIN
-		SELECT @equipo_ganador = nombre_equipo FROM Equipo WHERE id_equipo 
-		IN (SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion_local)
-		SELECT @equipo_perdedor = nombre_equipo FROM Equipo WHERE id_equipo 
-		IN (SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion_visitante)
-	END
-	IF @marcador_local < @marcador_visitante
-	BEGIN
-		SELECT @equipo_ganador = nombre_equipo FROM Equipo WHERE id_equipo 
-		IN (SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion_visitante)
-		SELECT @equipo_perdedor = nombre_equipo FROM Equipo WHERE id_equipo 
-		IN (SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion_local)
-	END
-	UPDATE ProgramaPartido
-	SET hora_programada = @hora_programada, marcador_local = @marcador_local, marcador_visitante = @marcador_visitante,
-	tarjetas_amarillas = @tarjetas_amarillas, tarjetas_rojas = @tarjetas_rojas, cambios = @cambios, faltas = @faltas, 
-	id_estado_partido = @id_estado_partido, id_ubicacion_estadio = @id_ubicacion_estadio
-	WHERE id_programa_partido = @id_programa_partido
-END
-GO
-ALTER TABLE [dbo].[ProgramaPartido] ENABLE TRIGGER [AgregarPartidoProgramadoB]
-GO
 /****** Execute Procedures Date: 03/05/2023 9:51:06 ******/
 DECLARE @year int = 10
 -- TODO: Establezca los valores de los parámetros aquí.
@@ -3786,9 +3821,7 @@ EXECUTE [dbo].[AgregarPlanillaEquipoA]
 GO
 EXECUTE [dbo].[AgregarPlanillaEquipoB]
 GO
-DECLARE @id_torneo int = 2
-EXECUTE [dbo].[AgregarPartidoProgramadoA]
-	@id_torneo
+EXECUTE [dbo].[AgregarTorneos]
 GO
 EXECUTE [dbo].[generar_alineacion_tecnico] 
 GO
