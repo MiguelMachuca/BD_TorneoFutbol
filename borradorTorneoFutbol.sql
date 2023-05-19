@@ -142,9 +142,12 @@ create table CambioEstado(
 create table EstadisticaClub(
 	id_estadistica_club int primary key identity(1,1),
 	partidos_jugados int,
+	partidos_ganados int,
+	goles_marcados int,
+	goles_encontra int,
+	diferencia_goles int,
 	tarjetas_rojas int,
 	tarjetas_amarillas int,
-	goles_marcados int,
 	id_club_futbol int, 
 	foreign key (id_club_futbol) references ClubFutbol(id_club_futbol)
 )
@@ -169,13 +172,12 @@ CREATE TABLE PlanillaEquipo(
 	FOREIGN KEY (id_torneo) REFERENCES Torneo(id_torneo),
 )
 
-create table TorneoEquipoJugador(
+create table EquipoJugador(
 	id_torneo_equipo_jugador int primary key identity(1,1),
 	id_jugador int,
-	id_torneo int,
 	id_equipo int,
-	foreign key (id_jugador) references Jugador(id_jugador),
-	foreign key (id_torneo) references Torneo(id_torneo),
+	posicion int,
+	foreign key (id_jugador) references Jugador(id_jugador),	
 	foreign key (id_equipo) references Equipo(id_equipo)
 )
 
@@ -201,13 +203,15 @@ create table Alineacion(
 create table ProgramaPartido(
 	id_programa_partido int primary key identity(1,1),
 	fecha_programada date,
-	hora_programada time,
+	hora_programada TIME(0) CONSTRAINT CK_TiempoFormato CHECK (hora_programada = CONVERT(TIME(0), CONVERT(VARCHAR(5), hora_programada, 108))),
 	marcador_local int,
 	marcador_visitante int,
 	equipo_ganador varchar(50),
 	equipo_perdedor varchar(50),
 	tarjetas_amarillas int,
 	tarjetas_rojas int,
+	cambios int,
+	faltas int,
 	id_torneo int,
 	id_alineacion_local int,
 	id_alineacion_visitante int,
@@ -557,7 +561,7 @@ BEGIN
   DECLARE @direccion VARCHAR(100);
   
   DECLARE cursor_personas CURSOR FOR 
-    SELECT id_jugador FROM Jugador;
+    SELECT id_tecnico FROM Tecnico;
     
   OPEN cursor_personas;
   
@@ -583,7 +587,7 @@ BEGIN
     
     SET @direccion = CONCAT('Calle ', ABS(CHECKSUM(NEWID())) % 1000, ', ', @municipio, ', Santa Cruz, Bolivia');
     
-    UPDATE Jugador SET direccion = @direccion WHERE id_jugador = @id;
+    UPDATE Tecnico SET direccion = @direccion WHERE id_tecnico = @id;
     
     FETCH NEXT FROM cursor_personas INTO @id;
   END
@@ -942,55 +946,54 @@ CREATE PROCEDURE AgregarDetalleAlineacion
 EXEC AgregarDetalleAlineacion
 
 CREATE PROCEDURE AgregarDesignacion
-	AS
-	BEGIN
-		DECLARE @fecha DATE
-		DECLARE @id_arbitro INT
-		DECLARE @id_rol INT
-		DECLARE @id_programa_partido INT
+AS
+BEGIN
+	DECLARE @fecha DATE
+	DECLARE @id_arbitro INT
+	DECLARE @id_rol INT
+	DECLARE @id_programa_partido INT
 		
-		DECLARE @Designacion TABLE(id int identity (1,1), fecha DATE, id_arbitro INT,id_rol INT, id_programa_partido INT)
-		DECLARE cursor1 CURSOR FOR
-		SELECT id_programa_partido, fecha_programada
-		FROM ProgramaPartido;
+	DECLARE @Designacion TABLE(id int identity (1,1), fecha DATE, id_arbitro INT,id_rol INT, id_programa_partido INT)
+	DECLARE cursor1 CURSOR FOR
+	SELECT id_programa_partido, fecha_programada
+	FROM ProgramaPartido;
 
-		OPEN cursor1;
+	OPEN cursor1;
+
+	FETCH NEXT FROM cursor1 INTO @id_programa_partido, @fecha;
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		DECLARE @i INT = 1
+		while @i <= 4
+		BEGIN
+			DECLARE @cant INT = 1
+			WHILE @cant >= 1
+				BEGIN						
+					SELECT TOP 1 @id_rol = id_rol FROM Rol ORDER BY NEWID()
+					SELECT @cant = COUNT(*) FROM @Designacion WHERE id_rol = @id_rol
+					IF @cant = 0
+						BEGIN
+							SELECT TOP 1 @id_arbitro = id_arbitro FROM Arbitro ORDER BY NEWID()		
+							SELECT @cant = COUNT(*) FROM @Designacion WHERE id_arbitro = @id_arbitro						
+						END
+				END
+			INSERT INTO @Designacion(fecha, id_arbitro, id_rol, id_programa_partido)
+			VALUES (@fecha, @id_arbitro, @id_rol, @id_programa_partido)	
+
+			SET @i = @i + 1
+		END
+
+		INSERT INTO Designacion (fecha, id_arbitro, id_rol, id_programa_partido)
+		SELECT fecha, id_arbitro, id_rol, id_programa_partido
+		FROM @Designacion;
+		DELETE FROM @Designacion
 
 		FETCH NEXT FROM cursor1 INTO @id_programa_partido, @fecha;
-
-		WHILE @@FETCH_STATUS = 0
-		BEGIN
-			DECLARE @i INT = 1
-			while @i <= 4
-			BEGIN
-				DECLARE @cant INT = 1
-				WHILE @cant >= 1
-					BEGIN						
-						SELECT TOP 1 @id_rol = id_rol FROM Rol ORDER BY NEWID()
-						SELECT @cant = COUNT(*) FROM @Designacion WHERE id_rol = @id_rol
-						IF @cant = 0
-							BEGIN
-								SELECT TOP 1 @id_arbitro = id_arbitro FROM Arbitro ORDER BY NEWID()		
-								SELECT @cant = COUNT(*) FROM @Designacion WHERE id_arbitro = @id_arbitro						
-							END
-					END
-				INSERT INTO @Designacion(fecha, id_arbitro, id_rol, id_programa_partido)
-				VALUES (@fecha, @id_arbitro, @id_rol, @id_programa_partido)	
-
-				SET @i = @i + 1
-			END
-
-			INSERT INTO Designacion (fecha, id_arbitro, id_rol, id_programa_partido)
-			SELECT fecha, id_arbitro, id_rol, id_programa_partido
-			FROM @Designacion;
-			delete from @Designacion
-
-
-			FETCH NEXT FROM cursor1 INTO @id_programa_partido, @fecha;
-		END
-		CLOSE cursor1;
-		DEALLOCATE cursor1;
 	END
+	CLOSE cursor1;
+	DEALLOCATE cursor1;
+END
 
 EXEC AgregarDesignacion
 
@@ -1203,7 +1206,7 @@ END
 
 EXEC GenerarCambioJugador
 
-alter PROCEDURE AgregarEvento
+CREATE PROCEDURE AgregarEvento
 AS
 BEGIN
 	DECLARE @tiempo_jugado INT
@@ -1528,11 +1531,589 @@ select * from ProgramaPartido WHERE id_alineacion_local = 153
 
 
 
+select * from PlanillaEquipo
+
+
+select * from Posicion
+
+select count(*) 
+from Alineacion 
+where id_equipo = 7 
+and id_alineacion 
+in (select id_alineacion_visitante from ProgramaPartido where id_torneo = 1)
+
+select count(*) 
+from Alineacion 
+where id_equipo = 7 
+and id_alineacion 
+in (select id_alineacion_local from ProgramaPartido where id_torneo = 1)
+
+DECLARE @partidos_jugados INT
+
+
+------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------
+
+---------------------------------------------------------
+CREATE PROCEDURE AgregarPosicion
+AS
+BEGIN
+	DECLARE @id_equipo INT
+	DECLARE @id_torneo	INT
+	DECLARE @partidos_jugados INT
+
+	DECLARE cursor_planilla CURSOR FOR
+	SELECT id_equipo, id_torneo
+	FROM PlanillaEquipo;
+
+	OPEN cursor_planilla;
+
+	FETCH NEXT FROM cursor_planilla INTO @id_equipo, @id_torneo
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		DECLARE @puntos_equipos TABLE(id INT PRIMARY KEY IDENTITY(1,1), id_equipo int, cantidad_puntos int)
+		DECLARE @equipo_torneo TABLE(id INT PRIMARY KEY IDENTITY(1,1), id_alineacion INT)
+		DECLARE @id_alineacion INT
+		DECLARE @marcador_local INT
+		DECLARE @marcador_visitante INT
+		DECLARE @cantidad_puntos INT = 0
+		DECLARE @partidos_ganados INT = 0
+		DECLARE @partidos_empatados INT = 0
+		DECLARE @goles_anotados INT = 0
+		DECLARE @goles_encontra INT = 0
+		DECLARE @diferencia_goles INT = 0
+
+		INSERT INTO @equipo_torneo (id_alineacion)
+		SELECT id_alineacion
+		FROM Alineacion
+		WHERE id_equipo = @id_equipo
+		and id_alineacion 
+		in (select id_alineacion_local from ProgramaPartido where id_torneo = @id_torneo)
+		
+		INSERT INTO @equipo_torneo (id_alineacion)
+		SELECT id_alineacion
+		FROM Alineacion
+		WHERE id_equipo = @id_equipo
+		and id_alineacion 
+		in (select id_alineacion_visitante from ProgramaPartido where id_torneo = @id_torneo)
+
+		DECLARE cursor_equipo CURSOR FOR
+		SELECT id_alineacion
+		FROM @equipo_torneo;
+
+		OPEN cursor_equipo;
+
+		FETCH NEXT FROM cursor_equipo INTO @id_alineacion
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+  
+			SELECT @marcador_local = marcador_local, @marcador_visitante = marcador_visitante 
+			FROM ProgramaPartido 
+			WHERE id_alineacion_local = @id_alineacion 
+		
+			IF @marcador_local > @marcador_visitante
+			BEGIN
+				SET @cantidad_puntos = @cantidad_puntos + 3
+				SET @partidos_ganados = @partidos_ganados + 1
+				SET @goles_anotados = @goles_anotados + @marcador_local
+			END
+			IF @marcador_local = @marcador_visitante
+			BEGIN
+				SET @cantidad_puntos = @cantidad_puntos + 1
+				SET @partidos_empatados = @partidos_empatados + 1
+				SET @goles_anotados = @goles_anotados + @marcador_local
+				SET @goles_encontra = @goles_encontra + @marcador_visitante
+			END
+			IF @marcador_local < @marcador_visitante
+			BEGIN
+				SET @goles_encontra = @goles_encontra + @marcador_visitante
+			END			
+
+			SELECT @marcador_local = marcador_local, @marcador_visitante = marcador_visitante 
+			FROM ProgramaPartido 
+			WHERE id_alineacion_visitante = @id_alineacion 
+		
+			IF @marcador_visitante > @marcador_local
+			BEGIN
+				SET @cantidad_puntos = @cantidad_puntos + 3
+				SET @partidos_ganados = @partidos_ganados + 1
+				SET @goles_anotados = @goles_anotados + @marcador_visitante
+			END
+			IF @marcador_visitante = @marcador_local
+			BEGIN
+				SET @cantidad_puntos = @cantidad_puntos + 1
+				SET @partidos_empatados = @partidos_empatados + 1
+				SET @goles_anotados = @goles_anotados + @marcador_visitante
+				SET @goles_encontra = @goles_encontra + @marcador_local
+			END
+			IF @marcador_visitante < @marcador_local 
+			BEGIN
+				SET @goles_encontra = @goles_encontra + @marcador_local
+			END						
+								
+		FETCH NEXT FROM cursor_equipo INTO @id_alineacion;
+		END
+		CLOSE cursor_equipo;
+		DEALLOCATE cursor_equipo;	
+
+		DECLARE @cantidad_local INT = 0
+		DECLARE @cantidad_visitante INT = 0
+		
+		select @cantidad_local = count(*) 
+		from Alineacion 
+		where id_equipo = @id_equipo 
+		and id_alineacion 
+		in (select id_alineacion_local from ProgramaPartido where id_torneo = @id_torneo)
+
+		select @cantidad_visitante = count(*) 
+		from Alineacion 
+		where id_equipo = @id_equipo 
+		and id_alineacion 
+		in (select id_alineacion_local from ProgramaPartido where id_torneo = @id_torneo)
+		
+		SET @partidos_jugados = @cantidad_visitante + @cantidad_local
+
+		SET @diferencia_goles = @goles_anotados - @goles_encontra
+
+		INSERT INTO Posicion(partidos_jugados, cantidad_puntos, partidos_ganados, partidos_empatados, goles_anotados, goles_encontra, diferencia_goles)
+		VALUES (@partidos_jugados, @cantidad_puntos, @partidos_ganados, @partidos_empatados, @goles_anotados, @goles_encontra, @diferencia_goles)
+		SET @cantidad_puntos = 0 
+		SET @partidos_ganados = 0
+		SET @partidos_empatados = 0
+		SET @goles_anotados = 0
+		SET @goles_encontra = 0
+		DECLARE @id_posicion INT
+		SELECT @id_posicion = SCOPE_IDENTITY();
+		INSERT INTO PosicionEquipoTorneo (id_equipo, id_posicion, id_torneo)
+		VALUES (@id_equipo, @id_posicion, @id_torneo)
+
+	FETCH NEXT FROM cursor_planilla INTO @id_equipo, @id_torneo;
+	END
+	CLOSE cursor_planilla;
+	DEALLOCATE cursor_planilla;
+END
+
+EXEC AgregarPosicion
+
+CREATE PROCEDURE AgregarTorneos
+AS 
+BEGIN
+	DECLARE @id_torneo INT
+	DECLARE cursor_torneo CURSOR FOR
+	SELECT id_torneo
+	FROM Torneo;
+
+	OPEN cursor_torneo;
+
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		DECLARE @numero INT = CAST((RAND()*(16-8)+8) AS INT)
+			
+		EXEC generar_partidos_todos_contra_todos @numero, @id_torneo
+		
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo;
+	END
+	CLOSE cursor_torneo;
+	DEALLOCATE cursor_torneo;
+END
+
+-----------------------------------------------------------
+INSERT INTO EstadisticaClub(id_club_futbol)
+SELECT id_club_futbol
+FROM ClubFutbol
+UPDATE EstadisticaClub 
+SET partidos_jugados = 0, 
+	partidos_ganados = 0, 
+	goles_encontra = 0,
+	diferencia_goles = 0,
+	tarjetas_rojas = 0, 
+	tarjetas_amarillas = 0, 
+	goles_marcados = 0;
+
+select * from EstadisticaClub
+-----------------------------------------------------------
+CREATE TRIGGER ActualizarEstadisticaClubParteUno
+ON PosicionEquipoTorneo
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @partidos_jugados INT, @goles_marcados INT, @id_club_futbol INT, @id_posicion INT, @id_equipo INT
+
+	SELECT @id_posicion = id_posicion, @id_equipo = id_equipo
+	FROM inserted
+	
+	SELECT @id_club_futbol = id_club_futbol FROM Equipo WHERE id_equipo = @id_equipo
+	SELECT @partidos_jugados = partidos_jugados, @goles_marcados = goles_anotados 
+	FROM Posicion WHERE id_posicion = @id_posicion 
+	
+	UPDATE EstadisticaClub
+	SET partidos_jugados = partidos_jugados + @partidos_jugados, goles_marcados = goles_marcados + @goles_marcados
+	WHERE id_club_futbol = @id_club_futbol
+END
+
+
+CREATE TRIGGER ActualizarEstadisticaClubParteDos
+ON Falta
+AFTER INSERT
+AS
+BEGIN	
+	DECLARE @tarjetas_rojas INT, @tarjetas_amarillas INT, @id_club_futbol INT, @id_detalle_alineacion INT,
+	@id_tarjeta INT, @tarjeta_roja INT, @tarjeta_amarilla INT
+	
+	SELECT @tarjeta_amarilla = id_tarjeta FROM Tarjeta WHERE color_tarjeta = 'Tarjeta Amarilla'
+	SELECT @tarjeta_roja = id_tarjeta FROM Tarjeta WHERE color_tarjeta = 'Tarjeta Roja'		
+	
+	SELECT @id_detalle_alineacion = id_detalle_alineacion, @id_tarjeta = id_tarjeta
+	FROM inserted
+
+	select @id_club_futbol = id_club_futbol from Equipo where id_club_futbol in 
+		(select id_equipo from Alineacion where id_alineacion in
+			(select id_alineacion from DetalleAlineacion where id_detalle_alineacion = @id_detalle_alineacion))
+
+	IF @id_tarjeta = @tarjeta_amarilla
+	BEGIN
+		UPDATE EstadisticaClub
+		SET tarjetas_amarillas = tarjetas_amarillas + 1
+		WHERE id_club_futbol = @id_club_futbol
+	END
+	IF @id_tarjeta = @tarjeta_roja
+	BEGIN
+		UPDATE EstadisticaClub
+		SET tarjetas_rojas = tarjetas_rojas + 1
+		WHERE id_club_futbol = @id_club_futbol
+	END	
+END
+
+-----------------------------AGREGAR PLANTEL--------------------------------
+CREATE PROCEDURE AgregarPlantelA
+AS
+BEGIN
+	DECLARE @id_equipo INT, @menor INT = 0, @mayor INT = 0
+
+	DECLARE cursor_equipo CURSOR FOR
+	SELECT id_equipo
+	FROM Equipo;
+
+	OPEN cursor_equipo;
+
+	FETCH NEXT FROM cursor_equipo INTO @id_equipo
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+	    SET @menor = @mayor + 1
+		SET @mayor = @mayor + 22
+		INSERT INTO EquipoJugador(id_jugador, id_equipo)
+		SELECT TOP 22 id_jugador, @id_equipo
+		FROM Jugador where id_jugador BETWEEN @menor and @mayor
+	FETCH NEXT FROM cursor_equipo INTO @id_equipo;
+	END
+	CLOSE cursor_equipo;
+	DEALLOCATE cursor_equipo;
+END
+
+CREATE PROCEDURE AgregarPlantelB
+AS
+BEGIN
+	DECLARE @id INT = 1, @id_jugador INT, @posicion VARCHAR(70)
+
+	DECLARE @posiciones TABLE (id INT IDENTITY(1,1), posiciones VARCHAR(70))
+	INSERT INTO @posiciones(posiciones)
+	VALUES ('Portero'),('Defensa central'),('Lateral derecho'),('Lateral izquierdo'),('Centrocampista defensivo'),('Centrocampista central'),('Centrocampista derecho'),('Centrocampista izquierdo'),('Delantero centro'),('Delantero derecho'),('Delantero izquierdo')
+	
+	DECLARE cursor_jugador CURSOR FOR
+	SELECT id_jugador
+	FROM EquipoJugador;
+
+	OPEN cursor_jugador;
+
+	FETCH NEXT FROM cursor_jugador INTO @id_jugador
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SELECT TOP 1 @posicion = posiciones FROM @posiciones WHERE id = @id
+		
+		UPDATE EquipoJugador
+		SET posicion = @posicion 
+		WHERE id_jugador = @id_jugador
+		
+		IF @id = 11
+		BEGIN
+			SET @id = 0
+		END
+		SET @id = @id + 1
+	FETCH NEXT FROM cursor_jugador INTO @id_jugador;
+	END
+	CLOSE cursor_jugador;
+	DEALLOCATE cursor_jugador;
+END
+
+-----------------------------AGREGAR PLANTEL--------------------------------
+EXEC AgregarPlantelA
+EXEC AgregarPlantelB
+
+select * from EquipoJugador
+delete from EquipoJugador
+----------------------------------------------------------------------------
+-----------------------------AGREGAR PLANILLA EQUIPOS------------------------------
+CREATE PROCEDURE AgregarPlanillaEquipoA
+AS 
+BEGIN		
+	DECLARE @id_torneo INT, @numero_equipo INT, @numero_aleatorio INT, @mayor INT, @menor INT
+	
+	DECLARE cursor_torneo CURSOR FOR
+	SELECT id_torneo
+	FROM Torneo;
+	
+	OPEN cursor_torneo;
+
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo
+	WHILE @@FETCH_STATUS = 0	
+	BEGIN
+		SET @mayor = 15
+		SET @menor = 5 
+		SET @numero_equipo = CAST((RAND() * (@mayor - @menor + 1) + @menor) AS INT);
+		SET @mayor = CAST((RAND() * (30 - @numero_equipo + 1) + @numero_equipo) AS INT); 
+		SET @menor = (@mayor - @numero_equipo) + 1
+
+		INSERT INTO PlanillaEquipo(id_equipo, id_torneo)
+		SELECT TOP (@numero_equipo) id_equipo, @id_torneo
+		FROM Equipo where id_equipo BETWEEN @menor and @mayor
+				
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo
+	END
+	CLOSE cursor_torneo;
+	DEALLOCATE cursor_torneo;
+END
+
+CREATE PROCEDURE AgregarPlanillaEquipoB
+AS
+BEGIN		
+	DECLARE @fecha_inscrito DATE
+	DECLARE @fecha_inicio_inscripcion DATE
+	DECLARE @fecha_fin_inscripcion DATE
+	DECLARE @id_planilla_equipo INT	
+	DECLARE @id_usuario INT
+	DECLARE @forma_pago VARCHAR(30)	
+	DECLARE @id_torneo INT
+	DECLARE @dias INT
+
+	DECLARE cursor_planilla_equipo CURSOR FOR
+	SELECT id_planilla_equipo, id_torneo
+	FROM PlanillaEquipo;
+	
+	OPEN cursor_planilla_equipo;
+
+	FETCH NEXT FROM cursor_planilla_equipo INTO @id_planilla_equipo, @id_torneo
+	WHILE @@FETCH_STATUS = 0	
+	BEGIN
+
+		SELECT @fecha_inicio_inscripcion = fecha_inicio_inscripcion, @fecha_fin_inscripcion = fecha_fin_inscripcion 
+		FROM Torneo 
+		WHERE id_torneo = @id_torneo
+	
+		DECLARE @formas_pagos TABLE(id INT PRIMARY KEY IDENTITY(1,1), forma_pago varchar(30))
+		INSERT INTO @formas_pagos(forma_pago)
+		VALUES ('Pago en efectivo'),('Transferencia bancaria'),('Tarjeta de crédito/débito'),('Plataformas de pago en línea')
+
+		SET @dias = DATEDIFF(day, CAST(@fecha_inicio_inscripcion AS DATE) , CAST(@fecha_fin_inscripcion AS DATE))	
+		---------------------------------------------------------------------------------------------
+		SET @fecha_inscrito = DATEADD(day, CAST((RAND() * @dias) AS INT), @fecha_inicio_inscripcion)
+		SELECT TOP 1 @forma_pago = forma_pago FROM @formas_pagos ORDER BY NEWID()
+		SELECT TOP 1 @id_usuario = id_usuario FROM Usuario ORDER BY NEWID()
+		---------------------------------------------------------------------------------------------
+		UPDATE PlanillaEquipo
+		SET forma_pago = @forma_pago, fecha_inscrito = @fecha_inscrito, id_usuario = @id_usuario
+		WHERE id_planilla_equipo = @id_planilla_equipo
+
+	FETCH NEXT FROM cursor_planilla_equipo INTO @id_planilla_equipo, @id_torneo
+	END
+	CLOSE cursor_planilla_equipo;
+	DEALLOCATE cursor_planilla_equipo;
+END
+-----------------------------AGREGAR PLANILLA EQUIPOS------------------------------
+EXEC AgregarPlanillaEquipoA
+EXEC AgregarPlanillaEquipoB
+
+select * from PlanillaEquipo
+-----------------------------------------------------------------------------------
+
+
+------------------------------------AGREGAR TORNEOS--------------------------------------
+CREATE PROCEDURE AgregarPartidoProgramadoA (@id_torneo INT)
+AS
+BEGIN	
+	DECLARE @id_alineacion_local INT, @id_alineacion_visitante INT, @fecha_programada DATE, @dias INT	
+	DECLARE @id_equipo1 INT, @id_equipo2 INT, @cantidad INT, @fecha_inicio DATE, @fecha_fin DATE 
+	------------------------------------------------------------------------------	
+	SELECT @fecha_inicio = fecha_inicio_torneo, @fecha_fin = fecha_fin_torneo 
+	FROM Torneo WHERE id_torneo = @id_torneo
+	SELECT @dias = DATEDIFF(day, @fecha_inicio, @fecha_fin)
+	
+	SELECT @cantidad = COUNT(*) FROM PlanillaEquipo WHERE id_torneo = @id_torneo
+
+	DECLARE cursorA CURSOR FOR 
+	SELECT id_equipo FROM PlanillaEquipo WHERE id_torneo = @id_torneo ORDER BY id_equipo ASC;
+	OPEN cursorA;
+
+	FETCH NEXT FROM cursorA INTO @id_equipo1;
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SET @cantidad = @cantidad - 1
+		
+		DECLARE cursorB CURSOR FOR
+		SELECT TOP (@cantidad) id_equipo FROM PlanillaEquipo WHERE id_torneo = @id_torneo ORDER BY id_equipo DESC;
+		OPEN cursorB;
+
+		FETCH NEXT FROM cursorB INTO @id_equipo2;
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			-------------------------------------------------------------------------------------------------------------
+			SELECT @fecha_programada = DATEADD(day, CAST(RAND()*(@dias) AS int), @fecha_inicio)		
+			
+			INSERT INTO Alineacion(id_equipo, fecha) VALUES(@id_equipo1, @fecha_programada)
+			SET @id_alineacion_local = SCOPE_IDENTITY();
+			INSERT INTO Alineacion(id_equipo, fecha) VALUES(@id_equipo2, @fecha_programada)
+			SET @id_alineacion_visitante = SCOPE_IDENTITY();
+			-------------------------------------------------------------------------------------------------------------
+            INSERT INTO ProgramaPartido(id_alineacion_local, id_alineacion_visitante, fecha_programada, id_torneo)
+            VALUES (@id_alineacion_local, @id_alineacion_visitante, @fecha_programada, @id_torneo)
+			-------------------------------------------------------------------------------------------------------------
+			SELECT @fecha_programada = DATEADD(day, CAST(RAND()*(@dias) AS int), @fecha_inicio)			
+			
+			INSERT INTO Alineacion(id_equipo, fecha) VALUES(@id_equipo1, @fecha_programada)
+			SET @id_alineacion_visitante = SCOPE_IDENTITY();
+			INSERT INTO Alineacion(id_equipo, fecha) VALUES(@id_equipo2, @fecha_programada)
+			SET @id_alineacion_local = SCOPE_IDENTITY();
+			-------------------------------------------------------------------------------------------------------------
+			INSERT INTO ProgramaPartido(id_alineacion_local, id_alineacion_visitante, fecha_programada, id_torneo)
+            VALUES (@id_alineacion_local, @id_alineacion_visitante, @fecha_programada, @id_torneo)
+			-------------------------------------------------------------------------------------------------------------
+			FETCH NEXT FROM cursorB INTO @id_equipo2;
+		END
+		CLOSE cursorB;
+		DEALLOCATE cursorB;
+		FETCH NEXT FROM cursorA INTO @id_equipo1;
+	END
+	CLOSE cursorA;
+	DEALLOCATE cursorA;
+END
+
+
+CREATE TRIGGER AgregarPartidoProgramadoB
+ON ProgramaPartido
+AFTER INSERT
+AS
+BEGIN		
+    DECLARE @hora_programada TIME, @marcador_local INT, @marcador_visitante INT, @equipo_ganador varchar(50), 
+	@equipo_perdedor varchar(50), @tarjetas_amarillas INT, @tarjetas_rojas INT, @id_ubicacion_estadio INT, 
+	@id_estado_partido INT = 1, @faltas INT, @cambios INT, @id_programa_partido INT, @id_alineacion_visitante INT,
+	@id_alineacion_local INT
+
+	SELECT TOP 1 @id_ubicacion_estadio = id_ubicacion_estadio FROM UbicacionEstadio ORDER BY NEWID()	
+	SET @tarjetas_amarillas = FLOOR(2 + (RAND() * (4 - 2 + 1)))
+	SET @tarjetas_rojas = FLOOR(0 + (RAND() * (1 - 0 + 1)))			
+	SET @marcador_local = FLOOR(0 + (RAND() * (4 - 0 + 1)))
+	SET @marcador_visitante = FLOOR(0 + (RAND() * (4 - 0 + 1)))
+	SET @faltas = CAST(RAND() * 5 + 15 AS INT)
+	SET @cambios = CAST(RAND() * 3 + 4 AS INT)
+	SET @hora_programada = RIGHT(DATEADD(hour, CAST(RAND() * 9 AS int), '08:00'), 7)
+	
+	SELECT @id_programa_partido = id_programa_partido, 
+	@id_alineacion_local = id_alineacion_local, @id_alineacion_visitante = id_alineacion_visitante
+	FROM inserted
+
+	IF @marcador_local > @marcador_visitante
+	BEGIN
+		SELECT @equipo_ganador = nombre_equipo FROM Equipo WHERE id_equipo 
+		IN (SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion_local)
+		SELECT @equipo_perdedor = nombre_equipo FROM Equipo WHERE id_equipo 
+		IN (SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion_visitante)
+	END
+	IF @marcador_local < @marcador_visitante
+	BEGIN
+		SELECT @equipo_ganador = nombre_equipo FROM Equipo WHERE id_equipo 
+		IN (SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion_visitante)
+		SELECT @equipo_perdedor = nombre_equipo FROM Equipo WHERE id_equipo 
+		IN (SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion_local)
+	END
+	UPDATE ProgramaPartido
+	SET hora_programada = @hora_programada, marcador_local = @marcador_local, marcador_visitante = @marcador_visitante,
+	equipo_ganador = @equipo_ganador, equipo_perdedor = @equipo_perdedor, tarjetas_amarillas = @tarjetas_amarillas,
+	tarjetas_rojas = @tarjetas_rojas, cambios = @cambios, faltas = @faltas, id_estado_partido = @id_estado_partido,
+	id_ubicacion_estadio = @id_ubicacion_estadio
+	WHERE id_programa_partido = @id_programa_partido
+END
+
+------------------------------------AGREGAR TORNEOS---------------------------------------
+----------------------------------------------------------------------------
+EXEC AgregarPartidoProgramadoA 3
+SELECT *  FROM ProgramaPartido WHERE id_torneo > 2
+DELETE FROM ProgramaPartido WHERE id_torneo = 3;
+
+----------------------------------------------------------------------------
+ALTER FUNCTION ObtenerAlineacion(@id_equipo INT, @fecha DATE)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @id_alineacion INT
+	SELECT @id_alineacion = id_alineacion FROM Alineacion WHERE fecha = @fecha and id_equipo = @id_equipo
+	RETURN @id_alineacion
+END
 
 
 
-------------------------------------------------------------------------------------------------
+-- Realizar la inserción en la tabla
+--------------------------------------------------------------------------------------
+CREATE PROCEDURE [dbo].[AgregarPartidoProgramadoB] (@id_programa_partido INT)
+AS
+BEGIN		
+    DECLARE @hora_programada TIME, @marcador_local INT, @marcador_visitante INT, @equipo_ganador varchar(50), 
+	@equipo_perdedor varchar(50), @tarjetas_amarillas INT, @tarjetas_rojas INT, @id_ubicacion_estadio INT, 
+	@id_estado_partido INT = 1, @faltas INT, @cambios INT, @id_alineacion_visitante INT, @id_alineacion_local INT,
+	@pases INT, @penales INT, @tiros_libres INT, @duracion_partido INT, @identificador_marcador INT
 
+	SELECT TOP 1 @id_ubicacion_estadio = id_ubicacion_estadio FROM UbicacionEstadio ORDER BY NEWID()	
+	SET @tarjetas_amarillas = FLOOR(2 + (RAND() * (4 - 2 + 1)))
+	SET @tarjetas_rojas = FLOOR(0 + (RAND() * (1 - 0 + 1)))			
+	SET @marcador_local = FLOOR(0 + (RAND() * (4 - 0 + 1)))
+	SET @marcador_visitante = FLOOR(0 + (RAND() * (4 - 0 + 1)))
+	SET @faltas = CAST(RAND() * 5 + 15 AS INT)
+	SET @cambios = CAST(RAND() * 3 + 4 AS INT)
+	SET @hora_programada = RIGHT(DATEADD(hour, CAST(RAND() * 9 AS int), '08:00'), 7)
+	SET @pases = 400 + CAST((RAND() * (600 - 400 + 1)) AS INT)
+	SET @penales = FLOOR(0 + (RAND() * (1 - 0 + 1)))
+	SET @tiros_libres = 10 + (RAND() * (15 - 10))
+	SET @duracion_partido = 95 + (RAND() * (100 - 95))
+
+	SELECT @id_alineacion_local = id_alineacion_local, @id_alineacion_visitante = id_alineacion_visitante
+	FROM ProgramaPartido
+	WHERE id_programa_partido = @id_programa_partido 
+
+	IF @marcador_local > @marcador_visitante
+	BEGIN
+		SET @identificador_marcador = 0
+	END
+	IF @marcador_local < @marcador_visitante
+	BEGIN
+		SET @identificador_marcador = 1
+	END
+	IF @marcador_local = @marcador_visitante
+	BEGIN
+		SET @identificador_marcador = 2
+	END
+
+	UPDATE ProgramaPartido
+	SET hora_programada = @hora_programada, marcador_local = @marcador_local, marcador_visitante = @marcador_visitante,
+	tarjetas_amarillas = @tarjetas_amarillas, tarjetas_rojas = @tarjetas_rojas, cambios = @cambios, faltas = @faltas, 
+	id_estado_partido = @id_estado_partido, id_ubicacion_estadio = @id_ubicacion_estadio, pases = @pases, 
+	penales = @penales, tiros_libres = @tiros_libres, duracion_partido = @duracion_partido, 
+	identificador_marcador = @identificador_marcador
+
+	WHERE id_programa_partido = @id_programa_partido
+END
+
+SELECT * FROM ProgramaPartido
+------------------------------------CONSULTAS---------------------------------------
 SELECT * FROM CiudadEstadio
 SELECT * FROM EstadoPartido
 SELECT * FROM Rol
@@ -1561,56 +2142,44 @@ SELECT * FROM DetalleAlineacion
 SELECT * FROM Falta
 SELECT * FROM Goleo
 SELECT * FROM CambioEstado
---------------------------------------BASURA---------------------------------------
+SELECT * FROM EstadisticaClub
+------------------------------------CONSULTAS---------------------------------------
 
-CREATE PROCEDURE generar_alineaciones_por_equipo 
+CREATE FUNCTION dbo.RandomNumberWithProbabilities
+(
+    @min INT,
+    @max INT,
+    @prob1 FLOAT,
+    @prob2 FLOAT
+)
+RETURNS INT
 AS
 BEGIN
-    DECLARE @id_equipo INT, @num_alineaciones INT, @i INT
-    
-    -- Obtener el ID y nombre de cada equipo de la tabla "equipos"
-    DECLARE equipos_cursor CURSOR FOR 
-        SELECT id_equipo FROM Equipo
-        
-    OPEN equipos_cursor  
-    FETCH NEXT FROM equipos_cursor INTO @id_equipo
-    
-    -- Recorrer cada equipo y generar de 11 a 27 alineaciones aleatorias
-    WHILE @@FETCH_STATUS = 0  
-    BEGIN  
-        SET @num_alineaciones = ROUND(RAND() * 16, 0) + 11 -- Generar un número aleatorio entre 11 y 27
-        SET @i = 1
-        
-        WHILE (@i <= @num_alineaciones)
-        BEGIN
-            -- Generar una alineación aleatoria para el equipo actual
-            INSERT INTO Alineacion (id_equipo)           
-			VALUES (@id_equipo)
+    DECLARE @range INT, @offset INT, @result FLOAT;
 
-            SET @i = @i + 1
-        END
-        
-        FETCH NEXT FROM equipos_cursor INTO @id_equipo
-    END  
-    
-    CLOSE equipos_cursor  
-    DEALLOCATE equipos_cursor  
+    -- Calculate the range and offset
+    SELECT @range = @max - @min + 1, @offset = @min - 1;
+
+    -- Generate a random number between 0 and 1
+    SET @result = (SELECT TOP 1 RAND(CAST(NEWID() AS VARBINARY)) FROM Numbers);
+
+    -- Determine which range the random number falls into
+    IF @result < @prob1
+    BEGIN
+        -- First range
+        RETURN CONVERT(INT, (SELECT TOP 1 number FROM Numbers WHERE number BETWEEN @min AND @max ORDER BY number OFFSET @offset ROWS FETCH NEXT 1 ROWS ONLY));
+    END
+    ELSE IF @result < @prob1 + @prob2
+    BEGIN
+        -- Second range
+        RETURN CONVERT(INT, (SELECT TOP 1 number FROM Numbers WHERE number BETWEEN @min AND @max ORDER BY number OFFSET @offset + 1 ROWS FETCH NEXT 1 ROWS ONLY));
+    END
+    ELSE
+    BEGIN
+        -- Third range
+        RETURN CONVERT(INT, (SELECT TOP 1 number FROM Numbers WHERE number BETWEEN @min AND @max ORDER BY number OFFSET @offset + 2 ROWS FETCH NEXT 1 ROWS ONLY));
+    END
+
+    RETURN 0; -- Esto se agrega para cumplir con el requisito de que la última instrucción de la función sea un RETURN.
 END
 
-
-EXEC generar_alineaciones_por_equipo	
-
-
-CREATE FUNCTION obtener_primary_key(@id_foreign_key INT)
-RETURNS INT
-BEGIN
-  DECLARE @primary_key INT
-  SELECT @primary_key = id_alineacion FROM Alineacion WHERE id_equipo = @id_foreign_key;
-  RETURN @primary_key;
-END;
-
---INSERT INTO Jugador (nombre, apellido_paterno, apellido_materno)
---SELECT nombre, apellido_paterno, apellido_materno FROM Nombres$
-
---alter table TipoTecnico
---alter column tipo VARCHAR(30)
