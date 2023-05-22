@@ -888,7 +888,6 @@ EXEC generar_alineacion_tecnico
 CREATE PROCEDURE AgregarDetalleAlineacion
 	AS
 	BEGIN
-
 		DECLARE @posicion VARCHAR(70)
 		DECLARE @id_jugador INT
 		DECLARE @id_alineacion INT	
@@ -2182,3 +2181,394 @@ BEGIN
     RETURN 0; -- Esto se agrega para cumplir con el requisito de que la última instrucción de la función sea un RETURN.
 END
 
+----------------------------------------------------------------------------------------
+SELECT * FROM PeriodoPartido
+CREATE PROCEDURE AgregarPeriodoPartido
+AS
+BEGIN
+	DECLARE @hora_inicio TIME, @hora_fin TIME, @minutos_retraso INT, 
+	@minutos_extras INT, @id_programa_partido INT, @minuto_random INT, @hora_programada TIME
+
+	DECLARE cursor_partido CURSOR FOR
+	SELECT id_programa_partido, hora_programada
+	FROM ProgramaPartido;
+	
+	OPEN cursor_partido;
+
+	FETCH NEXT FROM cursor_partido INTO @id_programa_partido, @hora_programada
+	WHILE @@FETCH_STATUS = 0	
+	BEGIN
+		SET @hora_inicio = DATEADD(MINUTE, FLOOR(RAND()*(15-5+1)+5), @hora_programada)
+		SET @hora_fin = DATEADD(MINUTE, 45 + (FLOOR(RAND()*(5-1+1)+1)), @hora_inicio)
+		SET @minutos_retraso = DATEDIFF(MINUTE, @hora_programada, @hora_inicio)
+		SET @minutos_extras = (DATEDIFF(MINUTE, @hora_inicio, @hora_fin) - 45)
+
+		SELECT DATEDIFF(MINUTE, @hora_fin, @hora_inicio)
+
+		INSERT INTO PeriodoPartido(hora_inicio, hora_fin, minutos_retraso, minutos_extras, id_programa_partido
+		) VALUES(@hora_inicio, @hora_fin, @minutos_retraso, @minutos_extras, @id_programa_partido)
+		--------------------------------------------------------------------------------------------------------
+		SET @hora_inicio = DATEADD(MINUTE, FLOOR(RAND()*(15-5+1)+5), DATEADD(MINUTE, 15, @hora_fin))
+		SET @hora_fin = DATEADD(MINUTE, 45 + (FLOOR(RAND()*(5-1+1)+1)), @hora_inicio)
+		SET @minutos_retraso = DATEDIFF(MINUTE, DATEADD(MINUTE, -15, @hora_inicio), @hora_inicio)
+		SET @minutos_extras = (DATEDIFF(MINUTE, @hora_inicio, @hora_fin) - 45)
+
+		INSERT INTO PeriodoPartido(hora_inicio, hora_fin, minutos_retraso, minutos_extras, id_programa_partido
+		) VALUES(@hora_inicio, @hora_fin, @minutos_retraso, @minutos_extras, @id_programa_partido)
+
+	FETCH NEXT FROM cursor_partido INTO @id_programa_partido, @hora_programada;
+	END
+	CLOSE cursor_partido;
+	DEALLOCATE cursor_partido;
+END
+----------------------------------------------------------------------------------------
+SELECT * FROM PeriodoPartido
+
+DELETE FROM PeriodoPartido
+
+		
+CREATE PROCEDURE ActualizarDuracion
+AS
+BEGIN
+	DECLARE @hora_inicio TIME, @hora_fin TIME, @cantidad_hora INT, @id_programa_partido INT
+	
+	DECLARE cursor_partido CURSOR FOR
+	SELECT id_programa_partido
+	FROM ProgramaPartido
+
+	OPEN cursor_partido
+
+	FETCH NEXT FROM cursor_partido INTO @id_programa_partido
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SELECT TOP 1 @hora_inicio = hora_inicio, @hora_fin = hora_fin 
+		FROM PeriodoPartido 
+		WHERE id_programa_partido = @id_programa_partido ORDER BY id_periodo_partido ASC
+		SET @cantidad_hora = DATEDIFF(MINUTE, @hora_inicio, @hora_fin)
+		----------------------------------------------------------------------
+		SELECT TOP 1 @hora_inicio = hora_inicio, @hora_fin = hora_fin 
+		FROM PeriodoPartido 
+		WHERE id_programa_partido = @id_programa_partido ORDER BY id_periodo_partido DESC
+		SET @cantidad_hora = @cantidad_hora + DATEDIFF(MINUTE, @hora_inicio, @hora_fin)
+	
+		update ProgramaPartido SET duracion_partido = @cantidad_hora 
+		WHERE id_programa_partido = @id_programa_partido
+		
+	FETCH NEXT FROM cursor_partido INTO @id_programa_partido
+	END
+	CLOSE cursor_partido
+	DEALLOCATE cursor_partido
+END
+
+
+---------------------------------------------------------------------
+select * from EquipoJugador
+
+
+DECLARE @id_jugador INT, @posicion VARCHAR(70), @id_alineacion INT
+DECLARE @posiciones TABLE (id INT IDENTITY(1,1), posiciones VARCHAR(70))
+INSERT INTO @posiciones(posiciones)
+VALUES ('Portero'),('Defensa central'),('Lateral derecho'),('Lateral izquierdo'),('Centrocampista defensivo'),('Centrocampista central'),('Centrocampista derecho'),('Centrocampista izquierdo'),('Delantero centro'),('Delantero derecho'),('Delantero izquierdo')
+
+DECLARE cursor_alineacion CURSOR FOR
+SELECT id_alineacion
+FROM Alineacion
+OPEN cursor_alineacion
+
+FETCH NEXT FROM cursor_alineacion INTO @id_alineacion
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	DECLARE cursor_posicion CURSOR FOR
+	SELECT posiciones
+	FROM @posiciones
+	OPEN cursor_posicion
+
+	FETCH NEXT FROM cursor_posicion INTO @posicion
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SELECT TOP 1 @id_jugador = id_jugador FROM EquipoJugador WHERE id_equipo in
+		(SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion) 
+		and posicion = @posicion ORDER BY NEWID()
+		
+		INSERT INTO DetalleAlineacion (posicion, id_jugador, id_alineacion)
+		VALUES (@posicion, @id_jugador, @id_alineacion)
+	FETCH NEXT FROM cursor_posicion INTO @posicion
+	END
+	CLOSE cursor_posicion
+	DEALLOCATE cursor_posicion
+FETCH NEXT FROM cursor_alineacion INTO @id_alineacion
+END
+CLOSE cursor_alineacion
+DEALLOCATE cursor_alineacion
+
+
+---------------------------------------------------------------------
+
+--CREATE PROCEDURE AGREGAR
+--AS
+--BEGIN
+------------------------------------------------------------------------------------------------------- 
+DECLARE @cambios INT, @cambio_local INT, @cambio_visitante INT, @id_alineacion_local INT, 
+@id_alineacion_visitante INT, @id_jugador_salida INT, @id_jugador_entrada INT, @posicion VARCHAR(70), 
+@id_cambio_jugador INT, @id_jugador INT, @duracion_partido INT, @minuto INT, @id_alineacion INT
+
+DECLARE cursor_partido CURSOR FOR
+SELECT cambios, id_alineacion_local, id_alineacion_visitante
+FROM ProgramaPartido
+OPEN cursor_partido
+
+FETCH NEXT FROM cursor_partido INTO @cambios, @id_alineacion_local, @id_alineacion_visitante
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	SET @cambio_local = FLOOR(RAND() * (@cambios + 1))
+	SET @cambio_visitante = @cambios - @cambio_local
+
+	INSERT INTO CambioJugador(id_jugador_salida)
+	SELECT TOP (@cambio_local) id_detalle_alineacion
+	FROM DetalleAlineacion
+	WHERE id_alineacion = @id_alineacion_local
+
+	INSERT INTO CambioJugador(id_jugador_salida)
+	SELECT TOP (@cambio_visitante) id_detalle_alineacion
+	FROM DetalleAlineacion
+	WHERE id_alineacion = @id_alineacion_visitante
+
+FETCH NEXT FROM cursor_partido INTO @cambios, @id_alineacion_local, @id_alineacion_visitante
+END
+CLOSE cursor_partido
+DEALLOCATE cursor_partido
+-------------------------------------------------------------------------------------------------------
+DECLARE cursor_cambio CURSOR FOR
+SELECT id_cambio_juagador, id_jugador_salida
+FROM CambioJugador
+
+OPEN cursor_cambio
+
+FETCH NEXT FROM cursor_cambio INTO @id_cambio_jugador, @id_jugador_salida
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	SELECT @posicion = posicion, @id_jugador_salida = id_jugador, @id_alineacion = id_alineacion  
+	FROM DetalleAlineacion WHERE id_detalle_alineacion = @id_jugador_salida
+
+	SELECT @id_jugador = id_jugador FROM EquipoJugador 
+	WHERE id_jugador <> @id_jugador_salida AND posicion = @posicion AND id_equipo
+	in(SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion)
+
+	INSERT INTO DetalleAlineacion(posicion, id_jugador, id_alineacion)
+	VALUES(@posicion, @id_jugador, @id_alineacion)
+
+	SET @id_jugador_entrada = SCOPE_IDENTITY()
+
+	SELECT @duracion_partido = duracion_partido FROM ProgramaPartido 
+	WHERE id_alineacion_local = @id_alineacion OR id_alineacion_visitante = @id_alineacion
+	
+	SET @minuto = CAST(RAND() * @duracion_partido + 1 AS INT)
+
+	UPDATE CambioJugador SET id_jugador_entrada = @id_jugador_entrada, minuto_cambio = @minuto
+	WHERE id_cambio_juagador = @id_cambio_jugador
+
+FETCH NEXT FROM cursor_cambio INTO @id_cambio_jugador, @id_jugador_salida
+END
+CLOSE cursor_cambio
+DEALLOCATE cursor_cambio
+-------------------------------------------------------------------------------------------------------
+
+
+SELECT * FROM CambioJugador WHERE id_cambio_juagador > 11880
+---------------------------------------------------------------------
+SELECT * FROM DetalleAlineacion
+WHERE id_detalle_alineacion > 55440
+---------------------------------------------------------------------------------------
+
+CREATE PROCEDURE GolesAnotados(@id_torneo INT, @id_equipo INT)
+AS
+BEGIN
+    DECLARE @goles INT = 0;
+
+    SELECT @goles = SUM(marcador_local)
+	FROM ProgramaPartido 
+	WHERE id_torneo = @id_torneo 
+	AND id_alineacion_local
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+	
+	SELECT @goles = @goles + SUM(marcador_visitante)
+	FROM ProgramaPartido 
+	WHERE id_torneo = @id_torneo
+	AND id_alineacion_visitante 
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+
+    RETURN @goles;
+END;
+
+CREATE PROCEDURE GolesEncontra(@id_torneo INT, @id_equipo INT)
+AS
+BEGIN
+    DECLARE @goles INT = 0;
+
+    SELECT @goles = SUM(marcador_visitante)
+	FROM ProgramaPartido 
+	WHERE id_torneo = @id_torneo 
+	AND id_alineacion_local
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+	
+	SELECT @goles = @goles + SUM(marcador_local)
+	FROM ProgramaPartido 
+	WHERE id_torneo = @id_torneo
+	AND id_alineacion_visitante 
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+
+    RETURN @goles;
+END;
+
+
+CREATE PROCEDURE PartidosGanados(@id_torneo INT, @id_equipo INT)
+AS
+BEGIN
+	DECLARE @partidos INT = 0
+	SELECT @partidos = COUNT(*)
+	FROM ProgramaPartido 
+	WHERE identificador_marcador = 0 AND id_torneo = @id_torneo
+	AND id_alineacion_local
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+	
+	SELECT @partidos = @partidos + COUNT(*)
+	FROM ProgramaPartido 
+	WHERE identificador_marcador = 1 AND id_torneo = @id_torneo
+	AND id_alineacion_visitante
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+
+	RETURN @partidos;
+END
+	
+CREATE PROCEDURE PartidosEmpatados(@id_torneo INT, @id_equipo INT)
+AS 
+BEGIN
+	DECLARE @partidos INT = 0
+
+	SELECT @partidos = COUNT(*)
+	FROM ProgramaPartido
+	WHERE identificador_marcador = 2 AND id_torneo = @id_torneo
+	AND (id_alineacion_local
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo)
+	OR id_alineacion_visitante
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) ) 
+	RETURN @partidos;
+END
+	
+
+-------------------------------------------------------------------
+DECLARE @cantidad_puntos INT, @partidos_ganados INT, @partidos_empatados INT, @goles_anotados INT,
+@goles_encontra INT, @diferencia_goles INT, @id_equipo INT, @id_torneo INT, @id_posicion INT
+
+DECLARE cursor_planilla CURSOR FOR
+SELECT id_torneo, id_equipo
+FROM PlanillaEquipo
+
+OPEN cursor_planilla;
+FETCH NEXT FROM cursor_planilla INTO @id_torneo, @id_equipo;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	EXEC @partidos_ganados = PartidosGanados @id_torneo, @id_equipo
+	EXEC @partidos_empatados = PartidosEmpatados @id_torneo, @id_equipo
+	EXEC @goles_anotados = GolesAnotados @id_torneo, @id_equipo
+	EXEC @goles_encontra = GolesAnotados @id_torneo, @id_equipo
+	SET @diferencia_goles = @goles_anotados - @goles_encontra
+	SET @cantidad_puntos = (@partidos_ganados * 3) + (@partidos_empatados)	
+
+	INSERT INTO Posicion(cantidad_puntos, partidos_ganados, partidos_empatados, goles_anotados, goles_encontra, diferencia_goles)
+	VALUES (@cantidad_puntos, @partidos_ganados, @partidos_empatados, @goles_anotados, @goles_encontra, @diferencia_goles)
+		
+	SELECT @id_posicion = SCOPE_IDENTITY();
+	INSERT INTO PosicionEquipoTorneo (id_equipo, id_posicion, id_torneo)
+	VALUES (@id_equipo, @id_posicion, @id_torneo)
+
+FETCH NEXT FROM cursor_planilla INTO @id_torneo, @id_equipo;
+END
+CLOSE cursor_planilla
+DEALLOCATE cursor_planilla
+
+
+
+DELETE FROM Posicion
+DELETE FROM PosicionEquipoTorneo
+-------------------------------------------------------------------
+
+	
+---------------------------------------------------------------------------------------
+CREATE PROCEDURE AgregarNacionalidadTecnico
+AS
+BEGIN
+	DECLARE @fecha_adquisicion DATE, @id_tecnico INT, @id_nacionalidad INT, @numero_nacionalidad INT,
+	@contador INT = 1, @flag INT = 0, @dias INT
+
+	DECLARE cursor_tecnico CURSOR FOR
+	SELECT id_tecnico
+	FROM Tecnico
+	OPEN cursor_tecnico 
+	FETCH NEXT FROM cursor_tecnico INTO @id_tecnico
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SET @numero_nacionalidad = FLOOR(RAND() * 3 + 1)
+		WHILE @numero_nacionalidad >= @contador
+		BEGIN
+			SELECT TOP 1 @id_nacionalidad = id_nacionalidad FROM Nacionalidad ORDER BY NEWID()
+			SELECT @flag = COUNT(*) FROM NacionalidadTecnico 
+			WHERE id_tecnico = @id_tecnico AND id_nacionalidad = @id_nacionalidad
+			IF @flag = 0
+			BEGIN		
+				SET @dias = RAND() * (10000 + 1)
+				SET @fecha_adquisicion = DATEADD(DAY, -(@dias), CONVERT(DATE, '2005-12-31', 23));
+				INSERT INTO NacionalidadTecnico(fecha_adquisicion, id_tecnico, id_nacionalidad)
+				VALUES(@fecha_adquisicion, @id_tecnico, @id_nacionalidad)
+				SET @contador = @contador + 1
+			END
+		END
+	FETCH NEXT FROM cursor_tecnico INTO @id_tecnico
+	END
+	CLOSE cursor_tecnico
+	DEALLOCATE cursor_tecnico
+END
+
+---------------------------------------------------------------------------------------
+CREATE PROCEDURE ActualizarPosiciones
+AS
+BEGIN
+	DECLARE @id_posicion INT, @posicion_torneo VARCHAR(50), @contador INT, @id_torneo INT
+
+	DECLARE cursor_toreno CURSOR FOR 
+	SELECT id_torneo
+	FROM PosicionEquipoTorneo
+	OPEN cursor_torneo
+
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		DECLARE cursor_posicion CURSOR FOR
+		SELECT id_posicion FROM Posicion WHERE id_posicion 
+		IN(SELECT id_posicion FROM PosicionEquipoTorneo WHERE id_torneo = @id_torneo)
+		ORDER BY cantidad_puntos DESC, diferencia_goles DESC, goles_anotados DESC
+		OPEN cursor_posicion
+
+		SET @contador = 0
+		FETCH NEXT FROM cursor_posicion INTO @id_posicion
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			SET @contador = @contador + 1
+			SET @posicion_torneo = CAST(@contador AS VARCHAR(5)) + '° Puesto'
+			UPDATE Posicion SET posicion_torneo = @posicion_torneo 
+			WHERE id_posicion = @id_posicion
+		FETCH NEXT FROM cursor_posicion INTO @id_posicion
+		END
+		CLOSE cursor_posicion
+		DEALLOCATE cursor_posicion
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo
+	END
+	CLOSE cursor_torneo
+	DEALLOCATE cursor_torneo
+END
+
+
+
+
+SELECT * FROM NacionalidadTecnico
+SELECT * FROM Tecnico

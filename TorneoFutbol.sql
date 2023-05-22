@@ -6,7 +6,7 @@ CREATE DATABASE [TorneoFutbol]
 GO
 USE [TorneoFutbol]
 GO
-/****** Object:  Table [dbo].[Alineacion]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Alineacion]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -22,7 +22,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AlineacionTecnico]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[AlineacionTecnico]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -38,7 +38,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Arbitro]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Arbitro]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -54,7 +54,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CambioEstado]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[CambioEstado]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -70,7 +70,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CambioJugador]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[CambioJugador]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -86,7 +86,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CiudadEstadio]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[CiudadEstadio]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -100,7 +100,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClubFutbol]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[ClubFutbol]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +117,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Designacion]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Designacion]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +134,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DetalleAlineacion]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[DetalleAlineacion]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -150,7 +150,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Dirigente]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Dirigente]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +166,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Equipo]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Equipo]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +181,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EquipoJugador]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[EquipoJugador]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,7 +197,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EstadisticaClub]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[EstadisticaClub]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +218,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EstadoJugador]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[EstadoJugador]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -232,7 +232,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EstadoPartido]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[EstadoPartido]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -246,7 +246,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Evento]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Evento]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -265,7 +265,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Falta]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Falta]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -276,13 +276,14 @@ CREATE TABLE [dbo].[Falta](
 	[id_tipo_falta] [int] NULL,
 	[id_tarjeta] [int] NULL,
 	[id_detalle_alineacion] [int] NULL,
+	[puntos_fair_play] [int] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_falta] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Goleo]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Goleo]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -297,7 +298,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Jugador]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Jugador]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -316,7 +317,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Nacionalidad]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Nacionalidad]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -330,7 +331,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NacionalidadJugador]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[NacionalidadJugador]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -346,13 +347,13 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NacionalidadTecnico]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[NacionalidadTecnico]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[NacionalidadTecnico](
-	[id_nacionalidad_tecnico] [int] NOT NULL,
+	[id_nacionalidad_tecnico] [int] IDENTITY(1,1) NOT NULL,
 	[fecha_adquisicion] [date] NULL,
 	[id_tecnico] [int] NULL,
 	[id_nacionalidad] [int] NULL,
@@ -362,13 +363,13 @@ CREATE TABLE [dbo].[NacionalidadTecnico](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PeriodoPartido]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[PeriodoPartido]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PeriodoPartido](
-	[id_periodo_partido] [int] NOT NULL,
+	[id_periodo_partido] [int] IDENTITY(1,1) NOT NULL,
 	[hora_inicio] [time](0) NULL,
 	[hora_fin] [time](0) NULL,
 	[minutos_retraso] [int] NULL,
@@ -380,7 +381,7 @@ CREATE TABLE [dbo].[PeriodoPartido](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PlanillaEquipo]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[PlanillaEquipo]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -398,15 +399,14 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Posicion]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Posicion]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Posicion](
 	[id_posicion] [int] IDENTITY(1,1) NOT NULL,
-	[posicion_torneo] [int] NULL,
-	[partidos_jugados] [int] NULL,
+	[posicion_torneo] [varchar](50) NULL,
 	[cantidad_puntos] [int] NULL,
 	[partidos_ganados] [int] NULL,
 	[partidos_empatados] [int] NULL,
@@ -419,7 +419,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PosicionEquipoTorneo]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[PosicionEquipoTorneo]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -435,7 +435,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProgramaPartido]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[ProgramaPartido]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -466,7 +466,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Rol]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Rol]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -480,7 +480,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tarjeta]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Tarjeta]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -494,7 +494,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tecnico]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Tecnico]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -514,7 +514,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoFalta]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[TipoFalta]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -528,7 +528,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoTecnico]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[TipoTecnico]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -542,7 +542,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoUsuario]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[TipoUsuario]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -556,7 +556,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Torneo]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Torneo]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -575,7 +575,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UbicacionEstadio]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[UbicacionEstadio]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -592,7 +592,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 18/05/2023 23:49:12 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 21/05/2023 18:56:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2759,7 +2759,87 @@ GO
 ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD FOREIGN KEY([id_tipo_usuario])
 REFERENCES [dbo].[TipoUsuario] ([id_tipo_usuario])
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarDesignacion]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[ActualizarDuracion]    Script Date: 21/05/2023 18:56:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ActualizarDuracion]
+AS
+BEGIN
+	DECLARE @hora_inicio TIME, @hora_fin TIME, @cantidad_hora INT, @id_programa_partido INT
+	
+	DECLARE cursor_partido CURSOR FOR
+	SELECT id_programa_partido
+	FROM ProgramaPartido
+
+	OPEN cursor_partido
+
+	FETCH NEXT FROM cursor_partido INTO @id_programa_partido
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SELECT TOP 1 @hora_inicio = hora_inicio, @hora_fin = hora_fin 
+		FROM PeriodoPartido 
+		WHERE id_programa_partido = @id_programa_partido ORDER BY id_periodo_partido ASC
+		SET @cantidad_hora = DATEDIFF(MINUTE, @hora_inicio, @hora_fin)
+		----------------------------------------------------------------------
+		SELECT TOP 1 @hora_inicio = hora_inicio, @hora_fin = hora_fin 
+		FROM PeriodoPartido 
+		WHERE id_programa_partido = @id_programa_partido ORDER BY id_periodo_partido DESC
+		SET @cantidad_hora = @cantidad_hora + DATEDIFF(MINUTE, @hora_inicio, @hora_fin)
+	
+		update ProgramaPartido SET duracion_partido = @cantidad_hora 
+		WHERE id_programa_partido = @id_programa_partido
+		
+	FETCH NEXT FROM cursor_partido INTO @id_programa_partido
+	END
+	CLOSE cursor_partido
+	DEALLOCATE cursor_partido
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ActualizarPosiciones]    Script Date: 21/05/2023 21:59:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ActualizarPosiciones]
+AS
+BEGIN
+	DECLARE @id_posicion INT, @posicion_torneo VARCHAR(50), @contador INT, @id_torneo INT
+
+	DECLARE cursor_torneo CURSOR FOR 
+	SELECT id_torneo
+	FROM PosicionEquipoTorneo
+	OPEN cursor_torneo
+
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		DECLARE cursor_posicion CURSOR FOR
+		SELECT id_posicion FROM Posicion WHERE id_posicion 
+		IN(SELECT id_posicion FROM PosicionEquipoTorneo WHERE id_torneo = @id_torneo)
+		ORDER BY cantidad_puntos DESC, diferencia_goles DESC, goles_anotados DESC
+		OPEN cursor_posicion
+
+		SET @contador = 0
+		FETCH NEXT FROM cursor_posicion INTO @id_posicion
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			SET @contador = @contador + 1
+			SET @posicion_torneo = CAST(@contador AS VARCHAR(5)) + '° Puesto'
+			UPDATE Posicion SET posicion_torneo = @posicion_torneo 
+			WHERE id_posicion = @id_posicion
+		FETCH NEXT FROM cursor_posicion INTO @id_posicion
+		END
+		CLOSE cursor_posicion
+		DEALLOCATE cursor_posicion
+	FETCH NEXT FROM cursor_torneo INTO @id_torneo
+	END
+	CLOSE cursor_torneo
+	DEALLOCATE cursor_torneo
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AgregarDesignacion]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2811,7 +2891,7 @@ BEGIN
 	DEALLOCATE cursor1;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarDetalleAlineacion]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarDetalleAlineacion]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2819,58 +2899,43 @@ GO
 CREATE PROCEDURE [dbo].[AgregarDetalleAlineacion]
 AS
 BEGIN
-	DECLARE @posicion VARCHAR(70), @id_jugador INT, @id_alineacion INT	
-		
+	DECLARE @id_jugador INT, @posicion VARCHAR(70), @id_alineacion INT
 	DECLARE @posiciones TABLE (id INT IDENTITY(1,1), posiciones VARCHAR(70))
 	INSERT INTO @posiciones(posiciones)
-	VALUES ('Portero'),('Defensa central'),('Lateral derecho'),('Lateral izquierdo'),('Centrocampista defensivo'),('Centrocampista central'),('Centrocampista derecho'),('Centrocampista izquierdo'),('Delantero centro'),('Delantero derecho'),('Delantero izquierdo'),('Sustitucion Uno'), ('Sustitucion Dos'), ('Sustitucion Tres')
-		
-	DECLARE cursor1 CURSOR FOR
+	VALUES ('Portero'),('Defensa central'),('Lateral derecho'),('Lateral izquierdo'),('Centrocampista defensivo'),('Centrocampista central'),('Centrocampista derecho'),('Centrocampista izquierdo'),('Delantero centro'),('Delantero derecho'),('Delantero izquierdo')
+
+	DECLARE cursor_alineacion CURSOR FOR
 	SELECT id_alineacion
-	FROM Alineacion;
+	FROM Alineacion
+	OPEN cursor_alineacion
 
-	OPEN cursor1;
-
-	FETCH NEXT FROM cursor1 INTO @id_alineacion;
-
+	FETCH NEXT FROM cursor_alineacion INTO @id_alineacion
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		---------------
-		DECLARE @DetalleAlineacion TABLE(id int identity(1,1), posicion varchar(70), id_jugador int, id_alineacion int)
-			
-		DECLARE @c INT = 1
-		WHILE @c <= 14
-			BEGIN								
-				DECLARE @cant INT = 1
-				WHILE @cant >= 1
-					BEGIN
-						SELECT TOP 1 @posicion = posiciones FROM @posiciones ORDER BY NEWID()
-						SELECT @cant = COUNT(*) FROM @DetalleAlineacion WHERE posicion = @posicion
-						IF @cant = 0
-							BEGIN
-								SELECT TOP 1 @id_jugador = id_jugador FROM Jugador ORDER BY NEWID()
-								SELECT @cant = COUNT(*) FROM @DetalleAlineacion WHERE id_jugador = @id_jugador
-							END
-					END
-				INSERT INTO @DetalleAlineacion(posicion, id_jugador, id_alineacion) 
-				VALUES (@posicion, @id_jugador, @id_alineacion)
-				SET @c = @c + 1
-			END
-			set @id_alineacion = @id_alineacion + 1
-			-- select * from @DetalleAlineacion
-		
+		DECLARE cursor_posicion CURSOR FOR
+		SELECT posiciones
+		FROM @posiciones
+		OPEN cursor_posicion
+
+		FETCH NEXT FROM cursor_posicion INTO @posicion
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			SELECT TOP 1 @id_jugador = id_jugador FROM EquipoJugador WHERE id_equipo in
+			(SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion) 
+			and posicion = @posicion ORDER BY NEWID()		
 			INSERT INTO DetalleAlineacion (posicion, id_jugador, id_alineacion)
-			SELECT posicion, id_jugador, id_alineacion
-			FROM @DetalleAlineacion;
-			delete from @DetalleAlineacion
-		---------------
-		FETCH NEXT FROM cursor1 INTO @id_alineacion;
+			VALUES (@posicion, @id_jugador, @id_alineacion)
+		FETCH NEXT FROM cursor_posicion INTO @posicion
+		END
+		CLOSE cursor_posicion
+		DEALLOCATE cursor_posicion
+	FETCH NEXT FROM cursor_alineacion INTO @id_alineacion
 	END
-	CLOSE cursor1;
-	DEALLOCATE cursor1;	
+	CLOSE cursor_alineacion
+	DEALLOCATE cursor_alineacion
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarEvento]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarEvento]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2878,7 +2943,10 @@ GO
 CREATE PROCEDURE [dbo].[AgregarEvento]
 AS
 BEGIN
-	DECLARE @tiempo_jugado INT, @cantidad_pases INT, @id_detalle_alineacion INT, @minuto_cambio INT, @flag INT	
+	DECLARE @tiempo_jugado INT, @cantidad_pases INT, @id_detalle_alineacion INT, 
+	@minuto_cambio INT, @flag INT, @id_alineacion INT, @duracion_partido INT,
+	@posicion VARCHAR(70), @kilometros_recorridos INT, @intercepciones INT, 
+	@takles_ganados INT
 	
 	DECLARE cursor_evento CURSOR FOR
 	SELECT id_detalle_alineacion
@@ -2889,8 +2957,14 @@ BEGIN
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
+		SELECT @id_alineacion = id_alineacion FROM DetalleAlineacion 
+		WHERE id_detalle_alineacion = @id_detalle_alineacion
+
+		SELECT @duracion_partido = duracion_partido FROM ProgramaPartido 
+		WHERE id_alineacion_local = @id_alineacion OR id_alineacion_visitante = @id_alineacion
+
 		SELECT @cantidad_pases = ROUND(RAND()*(100-50)+50, 0)
-		SET @tiempo_jugado = 90		
+		SET @tiempo_jugado = @duracion_partido		
 		SELECT @flag = COUNT(*) FROM CambioJugador WHERE id_jugador_entrada = @id_detalle_alineacion OR id_jugador_salida = @id_detalle_alineacion
 
 		IF @flag > 0
@@ -2906,15 +2980,70 @@ BEGIN
 				SET @tiempo_jugado = @minuto_cambio
 			END								
 		END
-		INSERT INTO Evento(tiempo_jugado, cantidad_pases, id_detalle_alineacion)
-		VALUES (@tiempo_jugado, @cantidad_pases, @id_detalle_alineacion)		
+		SELECT @posicion = posicion FROM DetalleAlineacion 
+		WHERE id_detalle_alineacion = @id_detalle_alineacion 
+		
+		IF @posicion <> 'Portero'
+		BEGIN
+			SET @kilometros_recorridos = FLOOR(RAND()*(13-10+1)+10)
+			SET @intercepciones = FLOOR(RAND()*(5-2+1)+2)
+			SET @takles_ganados = FLOOR(RAND()*(5-2+1)+2)
+		END
+		ELSE
+		BEGIN
+			SET @kilometros_recorridos = FLOOR(RAND()*(3-2+1)+2)
+			SET @intercepciones = FLOOR(RAND()*(1-0+1)+0)
+			SET @takles_ganados = FLOOR(RAND()*(1-0+1)+1)		
+		END		
+		INSERT INTO Evento(tiempo_jugado, cantidad_pases, id_detalle_alineacion, kilometros_recorridos, intercepciones, takles_ganados)
+		VALUES (@tiempo_jugado, @cantidad_pases, @id_detalle_alineacion, @kilometros_recorridos, @intercepciones, @takles_ganados)		
 	FETCH NEXT FROM cursor_evento INTO @id_detalle_alineacion;
 	END	
 	CLOSE cursor_evento;
 	DEALLOCATE cursor_evento;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarPartidoProgramadoA]    Script Date: 19/05/2023 8:52:20 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarNacionalidadTecnico]    Script Date: 21/05/2023 18:56:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[AgregarNacionalidadTecnico]
+AS
+BEGIN
+	DECLARE @fecha_adquisicion DATE, @id_tecnico INT, @id_nacionalidad INT, @numero_nacionalidad INT,
+	@contador INT, @flag INT = 0, @dias INT
+	
+	DECLARE cursor_tecnico CURSOR FOR
+	SELECT id_tecnico
+	FROM Tecnico
+	OPEN cursor_tecnico 
+	FETCH NEXT FROM cursor_tecnico INTO @id_tecnico
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SET @contador = 1
+		SET @numero_nacionalidad = FLOOR(RAND() * 3 + 1)
+		WHILE @numero_nacionalidad >= @contador
+		BEGIN
+			SELECT TOP 1 @id_nacionalidad = id_nacionalidad FROM Nacionalidad ORDER BY NEWID()
+			SELECT @flag = COUNT(*) FROM NacionalidadTecnico 
+			WHERE id_tecnico = @id_tecnico AND id_nacionalidad = @id_nacionalidad
+			IF @flag = 0
+			BEGIN		
+				SET @dias = RAND() * (10000 + 1)
+				SET @fecha_adquisicion = DATEADD(DAY, -(@dias), CONVERT(DATE, '2005-12-31', 23));
+				INSERT INTO NacionalidadTecnico(fecha_adquisicion, id_tecnico, id_nacionalidad)
+				VALUES(@fecha_adquisicion, @id_tecnico, @id_nacionalidad)
+				SET @contador = @contador + 1
+			END
+		END
+	FETCH NEXT FROM cursor_tecnico INTO @id_tecnico
+	END
+	CLOSE cursor_tecnico
+	DEALLOCATE cursor_tecnico
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AgregarPartidoProgramadoA]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2984,7 +3113,7 @@ BEGIN
 	DEALLOCATE cursorA;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarPartidoProgramadoB]    Script Date: 19/05/2023 8:52:20 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarPartidoProgramadoB]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3037,7 +3166,49 @@ BEGIN
 	WHERE id_programa_partido = @id_programa_partido
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarPlanillaEquipoA]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarPeriodoPartido]    Script Date: 21/05/2023 18:56:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[AgregarPeriodoPartido]
+AS
+BEGIN
+	DECLARE @hora_inicio TIME, @hora_fin TIME, @minutos_retraso INT, 
+	@minutos_extras INT, @id_programa_partido INT, @minuto_random INT, @hora_programada TIME
+
+	DECLARE cursor_partido CURSOR FOR
+	SELECT id_programa_partido, hora_programada
+	FROM ProgramaPartido;
+	OPEN cursor_partido;
+
+	FETCH NEXT FROM cursor_partido INTO @id_programa_partido, @hora_programada
+	WHILE @@FETCH_STATUS = 0	
+	BEGIN
+		SET @hora_inicio = DATEADD(MINUTE, FLOOR(RAND()*(15-5+1)+5), @hora_programada)
+		SET @hora_fin = DATEADD(MINUTE, 45 + (FLOOR(RAND()*(5-1+1)+1)), @hora_inicio)
+		SET @minutos_retraso = DATEDIFF(MINUTE, @hora_programada, @hora_inicio)
+		SET @minutos_extras = (DATEDIFF(MINUTE, @hora_inicio, @hora_fin) - 45)
+
+
+		INSERT INTO PeriodoPartido(hora_inicio, hora_fin, minutos_retraso, minutos_extras, id_programa_partido
+		) VALUES(@hora_inicio, @hora_fin, @minutos_retraso, @minutos_extras, @id_programa_partido)
+		--------------------------------------------------------------------------------------------------------
+		SET @hora_inicio = DATEADD(MINUTE, FLOOR(RAND()*(15-5+1)+5), DATEADD(MINUTE, 15, @hora_fin))
+		SET @hora_fin = DATEADD(MINUTE, 45 + (FLOOR(RAND()*(5-1+1)+1)), @hora_inicio)
+		SET @minutos_retraso = DATEDIFF(MINUTE, DATEADD(MINUTE, -15, @hora_inicio), @hora_inicio)
+		SET @minutos_extras = (DATEDIFF(MINUTE, @hora_inicio, @hora_fin) - 45)
+
+		INSERT INTO PeriodoPartido(hora_inicio, hora_fin, minutos_retraso, minutos_extras, id_programa_partido
+		) VALUES(@hora_inicio, @hora_fin, @minutos_retraso, @minutos_extras, @id_programa_partido)
+
+	FETCH NEXT FROM cursor_partido INTO @id_programa_partido, @hora_programada;
+	END
+	CLOSE cursor_partido;
+	DEALLOCATE cursor_partido;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AgregarPlanillaEquipoA]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3056,7 +3227,7 @@ BEGIN
 	WHILE @@FETCH_STATUS = 0	
 	BEGIN
 		SET @menor = 5 
-		SET @mayor = 13		
+		SET @mayor = 15		
 		SET @numero_equipo = CAST((RAND() * (@mayor - @menor + 1) + @menor) AS INT);
 		SET @mayor = CAST((RAND() * (30 - @numero_equipo + 1) + @numero_equipo) AS INT); 
 		SET @menor = (@mayor - @numero_equipo) + 1
@@ -3070,7 +3241,7 @@ BEGIN
 	DEALLOCATE cursor_torneo;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarPlanillaEquipoB]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarPlanillaEquipoB]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3115,7 +3286,7 @@ BEGIN
 	DEALLOCATE cursor_planilla_equipo;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarPlantelA]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarPlantelA]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3144,7 +3315,7 @@ BEGIN
 	DEALLOCATE cursor_equipo;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarPlantelB]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarPlantelB]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3182,7 +3353,7 @@ BEGIN
 	DEALLOCATE cursor_jugador;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarPosicion]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarPosicion]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3190,133 +3361,38 @@ GO
 CREATE PROCEDURE [dbo].[AgregarPosicion]
 AS
 BEGIN
-	DECLARE @id_equipo INT
-	DECLARE @id_torneo	INT
-	DECLARE @partidos_jugados INT
+	DECLARE @cantidad_puntos INT, @partidos_ganados INT, @partidos_empatados INT, @goles_anotados INT,
+	@goles_encontra INT, @diferencia_goles INT, @id_equipo INT, @id_torneo INT, @id_posicion INT
 
 	DECLARE cursor_planilla CURSOR FOR
-	SELECT id_equipo, id_torneo
-	FROM PlanillaEquipo;
+	SELECT id_torneo, id_equipo
+	FROM PlanillaEquipo
 
 	OPEN cursor_planilla;
-
-	FETCH NEXT FROM cursor_planilla INTO @id_equipo, @id_torneo
+	FETCH NEXT FROM cursor_planilla INTO @id_torneo, @id_equipo;
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		DECLARE @puntos_equipos TABLE(id INT PRIMARY KEY IDENTITY(1,1), id_equipo int, cantidad_puntos int)
-		DECLARE @equipo_torneo TABLE(id INT PRIMARY KEY IDENTITY(1,1), id_alineacion INT)
-		DECLARE @id_alineacion INT, @marcador_local INT, @marcador_visitante INT, @cantidad_puntos INT = 0,
-		@partidos_ganados INT = 0, @partidos_empatados INT = 0, @goles_anotados INT = 0, @goles_encontra INT = 0,
-		@diferencia_goles INT = 0, @id_posicion INT
-
-		INSERT INTO @equipo_torneo (id_alineacion)
-		SELECT id_alineacion
-		FROM Alineacion
-		WHERE id_equipo = @id_equipo
-		and id_alineacion 
-		in (select id_alineacion_local from ProgramaPartido where id_torneo = @id_torneo)
-		
-		INSERT INTO @equipo_torneo (id_alineacion)
-		SELECT id_alineacion
-		FROM Alineacion
-		WHERE id_equipo = @id_equipo
-		and id_alineacion 
-		in (select id_alineacion_visitante from ProgramaPartido where id_torneo = @id_torneo)
-
-		DECLARE cursor_equipo CURSOR FOR
-		SELECT id_alineacion
-		FROM @equipo_torneo;
-
-		OPEN cursor_equipo;
-
-		FETCH NEXT FROM cursor_equipo INTO @id_alineacion
-		WHILE @@FETCH_STATUS = 0
-		BEGIN
-  
-			SELECT @marcador_local = marcador_local, @marcador_visitante = marcador_visitante 
-			FROM ProgramaPartido 
-			WHERE id_alineacion_local = @id_alineacion 
-		
-			IF @marcador_local > @marcador_visitante
-			BEGIN
-				SET @cantidad_puntos = @cantidad_puntos + 3
-				SET @partidos_ganados = @partidos_ganados + 1
-				SET @goles_anotados = @goles_anotados + @marcador_local
-			END
-			IF @marcador_local = @marcador_visitante
-			BEGIN
-				SET @cantidad_puntos = @cantidad_puntos + 1
-				SET @partidos_empatados = @partidos_empatados + 1
-				SET @goles_anotados = @goles_anotados + @marcador_local
-				SET @goles_encontra = @goles_encontra + @marcador_visitante
-			END
-			IF @marcador_local < @marcador_visitante
-			BEGIN
-				SET @goles_encontra = @goles_encontra + @marcador_visitante
-			END			
-
-			SELECT @marcador_local = marcador_local, @marcador_visitante = marcador_visitante 
-			FROM ProgramaPartido 
-			WHERE id_alineacion_visitante = @id_alineacion 
-		
-			IF @marcador_visitante > @marcador_local
-			BEGIN
-				SET @cantidad_puntos = @cantidad_puntos + 3
-				SET @partidos_ganados = @partidos_ganados + 1
-				SET @goles_anotados = @goles_anotados + @marcador_visitante
-			END
-			IF @marcador_visitante = @marcador_local
-			BEGIN
-				SET @cantidad_puntos = @cantidad_puntos + 1
-				SET @partidos_empatados = @partidos_empatados + 1
-				SET @goles_anotados = @goles_anotados + @marcador_visitante
-				SET @goles_encontra = @goles_encontra + @marcador_local
-			END
-			IF @marcador_visitante < @marcador_local 
-			BEGIN
-				SET @goles_encontra = @goles_encontra + @marcador_local
-			END						
-								
-		FETCH NEXT FROM cursor_equipo INTO @id_alineacion;
-		END
-		CLOSE cursor_equipo;
-		DEALLOCATE cursor_equipo;	
-
-		DECLARE @cantidad_local INT = 0
-		DECLARE @cantidad_visitante INT = 0
-		
-		select @cantidad_local = count(*) 
-		from Alineacion 
-		where id_equipo = @id_equipo 
-		and id_alineacion 
-		in (select id_alineacion_local from ProgramaPartido where id_torneo = @id_torneo)
-
-		select @cantidad_visitante = count(*) 
-		from Alineacion 
-		where id_equipo = @id_equipo 
-		and id_alineacion 
-		in (select id_alineacion_local from ProgramaPartido where id_torneo = @id_torneo)
-		
-		SET @partidos_jugados = @cantidad_visitante + @cantidad_local
-
+		EXEC @partidos_ganados = PartidosGanados @id_torneo, @id_equipo
+		EXEC @partidos_empatados = PartidosEmpatados @id_torneo, @id_equipo
+		EXEC @goles_anotados = GolesAnotados @id_torneo, @id_equipo
+		EXEC @goles_encontra = GolesEncontra @id_torneo, @id_equipo
 		SET @diferencia_goles = @goles_anotados - @goles_encontra
+		SET @cantidad_puntos = (@partidos_ganados * 3) + (@partidos_empatados)	
 
-		INSERT INTO Posicion(partidos_jugados, cantidad_puntos, partidos_ganados, partidos_empatados, goles_anotados, goles_encontra, diferencia_goles)
-		VALUES (@partidos_jugados, @cantidad_puntos, @partidos_ganados, @partidos_empatados, @goles_anotados, @goles_encontra, @diferencia_goles)
-		SET @cantidad_puntos = 0 SET @partidos_ganados = 0 SET @partidos_empatados = 0 SET @goles_anotados = 0 
-		SET @goles_encontra = 0
+		INSERT INTO Posicion(cantidad_puntos, partidos_ganados, partidos_empatados, goles_anotados, goles_encontra, diferencia_goles)
+		VALUES (@cantidad_puntos, @partidos_ganados, @partidos_empatados, @goles_anotados, @goles_encontra, @diferencia_goles)
 		
 		SELECT @id_posicion = SCOPE_IDENTITY();
 		INSERT INTO PosicionEquipoTorneo (id_equipo, id_posicion, id_torneo)
 		VALUES (@id_equipo, @id_posicion, @id_torneo)
 
-	FETCH NEXT FROM cursor_planilla INTO @id_equipo, @id_torneo;
+	FETCH NEXT FROM cursor_planilla INTO @id_torneo, @id_equipo;
 	END
-	CLOSE cursor_planilla;
-	DEALLOCATE cursor_planilla;
+	CLOSE cursor_planilla
+	DEALLOCATE cursor_planilla
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AgregarTorneos]    Script Date: 19/05/2023 9:11:52 ******/
+/****** Object:  StoredProcedure [dbo].[AgregarTorneos]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3343,7 +3419,7 @@ BEGIN
 	DEALLOCATE cursor_torneo;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[generar_alineacion_tecnico]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[generar_alineacion_tecnico]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3375,7 +3451,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GenerarCambioJugador]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[GenerarCambioJugador]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3383,48 +3459,74 @@ GO
 CREATE PROCEDURE [dbo].[GenerarCambioJugador]
 AS
 BEGIN
-	DECLARE @id_detalle_alineacion_salida INT, @id_detalle_alineacion_entrada INT, @id_alineacion INT,
-	@minuto_cambio INT, @cant INT
+	------------------------------------------------------------------------------------------------------- 
+	DECLARE @cambios INT, @cambio_local INT, @cambio_visitante INT, @id_alineacion_local INT, 
+	@id_alineacion_visitante INT, @id_jugador_salida INT, @id_jugador_entrada INT, @posicion VARCHAR(70), 
+	@id_cambio_jugador INT, @id_jugador INT, @duracion_partido INT, @minuto INT, @id_alineacion INT
 
-	DECLARE cursor1 CURSOR FOR
-	SELECT id_alineacion
-	FROM Alineacion;
-	OPEN cursor1;
+	DECLARE cursor_partido CURSOR FOR
+	SELECT cambios, id_alineacion_local, id_alineacion_visitante
+	FROM ProgramaPartido
+	OPEN cursor_partido
 
-	FETCH NEXT FROM cursor1 INTO @id_alineacion;
-
+	FETCH NEXT FROM cursor_partido INTO @cambios, @id_alineacion_local, @id_alineacion_visitante
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
-		DECLARE @cantidad_cambio INT = 1
-		WHILE @cantidad_cambio <= 3
-		BEGIN
-			SET @minuto_cambio = CAST(RAND() * 90 + 1 AS INT)						
-			SET @cant = 1
-			WHILE @cant > 0
-			BEGIN
-				SELECT TOP 1 @id_detalle_alineacion_salida = id_detalle_alineacion from DetalleAlineacion WHERE id_alineacion = @id_alineacion AND posicion <> 'Portero' AND posicion <> 'Sustitucion Uno' AND posicion <> 'Sustitucion Dos' AND posicion <> 'Sustitucion Tres' ORDER BY NEWID()
-				SELECT @cant = COUNT(*) FROM CambioJugador WHERE id_jugador_salida = @id_detalle_alineacion_salida
-			END			
-			SET @cant = 1
-			WHILE @cant > 0
-			BEGIN
-				SELECT TOP 1 @id_detalle_alineacion_entrada = id_detalle_alineacion from DetalleAlineacion WHERE id_alineacion = @id_alineacion AND (posicion = 'Sustitucion Uno' OR posicion = 'Sustitucion Dos' OR posicion = 'Sustitucion Tres') ORDER BY NEWID()
-				SELECT @cant = COUNT(*) FROM CambioJugador WHERE id_jugador_entrada = @id_detalle_alineacion_entrada
-			END
-			
-			INSERT INTO CambioJugador(minuto_cambio, id_jugador_entrada, id_jugador_salida)
-			VALUES (@minuto_cambio, @id_detalle_alineacion_entrada, @id_detalle_alineacion_salida)
-				
-			SET @cantidad_cambio = @cantidad_cambio + 1
-		END
-		
-	FETCH NEXT FROM cursor1 INTO @id_alineacion;
-	END	
-	CLOSE cursor1;
-	DEALLOCATE cursor1;
+		SET @cambio_local = FLOOR(RAND() * (@cambios + 1))
+		SET @cambio_visitante = @cambios - @cambio_local
+
+		INSERT INTO CambioJugador(id_jugador_salida)
+		SELECT TOP (@cambio_local) id_detalle_alineacion
+		FROM DetalleAlineacion
+		WHERE id_alineacion = @id_alineacion_local
+
+		INSERT INTO CambioJugador(id_jugador_salida)
+		SELECT TOP (@cambio_visitante) id_detalle_alineacion
+		FROM DetalleAlineacion
+		WHERE id_alineacion = @id_alineacion_visitante
+
+	FETCH NEXT FROM cursor_partido INTO @cambios, @id_alineacion_local, @id_alineacion_visitante
+	END
+	CLOSE cursor_partido
+	DEALLOCATE cursor_partido
+	-------------------------------------------------------------------------------------------------------
+	DECLARE cursor_cambio CURSOR FOR
+	SELECT id_cambio_juagador, id_jugador_salida
+	FROM CambioJugador
+
+	OPEN cursor_cambio
+
+	FETCH NEXT FROM cursor_cambio INTO @id_cambio_jugador, @id_jugador_salida
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SELECT @posicion = posicion, @id_jugador_salida = id_jugador, @id_alineacion = id_alineacion  
+		FROM DetalleAlineacion WHERE id_detalle_alineacion = @id_jugador_salida
+
+		SELECT @id_jugador = id_jugador FROM EquipoJugador 
+		WHERE id_jugador <> @id_jugador_salida AND posicion = @posicion AND id_equipo
+		in(SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion)
+
+		INSERT INTO DetalleAlineacion(posicion, id_jugador, id_alineacion)
+		VALUES(@posicion, @id_jugador, @id_alineacion)
+
+		SET @id_jugador_entrada = SCOPE_IDENTITY()
+
+		SELECT @duracion_partido = duracion_partido FROM ProgramaPartido 
+		WHERE id_alineacion_local = @id_alineacion OR id_alineacion_visitante = @id_alineacion
+	
+		SET @minuto = CAST(RAND() * @duracion_partido + 1 AS INT)
+
+		UPDATE CambioJugador SET id_jugador_entrada = @id_jugador_entrada, minuto_cambio = @minuto
+		WHERE id_cambio_juagador = @id_cambio_jugador
+
+	FETCH NEXT FROM cursor_cambio INTO @id_cambio_jugador, @id_jugador_salida
+	END
+	CLOSE cursor_cambio
+	DEALLOCATE cursor_cambio
+	-------------------------------------------------------------------------------------------------------
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GenerarFaltas]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[GenerarFaltas]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3432,16 +3534,18 @@ GO
 CREATE PROCEDURE [dbo].[GenerarFaltas]
 AS
 BEGIN
-	DECLARE @id_alineacion_local INT, @id_alineacion_visitante INT, @tarjetas_amarillas INT, @tarjetas_rojas INT,
-	@id_tipo_falta INT, @id_tarjeta INT, @id_detalle_alineacion INT, @minuto INT, @contador INT, @contador_amarillo_local INT,
-	@contador_amarillo_visitante INT, @cantidad_faltas INT, @contador_faltas INT, @contador_roja INT, @flag INT
+	DECLARE @id_alineacion_local INT, @id_alineacion_visitante INT, @tarjetas_amarillas INT, 
+	@tarjetas_rojas INT, @id_tipo_falta INT, @id_tarjeta INT, @id_detalle_alineacion INT, 
+	@minuto INT, @contador INT, @contador_amarillo_local INT, @contador_amarillo_visitante INT, 
+	@cantidad_faltas INT, @contador_faltas INT, @contador_roja INT, @flag INT, @duracion_partido INT,
+	@faltas INT
 		
 	DECLARE cursor1 CURSOR FOR
-	SELECT id_alineacion_local, id_alineacion_visitante, tarjetas_amarillas, tarjetas_rojas
+	SELECT id_alineacion_local, id_alineacion_visitante, tarjetas_amarillas, tarjetas_rojas, duracion_partido, faltas
 	FROM ProgramaPartido;
 	OPEN cursor1;
 
-	FETCH NEXT FROM cursor1 INTO @id_alineacion_local, @id_alineacion_visitante, @tarjetas_amarillas, @tarjetas_rojas;
+	FETCH NEXT FROM cursor1 INTO @id_alineacion_local, @id_alineacion_visitante, @tarjetas_amarillas, @tarjetas_rojas, @duracion_partido, @faltas;
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
@@ -3450,80 +3554,80 @@ BEGIN
 		SELECT @contador_amarillo_visitante = @tarjetas_amarillas - @contador_amarillo_local
 		SELECT @flag = ROUND(RAND() + 1.0, 0)
 
-		SELECT @cantidad_faltas = ABS(CHECKSUM(NEWID())) % 5 + 9
+		SET @cantidad_faltas = @faltas/2
 		SET @contador_faltas = 1
 		WHILE @cantidad_faltas >= @contador_faltas
 		BEGIN
-			SET @minuto = CAST(RAND() * 90 + 1 AS INT)
+			SET @minuto = CAST(RAND() * @duracion_partido + 1 AS INT)
 			SELECT TOP 1 @id_detalle_alineacion = id_detalle_alineacion FROM DetalleAlineacion WHERE id_alineacion = @id_alineacion_local ORDER BY NEWID()
 			SELECT TOP 1 @id_tipo_falta = id_tipo_falta FROM TipoFalta ORDER BY NEWID()
 			SELECT @id_tarjeta = id_tarjeta FROM Tarjeta WHERE color_tarjeta = 'Tarjeta Amarilla' 
 								
 			IF @contador_amarillo_local > 0
 			BEGIN
-				INSERT INTO Falta(minuto, id_tipo_falta, id_tarjeta, id_detalle_alineacion)
-				VALUES (@minuto, @id_tipo_falta, @id_tarjeta, @id_detalle_alineacion)
+				INSERT INTO Falta(minuto, id_tipo_falta, id_tarjeta, id_detalle_alineacion, puntos_fair_play)
+				VALUES (@minuto, @id_tipo_falta, @id_tarjeta, @id_detalle_alineacion, -1)				
 			END
 			ELSE
 			BEGIN
 				IF @contador_roja > 0 AND @flag = 1
 				BEGIN
 					SELECT @id_tarjeta = id_tarjeta FROM Tarjeta WHERE color_tarjeta = 'Tarjeta Roja'
-					INSERT INTO Falta(minuto, id_tipo_falta, id_tarjeta, id_detalle_alineacion)
-					VALUES (@minuto, @id_tipo_falta, @id_tarjeta, @id_detalle_alineacion)
+					INSERT INTO Falta(minuto, id_tipo_falta, id_tarjeta, id_detalle_alineacion, puntos_fair_play)
+					VALUES (@minuto, @id_tipo_falta, @id_tarjeta, @id_detalle_alineacion, -3)
 					SET @contador_roja = @contador_roja - 1
 				END
 				ELSE
 				BEGIN
-					INSERT INTO Falta(minuto, id_tipo_falta, id_detalle_alineacion)
-					VALUES (@minuto, @id_tipo_falta, @id_detalle_alineacion)
+					INSERT INTO Falta(minuto, id_tipo_falta, id_detalle_alineacion, puntos_fair_play)
+					VALUES (@minuto, @id_tipo_falta, @id_detalle_alineacion, 0)
 				END					
 			END	
 			SET @contador_amarillo_local = @contador_amarillo_local - 1
 			SET @contador_faltas = @contador_faltas + 1
 		END	
 		------------------------------------------------------------------------------------------------
-		SELECT @cantidad_faltas = ABS(CHECKSUM(NEWID())) % 5 + 9
+		SET @cantidad_faltas = @faltas - @cantidad_faltas
 		SET @contador_faltas = 1
 		WHILE @cantidad_faltas >= @contador_faltas
 		BEGIN
-			SET @minuto = CAST(RAND() * 90 + 1 AS INT)
+			SET @minuto = CAST(RAND() * @duracion_partido + 1 AS INT)
 			SELECT TOP 1 @id_detalle_alineacion = id_detalle_alineacion FROM DetalleAlineacion WHERE id_alineacion = @id_alineacion_visitante ORDER BY NEWID()
 			SELECT TOP 1 @id_tipo_falta = id_tipo_falta FROM TipoFalta ORDER BY NEWID()
 			SELECT @id_tarjeta = id_tarjeta FROM Tarjeta WHERE color_tarjeta = 'Tarjeta Amarilla' 
 								
 			IF @contador_amarillo_visitante > 0
 			BEGIN
-				INSERT INTO Falta(minuto, id_tipo_falta, id_tarjeta, id_detalle_alineacion)
-				VALUES (@minuto, @id_tipo_falta, @id_tarjeta, @id_detalle_alineacion)
+				INSERT INTO Falta(minuto, id_tipo_falta, id_tarjeta, id_detalle_alineacion, puntos_fair_play)
+				VALUES (@minuto, @id_tipo_falta, @id_tarjeta, @id_detalle_alineacion, -1)
 			END
 			ELSE
 			BEGIN
 				IF @contador_roja > 0 AND @flag = 2
 				BEGIN
 					SELECT @id_tarjeta = id_tarjeta FROM Tarjeta WHERE color_tarjeta = 'Tarjeta Roja'
-					INSERT INTO Falta(minuto, id_tipo_falta, id_tarjeta, id_detalle_alineacion)
-					VALUES (@minuto, @id_tipo_falta, @id_tarjeta, @id_detalle_alineacion)
+					INSERT INTO Falta(minuto, id_tipo_falta, id_tarjeta, id_detalle_alineacion, puntos_fair_play)
+					VALUES (@minuto, @id_tipo_falta, @id_tarjeta, @id_detalle_alineacion, -3)
 					SET @contador_roja = @contador_roja - 1
 				END
 				ELSE
 				BEGIN
-					INSERT INTO Falta(minuto, id_tipo_falta, id_detalle_alineacion)
-					VALUES (@minuto, @id_tipo_falta, @id_detalle_alineacion)
+					INSERT INTO Falta(minuto, id_tipo_falta, id_detalle_alineacion, puntos_fair_play)
+					VALUES (@minuto, @id_tipo_falta, @id_detalle_alineacion, 0)
 				END					
 			END		
 			SET @contador_amarillo_local = @contador_amarillo_visitante - 1
 			SET @contador_faltas = @contador_faltas + 1
 		END	
 			
-		FETCH NEXT FROM cursor1 INTO @id_alineacion_local, @id_alineacion_visitante, @tarjetas_amarillas, @tarjetas_rojas;
+		FETCH NEXT FROM cursor1 INTO @id_alineacion_local, @id_alineacion_visitante, @tarjetas_amarillas, @tarjetas_rojas, @duracion_partido, @faltas;
 	END
 
 	CLOSE cursor1;
 	DEALLOCATE cursor1;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GenerarGoleo]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[GenerarGoleo]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3575,7 +3679,7 @@ BEGIN
 	DEALLOCATE cursor1;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GenerarTorneos]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[GenerarTorneos]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3625,7 +3729,57 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[InsertarCambioEstado]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[GolesAnotados]    Script Date: 21/05/2023 18:56:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GolesAnotados](@id_torneo INT, @id_equipo INT)
+AS
+BEGIN
+    DECLARE @goles INT = 0;
+
+    SELECT @goles = SUM(marcador_local)
+	FROM ProgramaPartido 
+	WHERE id_torneo = @id_torneo 
+	AND id_alineacion_local
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+	
+	SELECT @goles = @goles + SUM(marcador_visitante)
+	FROM ProgramaPartido 
+	WHERE id_torneo = @id_torneo
+	AND id_alineacion_visitante 
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+
+    RETURN @goles;
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[GolesEncontra]    Script Date: 21/05/2023 18:56:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GolesEncontra](@id_torneo INT, @id_equipo INT)
+AS
+BEGIN
+    DECLARE @goles INT = 0;
+
+    SELECT @goles = SUM(marcador_visitante)
+	FROM ProgramaPartido 
+	WHERE id_torneo = @id_torneo 
+	AND id_alineacion_local
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+	
+	SELECT @goles = @goles + SUM(marcador_local)
+	FROM ProgramaPartido 
+	WHERE id_torneo = @id_torneo
+	AND id_alineacion_visitante 
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+
+    RETURN @goles;
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[InsertarCambioEstado]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3676,7 +3830,7 @@ BEGIN
     END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[InsertarNacionalidadJugador]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[InsertarNacionalidadJugador]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3723,7 +3877,51 @@ BEGIN
     END
 END
 GO
-/****** Object:  Trigger [dbo].[ActualizarAlineacion]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  StoredProcedure [dbo].[PartidosEmpatados]    Script Date: 21/05/2023 18:56:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PartidosEmpatados](@id_torneo INT, @id_equipo INT)
+AS 
+BEGIN
+	DECLARE @partidos INT = 0
+
+	SELECT @partidos = COUNT(*)
+	FROM ProgramaPartido
+	WHERE identificador_marcador = 2 AND id_torneo = @id_torneo
+	AND (id_alineacion_local
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo)
+	OR id_alineacion_visitante
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) ) 
+	RETURN @partidos;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PartidosGanados]    Script Date: 21/05/2023 18:56:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PartidosGanados](@id_torneo INT, @id_equipo INT)
+AS
+BEGIN
+	DECLARE @partidos INT = 0
+	SELECT @partidos = COUNT(*)
+	FROM ProgramaPartido 
+	WHERE identificador_marcador = 0 AND id_torneo = @id_torneo
+	AND id_alineacion_local
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+	
+	SELECT @partidos = @partidos + COUNT(*)
+	FROM ProgramaPartido 
+	WHERE identificador_marcador = 1 AND id_torneo = @id_torneo
+	AND id_alineacion_visitante
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo) 
+
+	RETURN @partidos;
+END
+GO
+/****** Object:  Trigger [dbo].[ActualizarAlineacion]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3742,7 +3940,7 @@ END
 GO
 ALTER TABLE [dbo].[Alineacion] ENABLE TRIGGER [ActualizarAlineacion]
 GO
-/****** Object:  Trigger [dbo].[ActualizarEstadisticaClubParteDos]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  Trigger [dbo].[ActualizarEstadisticaClubParteDos]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3781,7 +3979,7 @@ END
 GO
 ALTER TABLE [dbo].[Falta] ENABLE TRIGGER [ActualizarEstadisticaClubParteDos]
 GO
-/****** Object:  Trigger [dbo].[ActualizarEstadisticaClubParteUno]    Script Date: 18/05/2023 20:10:29 ******/
+/****** Object:  Trigger [dbo].[ActualizarEstadisticaClubParteUno]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3797,11 +3995,11 @@ BEGIN
 	FROM inserted
 	
 	SELECT @id_club_futbol = id_club_futbol FROM Equipo WHERE id_equipo = @id_equipo
-	SELECT @partidos_jugados = partidos_jugados, @goles_marcados = goles_anotados 
+	SELECT @goles_marcados = goles_anotados 
 	FROM Posicion WHERE id_posicion = @id_posicion 
 	
 	UPDATE EstadisticaClub
-	SET partidos_jugados = partidos_jugados + @partidos_jugados, goles_marcados = goles_marcados + @goles_marcados
+	SET partidos_jugados = 0, goles_marcados = goles_marcados + @goles_marcados
 	WHERE id_club_futbol = @id_club_futbol
 END
 GO
@@ -3829,6 +4027,10 @@ EXECUTE [dbo].[AgregarDetalleAlineacion]
 GO
 EXECUTE [dbo].[AgregarDesignacion]
 GO
+EXECUTE [dbo].[AgregarPeriodoPartido]
+GO
+EXECUTE [dbo].[ActualizarDuracion]
+GO
 EXECUTE [dbo].[GenerarGoleo]
 GO
 EXECUTE [dbo].[GenerarFaltas]
@@ -3842,6 +4044,10 @@ GO
 EXECUTE [dbo].[InsertarNacionalidadJugador]
 GO
 EXECUTE [dbo].[AgregarPosicion]
+GO
+EXECUTE [dbo].[AgregarNacionalidadTecnico]
+GO
+EXECUTE [dbo].[ActualizarPosiciones]
 GO
 /****** Script para el comando SelectTopNRows de SSMS  ******/
 SELECT *
@@ -3903,6 +4109,12 @@ SELECT *
 GO
 SELECT *
   FROM [TorneoFutbol].[dbo].[NacionalidadJugador]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[NacionalidadTecnico]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[PeriodoPartido]
 GO
 SELECT *
   FROM [TorneoFutbol].[dbo].[PlanillaEquipo]
