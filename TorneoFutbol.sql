@@ -3123,7 +3123,7 @@ AS
 BEGIN		
     DECLARE @hora_programada TIME, @marcador_local INT, @marcador_visitante INT, @equipo_ganador varchar(50), 
 	@equipo_perdedor varchar(50), @tarjetas_amarillas INT, @tarjetas_rojas INT, @id_ubicacion_estadio INT, 
-	@id_estado_partido INT = 1, @faltas INT, @cambios INT, @id_alineacion_visitante INT, @id_alineacion_local INT,
+	@id_estado_partido INT, @faltas INT, @cambios INT, @id_alineacion_visitante INT, @id_alineacion_local INT,
 	@pases INT, @penales INT, @tiros_libres INT, @duracion_partido INT, @identificador_marcador INT
 
 	SELECT TOP 1 @id_ubicacion_estadio = id_ubicacion_estadio FROM UbicacionEstadio ORDER BY NEWID()	
@@ -3146,14 +3146,17 @@ BEGIN
 	IF @marcador_local > @marcador_visitante
 	BEGIN
 		SET @identificador_marcador = 0
+		SET @id_estado_partido = 1
 	END
 	IF @marcador_local < @marcador_visitante
 	BEGIN
 		SET @identificador_marcador = 1
+		SET @id_estado_partido = 1
 	END
 	IF @marcador_local = @marcador_visitante
 	BEGIN
 		SET @identificador_marcador = 2
+		SET @id_estado_partido = 2
 	END
 
 	UPDATE ProgramaPartido
@@ -3636,15 +3639,15 @@ CREATE PROCEDURE [dbo].[GenerarGoleo]
 AS
 BEGIN
 	DECLARE @id_alineacion_local INT, @id_alineacion_visitante INT, @marcador_local INT,
-	@marcador_visitante INT, @id_detalle_alineacion INT, @minuto INT
+	@marcador_visitante INT, @id_detalle_alineacion INT, @minuto INT, @duracion_partido INT
 		
 	DECLARE cursor1 CURSOR FOR
-	SELECT id_alineacion_local, id_alineacion_visitante, marcador_local, marcador_visitante
+	SELECT id_alineacion_local, id_alineacion_visitante, marcador_local, marcador_visitante, duracion_partido
 	FROM ProgramaPartido;
 
 	OPEN cursor1;
 
-	FETCH NEXT FROM cursor1 INTO @id_alineacion_local, @id_alineacion_visitante, @marcador_local, @marcador_visitante;
+	FETCH NEXT FROM cursor1 INTO @id_alineacion_local, @id_alineacion_visitante, @marcador_local, @marcador_visitante, @duracion_partido;
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
@@ -3653,7 +3656,7 @@ BEGIN
 		BEGIN
 			WHILE @marcador_local >= @contador
 			BEGIN
-				SET @minuto = CAST(RAND() * 90 + 1 AS INT)
+				SET @minuto = CAST(RAND() * @duracion_partido + 1 AS INT)
 				SELECT TOP 1 @id_detalle_alineacion = id_detalle_alineacion FROM DetalleAlineacion WHERE id_alineacion = @id_alineacion_local ORDER BY NEWID()
 				INSERT INTO Goleo(minuto, id_detalle_alineacion)
 				VALUES (@minuto, @id_detalle_alineacion)
@@ -3672,7 +3675,7 @@ BEGIN
 				SET @contador = @contador + 1
 			END
 		END					
-		FETCH NEXT FROM cursor1 INTO @id_alineacion_local, @id_alineacion_visitante, @marcador_local, @marcador_visitante;
+		FETCH NEXT FROM cursor1 INTO @id_alineacion_local, @id_alineacion_visitante, @marcador_local, @marcador_visitante, @duracion_partido;
 	END
 
 	CLOSE cursor1;
@@ -3940,70 +3943,58 @@ END
 GO
 ALTER TABLE [dbo].[Alineacion] ENABLE TRIGGER [ActualizarAlineacion]
 GO
-/****** Object:  Trigger [dbo].[ActualizarEstadisticaClubParteDos]    Script Date: 21/05/2023 18:56:34 ******/
+/****** Object:  StoredProcedure [dbo].[ActualizarEstadisticaClubParteUno]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TRIGGER [dbo].[ActualizarEstadisticaClubParteDos]
-ON [dbo].[Falta]
-AFTER INSERT
-AS
-BEGIN	
-	DECLARE @tarjetas_rojas INT, @tarjetas_amarillas INT, @id_club_futbol INT, @id_detalle_alineacion INT,
-	@id_tarjeta INT, @tarjeta_roja INT, @tarjeta_amarilla INT
-	
-	SELECT @tarjeta_amarilla = id_tarjeta FROM Tarjeta WHERE color_tarjeta = 'Tarjeta Amarilla'
-	SELECT @tarjeta_roja = id_tarjeta FROM Tarjeta WHERE color_tarjeta = 'Tarjeta Roja'		
-	
-	SELECT @id_detalle_alineacion = id_detalle_alineacion, @id_tarjeta = id_tarjeta
-	FROM inserted
-
-	select @id_club_futbol = id_club_futbol from Equipo where id_club_futbol in 
-		(select id_equipo from Alineacion where id_alineacion in
-			(select id_alineacion from DetalleAlineacion where id_detalle_alineacion = @id_detalle_alineacion))
-
-	IF @id_tarjeta = @tarjeta_amarilla
-	BEGIN
-		UPDATE EstadisticaClub
-		SET tarjetas_amarillas = tarjetas_amarillas + 1
-		WHERE id_club_futbol = @id_club_futbol
-	END
-	IF @id_tarjeta = @tarjeta_roja
-	BEGIN
-		UPDATE EstadisticaClub
-		SET tarjetas_rojas = tarjetas_rojas + 1
-		WHERE id_club_futbol = @id_club_futbol
-	END	
-END
-GO
-ALTER TABLE [dbo].[Falta] ENABLE TRIGGER [ActualizarEstadisticaClubParteDos]
-GO
-/****** Object:  Trigger [dbo].[ActualizarEstadisticaClubParteUno]    Script Date: 21/05/2023 18:56:34 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TRIGGER [dbo].[ActualizarEstadisticaClubParteUno]
-ON [dbo].[PosicionEquipoTorneo]
-AFTER INSERT
+CREATE PROCEDURE [dbo].[ActualizarEstadisticaClubParteUno]
 AS
 BEGIN
-	DECLARE @partidos_jugados INT, @goles_marcados INT, @id_club_futbol INT, @id_posicion INT, @id_equipo INT
+	DECLARE @id_equipo INT, @id_posicion INT, @id_club_futbol INT, @diferencia_goles INT,
+	@goles_encontra INT, @goles_anotados INT, @partidos_ganados INT, @partidos_jugados INT,
+	@tarjetas_rojas INT, @tarjetas_amarillas INT
 
-	SELECT @id_posicion = id_posicion, @id_equipo = id_equipo
-	FROM inserted
+	DECLARE cursor_posicion CURSOR FOR
+	SELECT id_equipo, id_posicion
+	FROM PosicionEquipoTorneo
+
+	OPEN cursor_posicion
+
+	FETCH NEXT FROM cursor_posicion INTO @id_equipo, @id_posicion
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SELECT @partidos_jugados = COUNT(*) FROM Alineacion WHERE id_equipo = @id_equipo
+		SELECT @partidos_ganados = partidos_ganados FROM Posicion WHERE id_posicion = @id_posicion
+		SELECT @goles_anotados = goles_anotados FROM Posicion WHERE id_posicion = @id_posicion
+		SELECT @goles_encontra = goles_encontra FROM Posicion WHERE id_posicion = @id_posicion
+		SELECT @diferencia_goles = diferencia_goles FROM Posicion WHERE id_posicion = @id_posicion
 	
-	SELECT @id_club_futbol = id_club_futbol FROM Equipo WHERE id_equipo = @id_equipo
-	SELECT @goles_marcados = goles_anotados 
-	FROM Posicion WHERE id_posicion = @id_posicion 
+		SELECT @tarjetas_rojas = count(*) FROM Falta WHERE id_tarjeta = 1 AND id_detalle_alineacion 
+		IN (SELECT id_detalle_alineacion FROM DetalleAlineacion WHERE id_alineacion 
+		IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo))
+
+		SELECT @tarjetas_amarillas = count(*) FROM Falta WHERE id_tarjeta = 2 AND id_detalle_alineacion 
+		IN (SELECT id_detalle_alineacion FROM DetalleAlineacion WHERE id_alineacion 
+		IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo))
 	
-	UPDATE EstadisticaClub
-	SET partidos_jugados = 0, goles_marcados = goles_marcados + @goles_marcados
-	WHERE id_club_futbol = @id_club_futbol
+		SELECT @id_club_futbol = id_club_futbol FROM Equipo WHERE id_equipo = @id_equipo
+
+		UPDATE EstadisticaClub SET 
+		partidos_jugados = @partidos_jugados,
+		partidos_ganados = (partidos_ganados + @partidos_ganados), 
+		goles_marcados = (goles_marcados + @goles_anotados),
+		goles_encontra = (goles_encontra + @goles_encontra), 
+		diferencia_goles = (diferencia_goles + @diferencia_goles),
+		tarjetas_rojas = @tarjetas_rojas,
+		tarjetas_amarillas = @tarjetas_amarillas
+		WHERE id_club_futbol = @id_club_futbol
+
+	FETCH NEXT FROM cursor_posicion INTO @id_equipo, @id_posicion
+	END
+	CLOSE cursor_posicion
+	DEALLOCATE cursor_posicion
 END
-GO
-ALTER TABLE [dbo].[PosicionEquipoTorneo] ENABLE TRIGGER [ActualizarEstadisticaClubParteUno]
 GO
 /****** Execute Procedures Date: 03/05/2023 9:51:06 ******/
 DECLARE @year int = 10
@@ -4048,6 +4039,8 @@ GO
 EXECUTE [dbo].[AgregarNacionalidadTecnico]
 GO
 EXECUTE [dbo].[ActualizarPosiciones]
+GO
+EXECUTE [dbo].[ActualizarEstadisticaClubParteUno]
 GO
 /****** Script para el comando SelectTopNRows de SSMS  ******/
 SELECT *

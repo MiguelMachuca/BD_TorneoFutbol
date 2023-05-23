@@ -2568,7 +2568,53 @@ BEGIN
 END
 
 
+UPDATE EstadisticaClub SET partidos_jugados = 0, partidos_ganados = 0, goles_marcados = 0, 
+goles_encontra = 0, diferencia_goles = 0, tarjetas_rojas = 0, tarjetas_amarillas = 0
 
 
-SELECT * FROM NacionalidadTecnico
-SELECT * FROM Tecnico
+DECLARE @id_equipo INT, @id_posicion INT, @id_club_futbol INT, @diferencia_goles INT,
+@goles_encontra INT, @goles_anotados INT, @partidos_ganados INT, @partidos_jugados INT,
+@tarjetas_rojas INT, @tarjetas_amarillas INT
+
+DECLARE cursor_posicion CURSOR FOR
+SELECT id_equipo, id_posicion
+FROM PosicionEquipoTorneo
+
+OPEN cursor_posicion
+
+FETCH NEXT FROM cursor_posicion INTO @id_equipo, @id_posicion
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	SELECT @partidos_jugados = COUNT(*) FROM Alineacion WHERE id_equipo = @id_equipo
+	SELECT @partidos_ganados = partidos_ganados FROM Posicion WHERE id_posicion = @id_posicion
+	SELECT @goles_anotados = goles_anotados FROM Posicion WHERE id_posicion = @id_posicion
+	SELECT @goles_encontra = goles_encontra FROM Posicion WHERE id_posicion = @id_posicion
+	SELECT @diferencia_goles = diferencia_goles FROM Posicion WHERE id_posicion = @id_posicion
+	
+	SELECT @tarjetas_rojas = count(*) FROM Falta WHERE id_tarjeta = 1 AND id_detalle_alineacion 
+	IN (SELECT id_detalle_alineacion FROM DetalleAlineacion WHERE id_alineacion 
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo))
+
+	SELECT @tarjetas_amarillas = count(*) FROM Falta WHERE id_tarjeta = 2 AND id_detalle_alineacion 
+	IN (SELECT id_detalle_alineacion FROM DetalleAlineacion WHERE id_alineacion 
+	IN (SELECT id_alineacion FROM Alineacion WHERE id_equipo = @id_equipo))
+	
+	SELECT @id_club_futbol = id_club_futbol FROM Equipo WHERE id_equipo = @id_equipo
+
+	UPDATE EstadisticaClub SET partidos_jugados = @partidos_jugados,
+	partidos_ganados = (partidos_ganados + @partidos_ganados), 
+	goles_marcados = (goles_marcados + @goles_anotados),
+	goles_encontra = (goles_encontra + @goles_encontra), 
+	diferencia_goles = (diferencia_goles + @diferencia_goles),
+	tarjetas_rojas = @tarjetas_rojas,
+	tarjetas_amarillas = @tarjetas_amarillas
+	WHERE id_club_futbol = @id_club_futbol
+
+FETCH NEXT FROM cursor_posicion INTO @id_equipo, @id_posicion
+END
+CLOSE cursor_posicion
+DEALLOCATE cursor_posicion
+
+SELECT * FROM EstadisticaClub
+
+SELECT * FROM ClubFutbol
