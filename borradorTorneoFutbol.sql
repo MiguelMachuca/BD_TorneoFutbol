@@ -2529,6 +2529,9 @@ BEGIN
 	DEALLOCATE cursor_tecnico
 END
 
+
+SELECT * FROM NacionalidadJugador
+
 ---------------------------------------------------------------------------------------
 CREATE PROCEDURE ActualizarPosiciones
 AS
@@ -2802,3 +2805,121 @@ marcador_local as goles_encontra,
 FROM ProgramaPartido, Alineacion as a
 WHERE id_alineacion_visitante = a.id_alineacion
 ------------------------------------------------------------------------------------------
+SELECT * FROM NacionalidadJugador WHERE id_jugador in
+(SELECT id_jugador FROM Jugador)
+
+SELECT     Jugador.id_jugador , CONCAT(Jugador.nombre, ' ',Jugador.apellido_paterno, ' ',Jugador.apellido_materno) AS nombre_jugador, Nacionalidad.pais AS nacionalidad
+FROM            Jugador CROSS JOIN
+                         Nacionalidad
+
+
+SELECT * FROM Nacionalidad WHERE id_nacionalidad in 
+(SELECT * FROM NacionalidadJugador WHERE id_jugador = 410)
+
+
+SELECT     Jugador.id_jugador , CONCAT(Jugador.nombre, Jugador.apellido_paterno, Jugador.apellido_materno) AS nombre_jugador, Nacionalidad.pais AS nacionalidad
+FROM            Jugador CROSS JOIN
+                         Nacionalidad
+
+SELECT * FROM Jugador WHERE id_jugador in
+(SELECT id_jugador FROM NacionalidadJugador)
+
+SELECT COUNT(*) FROM NacionalidadJugador WHERE id_jugador = 
+DELETE FROM NacionalidadJugador
+
+SELECT * FROM Jugador WHERE id_jugador in
+(SELECT id_jugador FROM NacionalidadJugador)
+
+SELECT id_nacionalidad_jugador, Jugador.nombre FROM NacionalidadJugador WHERE id_jugador IN
+(SELECT id_jugador FROM Jugador)
+
+SELECT j.id_jugador, 
+CAST( CONCAT(j.nombre, ' ',j.apellido_paterno, ' ',j.apellido_materno) AS VARCHAR(160)) AS nombre_jugador, 
+n.pais AS nacionalidad, n.id_nacionalidad
+from Jugador as j, NacionalidadJugador as nj, Nacionalidad as n
+where j.id_jugador = nj.id_jugador and nj.id_nacionalidad = n.id_nacionalidad
+
+
+
+SELECT     Jugador.id_jugador ,CAST( CONCAT(Jugador.nombre, ' ',Jugador.apellido_paterno, ' ',Jugador.apellido_materno) AS VARCHAR(160)) AS nombre_jugador, Nacionalidad.pais AS nacionalidad
+FROM            Jugador CROSS JOIN
+                         Nacionalidad
+
+
+
+
+SELECT        Jugador.id_jugador, CAST( CONCAT(Jugador.nombre, ' ',Jugador.apellido_paterno, ' ',Jugador.apellido_materno) AS VARCHAR(160)) AS nombre_jugador, Nacionalidad.id_nacionalidad
+FROM            Jugador INNER JOIN
+                         NacionalidadJugador ON Jugador.id_jugador = NacionalidadJugador.id_jugador INNER JOIN
+                         Nacionalidad ON NacionalidadJugador.id_nacionalidad = Nacionalidad.id_nacionalidad
+
+
+SELECT j.id_jugador, a.id_equipo, p.id_torneo, p.id_ubicacion_estadio as id_estadio, a.fecha AS id_tiempo,
+e.tiempo_jugado AS minutos_jugados, 
+e.kilometros_recorridos, e.cantidad_pases AS pases, e.intercepciones, e.takles_ganados,
+COUNT(g.id_goleo) AS goles_anotados
+FROM Jugador AS j, Evento AS e, Alineacion AS a, ProgramaPartido p,
+DetalleAlineacion da--, Goleo g 
+LEFT JOIN Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion
+WHERE j.id_jugador = da.id_jugador AND da.id_detalle_alineacion = e.id_detalle_alineacion 
+AND a.id_alineacion = da.id_alineacion 
+AND (p.id_alineacion_local = a.id_alineacion OR p.id_alineacion_visitante = a.id_alineacion) 
+GROUP BY j.id_jugador, a.id_equipo, p.id_torneo, p.id_ubicacion_estadio, a.fecha,
+e.tiempo_jugado, e.kilometros_recorridos, e.cantidad_pases, e.intercepciones, e.takles_ganados
+
+-- 9674
+
+SELECT da.id_detalle_alineacion, da.posicion, da.id_jugador, da.id_alineacion,count(id_goleo) as cantidad_goles
+FROM Goleo AS g, DetalleAlineacion AS da
+WHERE g.id_detalle_alineacion = da.id_detalle_alineacion
+GROUP BY da.id_detalle_alineacion, da.posicion, da.id_jugador, da.id_alineacion
+
+
+SELECT da.id_detalle_alineacion, da.posicion, da.id_jugador, count(id_goleo) as goles
+FROM DetalleAlineacion as da
+LEFT JOIN Goleo ON da.id_detalle_alineacion = Goleo.id_detalle_alineacion
+GROUP BY da.id_detalle_alineacion, da.posicion, da.id_jugador
+
+
+
+SELECT *
+FROM TablaA
+LEFT JOIN TablaB ON TablaA.columnaEspecifica = TablaB.columnaEspecifica;
+
+SELECT j.id_jugador, 0 AS minutos_jugados,0 AS kilometros_recorridos, 0 AS pases, 0 AS intercepciones,
+0 AS takles_ganados,1 AS goles_anotados
+FROM Jugador AS j, DetalleAlineacion da, Evento e, Goleo g
+WHERE j.id_jugador = da.id_jugador AND da.id_detalle_alineacion = g.id_detalle_alineacion
+
+
+SELECT        Torneo.id_torneo, Equipo.id_equipo, DetalleAlineacion.id_detalle_alineacion
+FROM            Alineacion INNER JOIN
+                         DetalleAlineacion ON Alineacion.id_alineacion = DetalleAlineacion.id_alineacion INNER JOIN
+                         Equipo ON Alineacion.id_equipo = Equipo.id_equipo INNER JOIN
+                         Evento ON DetalleAlineacion.id_detalle_alineacion = Evento.id_detalle_alineacion INNER JOIN
+                         Jugador ON DetalleAlineacion.id_jugador = Jugador.id_jugador INNER JOIN
+                         PlanillaEquipo ON Equipo.id_equipo = PlanillaEquipo.id_equipo INNER JOIN
+                         Torneo ON PlanillaEquipo.id_torneo = Torneo.id_torneo
+
+
+SELECT        Torneo.id_torneo, Equipo.id_equipo, DetalleAlineacion.id_detalle_alineacion
+FROM            Alineacion INNER JOIN
+                         DetalleAlineacion ON Alineacion.id_alineacion = DetalleAlineacion.id_alineacion INNER JOIN
+                         Equipo ON Alineacion.id_equipo = Equipo.id_equipo INNER JOIN
+                         Evento ON DetalleAlineacion.id_detalle_alineacion = Evento.id_detalle_alineacion INNER JOIN
+                         Jugador ON DetalleAlineacion.id_jugador = Jugador.id_jugador INNER JOIN
+                         PlanillaEquipo ON Equipo.id_equipo = PlanillaEquipo.id_equipo INNER JOIN
+                         Torneo ON PlanillaEquipo.id_torneo = Torneo.id_torneo INNER JOIN
+                         Goleo ON DetalleAlineacion.id_detalle_alineacion = Goleo.id_detalle_alineacion
+
+
+
+
+SELECT        Jugador.id_jugador, DetalleAlineacion.id_detalle_alineacion, Goleo.id_goleo, Evento.id_evento
+FROM            DetalleAlineacion INNER JOIN
+                         Evento ON DetalleAlineacion.id_detalle_alineacion = Evento.id_detalle_alineacion INNER JOIN
+                         Goleo ON DetalleAlineacion.id_detalle_alineacion = Goleo.id_detalle_alineacion INNER JOIN
+                         Jugador ON DetalleAlineacion.id_jugador = Jugador.id_jugador
+
+
+select * from Evento

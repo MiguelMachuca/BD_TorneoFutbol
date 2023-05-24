@@ -1,11 +1,9 @@
-USE [master]
-DROP DATABASE [DW_TorneoFutbol]
+--USE [master]
+--DROP DATABASE [DW_TorneoFutbol]
 
-CREATE DATABASE [DW_TorneoFutbol]
-GO
 USE [DW_TorneoFutbol]
 GO
-/****** Object:  Table [dbo].[dimCiudad]    Script Date: 23/05/2023 20:09:48 ******/
+/****** Object:  Table [dbo].[dimCiudad]    Script Date: 24/05/2023 19:40:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -19,7 +17,7 @@ CREATE TABLE [dbo].[dimCiudad](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dimEquipo]    Script Date: 23/05/2023 20:09:49 ******/
+/****** Object:  Table [dbo].[dimEquipo]    Script Date: 24/05/2023 19:40:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -33,7 +31,7 @@ CREATE TABLE [dbo].[dimEquipo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dimEquipoLocalVisitante]    Script Date: 23/05/2023 20:09:49 ******/
+/****** Object:  Table [dbo].[dimEquipoLocalVisitante]    Script Date: 24/05/2023 19:40:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -47,7 +45,7 @@ CREATE TABLE [dbo].[dimEquipoLocalVisitante](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dimEstadio]    Script Date: 23/05/2023 20:09:49 ******/
+/****** Object:  Table [dbo].[dimEstadio]    Script Date: 24/05/2023 19:40:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -62,7 +60,32 @@ CREATE TABLE [dbo].[dimEstadio](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[dimTorneo]    Script Date: 23/05/2023 20:09:49 ******/
+/****** Object:  Table [dbo].[dimJugador]    Script Date: 24/05/2023 19:40:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dimJugador](
+	[id_jugador] [int] NULL,
+	[nombre_jugador] [varchar](160) NULL,
+	[id_nacionalidad] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[dimNacionalidad]    Script Date: 24/05/2023 19:40:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[dimNacionalidad](
+	[id_nacionalidad] [int] IDENTITY(1,1) NOT NULL,
+	[nacionalidad] [varchar](70) NULL,
+ CONSTRAINT [PK_dimNacionalidad] PRIMARY KEY CLUSTERED 
+(
+	[id_nacionalidad] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[dimTorneo]    Script Date: 24/05/2023 19:40:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -76,7 +99,7 @@ CREATE TABLE [dbo].[dimTorneo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[hechoEquipo]    Script Date: 23/05/2023 20:09:49 ******/
+/****** Object:  Table [dbo].[hechoEquipo]    Script Date: 24/05/2023 19:40:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,10 +119,34 @@ CREATE TABLE [dbo].[hechoEquipo](
 	[partidos_empatados] [int] NULL
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[hechoRendimientoJugador]    Script Date: 24/05/2023 19:40:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[hechoRendimientoJugador](
+	[id_jugador] [int] NULL,
+	[id_equipo] [int] NULL,
+	[id_torneo] [int] NULL,
+	[id_estadio] [int] NULL,
+	[id_tiempo] [date] NULL,
+	[minutos_jugados] [int] NULL,
+	[kilometros_recorridos] [int] NULL,
+	[pases] [int] NULL,
+	[intercepciones] [int] NULL,
+	[takles_ganados] [int] NULL,
+	[goles_anotados] [int] NULL
+) ON [PRIMARY]
+GO
 ALTER TABLE [dbo].[dimEstadio]  WITH NOCHECK ADD  CONSTRAINT [FK_dimEstadio_dimCiudad] FOREIGN KEY([id_ciudad])
 REFERENCES [dbo].[dimCiudad] ([id_ciudad])
 GO
 ALTER TABLE [dbo].[dimEstadio] CHECK CONSTRAINT [FK_dimEstadio_dimCiudad]
+GO
+ALTER TABLE [dbo].[dimJugador]  WITH NOCHECK ADD  CONSTRAINT [FK_dimJugador_dimNacionalidad] FOREIGN KEY([id_nacionalidad])
+REFERENCES [dbo].[dimNacionalidad] ([id_nacionalidad])
+GO
+ALTER TABLE [dbo].[dimJugador] CHECK CONSTRAINT [FK_dimJugador_dimNacionalidad]
 GO
 ALTER TABLE [dbo].[hechoEquipo]  WITH NOCHECK ADD  CONSTRAINT [FK_hechoEquipo_dimEquipo] FOREIGN KEY([id_equipo])
 REFERENCES [dbo].[dimEquipo] ([id_equipo])
@@ -120,4 +167,32 @@ ALTER TABLE [dbo].[hechoEquipo]  WITH NOCHECK ADD  CONSTRAINT [FK_hechoEquipo_di
 REFERENCES [dbo].[dimTorneo] ([id_torneo])
 GO
 ALTER TABLE [dbo].[hechoEquipo] CHECK CONSTRAINT [FK_hechoEquipo_dimTorneo]
+GO
+/****** Script para el comando SelectTopNRows de SSMS  ******/
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[dimCiudad]
+GO
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[dimEstadio]
+GO
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[dimEquipoLocalVisitante]
+GO
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[dimEquipo]
+GO
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[dimTorneo]
+GO
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[dimJugador]
+GO
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[dimNacionalidad]
+GO
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[hechoEquipo]
+GO
+SELECT *
+  FROM [DW_TorneoFutbol].[dbo].[hechoRendimientoJugador]
 GO

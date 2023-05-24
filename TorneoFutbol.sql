@@ -3841,43 +3841,36 @@ GO
 CREATE PROCEDURE [dbo].[InsertarNacionalidadJugador]
 AS
 BEGIN
-    DECLARE @Contador INT
-    SET @Contador = 1
+	DECLARE @fecha_adquisicion DATE, @id_jugador INT, @id_nacionalidad INT, @numero_nacionalidad INT,
+	@contador INT, @flag INT = 0, @dias INT
 
-    WHILE @Contador <= 900
-    BEGIN
-        -- Generar un IdJugador aleatorio
-        DECLARE @IdJugador INT
-
-        -- Obtener el número total de registros en la tabla Jugador
-        DECLARE @TotalJugadores INT
-        SELECT @TotalJugadores = COUNT(*) FROM Jugador
-
-        -- Generar un número aleatorio entre 1 y el número total de registros en la tabla Jugador
-        SET @IdJugador = ROUND((RAND() * (@TotalJugadores - 1)) + 1, 0)
-
-        -- Generar un IdNacionalidad aleatorio
-        DECLARE @IdNacionalidad INT
-
-        -- Obtener el número total de registros en la tabla Nacionalidad
-        DECLARE @TotalNacionalidades INT
-        SELECT @TotalNacionalidades = COUNT(*) FROM Nacionalidad
-
-        -- Generar un número aleatorio entre 1 y el número total de registros en la tabla Nacionalidad
-        SET @IdNacionalidad = ROUND((RAND() * (@TotalNacionalidades - 1)) + 1, 0)
-
-        -- Generar una fecha aleatoria entre 1910-01-01 y la fecha actual
-        DECLARE @FechaAdquisicion DATE
-        DECLARE @FechaMinima DATE
-        SET @FechaMinima = '1910-01-01'
-        SET @FechaAdquisicion = DATEADD(day, ROUND((RAND() * (DATEDIFF(day, @FechaMinima, GETDATE()))), 0), @FechaMinima)
-
-        -- Insertar el registro en la tabla NacionalidadJugador
-        INSERT INTO NacionalidadJugador (id_jugador, id_nacionalidad, fecha_adquisicion)
-        VALUES (@IdJugador, @IdNacionalidad, @FechaAdquisicion)
-
-        SET @Contador = @Contador + 1
-    END
+	DECLARE cursor_jugador CURSOR FOR
+	SELECT id_jugador
+	FROM Jugador
+	OPEN cursor_jugador 
+	FETCH NEXT FROM cursor_jugador INTO @id_jugador
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SET @contador = 1
+		SET @numero_nacionalidad = FLOOR(RAND() * 3 + 1)
+		WHILE @numero_nacionalidad >= @contador
+		BEGIN
+			SELECT TOP 1 @id_nacionalidad = id_nacionalidad FROM Nacionalidad ORDER BY NEWID()
+			SELECT @flag = COUNT(*) FROM NacionalidadJugador
+			WHERE id_jugador = @id_jugador AND id_nacionalidad = @id_nacionalidad
+			IF @flag = 0
+			BEGIN		
+				SET @dias = RAND() * (10000 + 1)
+				SET @fecha_adquisicion = DATEADD(DAY, -(@dias), CONVERT(DATE, '2005-12-31', 23));
+				INSERT INTO NacionalidadJugador(fecha_adquisicion, id_jugador, id_nacionalidad)
+				VALUES(@fecha_adquisicion, @id_jugador, @id_nacionalidad)
+				SET @contador = @contador + 1
+			END
+		END
+	FETCH NEXT FROM cursor_jugador INTO @id_jugador
+	END
+	CLOSE cursor_jugador
+	DEALLOCATE cursor_jugador
 END
 GO
 /****** Object:  StoredProcedure [dbo].[PartidosEmpatados]    Script Date: 21/05/2023 18:56:34 ******/
