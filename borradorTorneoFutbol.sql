@@ -2615,6 +2615,190 @@ END
 CLOSE cursor_posicion
 DEALLOCATE cursor_posicion
 
-SELECT * FROM EstadisticaClub
+/****** Script para el comando SelectTopNRows de SSMS  ******/
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Alineacion]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[AlineacionTecnico]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Arbitro]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[CambioEstado]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[CambioJugador]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[CiudadEstadio]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[ClubFutbol]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Designacion]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[DetalleAlineacion]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Dirigente]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Equipo]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[EstadisticaClub]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[EstadoJugador]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[EstadoPartido]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Evento]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Falta]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Goleo]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Jugador]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Nacionalidad]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[NacionalidadJugador]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[NacionalidadTecnico]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[PeriodoPartido]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[PlanillaEquipo]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Posicion]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[PosicionEquipoTorneo]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[ProgramaPartido]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Rol]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Tarjeta]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Tecnico]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[TipoFalta]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[TipoTecnico]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[TipoUsuario]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Torneo]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[UbicacionEstadio]
+GO
+SELECT *
+  FROM [TorneoFutbol].[dbo].[Usuario]
+GO
 
-SELECT * FROM ClubFutbol
+-------------------------------------DIMENSIONES-------------------------------------------
+------------------------------------------------------------------------------------------
+SELECT CAST(ROW_NUMBER() OVER (ORDER BY COLUMN_NAME) AS INT) 
+AS id_equipo_local_visitante, CAST(COLUMN_NAME AS VARCHAR(50)) AS local_visitante   
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'ProgramaPartido' AND
+      COLUMN_NAME IN ('id_alineacion_local', 'id_alineacion_visitante');
+
+DECLARE @TablaTemporal TABLE (Equipo_Local BIT, Equipo_Visitante BIT)
+INSERT INTO @TablaTemporal(Equipo_Local, Equipo_Visitante)
+VALUES(1,1)
+
+DECLARE @TablaTemporal 
+TABLE (id_equipo_local_visitante INT PRIMARY KEY IDENTITY(1,1), local_visitante VARCHAR(20))
+INSERT INTO @TablaTemporal(local_visitante)
+VALUES('Local'),('Visitante')
+SELECT id_equipo_local_visitante, local_visitante FROM @TablaTemporal
+
+SELECT CAST(ROW_NUMBER() OVER (ORDER BY COLUMN_NAME) AS INT) 
+AS id_equipo_local_visitante, CAST(COLUMN_NAME AS VARCHAR(20)) AS local_visitante
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = '@TablaTemporal' AND
+      COLUMN_NAME IN ('Equipo_Local', 'Equipo_Visitante');
+
+
+------------------------------------------------------------------------------------------
+---------------------------------------HECHOS---------------------------------------------
+------------------------------------------------------------------------------------------
+SELECT id_torneo, id_ubicacion_estadio as id_estadio, a.id_equipo as id_equipo, fecha_programada as id_tiempo,
+1 as id_equipo_local_visitante ,marcador_local as goles_marcados, 
+marcador_visitante as goles_encontra,
+	CASE
+		WHEN marcador_local > marcador_visitante THEN 3
+		WHEN marcador_visitante > marcador_local THEN 0
+		ELSE 1
+		END AS puntos,
+	CASE
+		WHEN marcador_local > marcador_visitante THEN 1
+		WHEN marcador_visitante > marcador_local THEN 0
+		ELSE 0
+		END AS partido_ganados,
+	CASE
+		WHEN marcador_local > marcador_visitante THEN 0
+		WHEN marcador_visitante > marcador_local THEN 1
+		ELSE 0
+		END AS partido_perdidos,
+	CASE
+		WHEN marcador_local = marcador_visitante THEN 1
+		ELSE 0
+		END AS partido_empatados,
+	(marcador_local - marcador_visitante) AS diferencia_goles
+FROM ProgramaPartido, Alineacion as a
+WHERE id_alineacion_local = a.id_alineacion
+UNION ALL
+SELECT id_torneo, id_ubicacion_estadio as id_estadio, a.id_equipo as id_equipo, fecha_programada as id_tiempo,
+2 as id_local_visitante, marcador_visitante as goles_marcados, 
+marcador_local as goles_encontra,
+	CASE
+		WHEN marcador_local < marcador_visitante THEN 3
+		WHEN marcador_visitante < marcador_local THEN 0
+		ELSE 1
+		END AS puntos,
+	CASE
+		WHEN marcador_local < marcador_visitante THEN 1
+		WHEN marcador_visitante < marcador_local THEN 0
+		ELSE 0
+		END AS partido_ganados,
+	CASE
+		WHEN marcador_local < marcador_visitante THEN 0
+		WHEN marcador_visitante < marcador_local THEN 1
+		ELSE 0
+		END AS partido_perdidos,
+	CASE
+		WHEN marcador_local = marcador_visitante THEN 1
+		ELSE 0
+		END AS partido_empatados,
+	(marcador_visitante - marcador_local) AS diferencia_goles
+FROM ProgramaPartido, Alineacion as a
+WHERE id_alineacion_visitante = a.id_alineacion
+------------------------------------------------------------------------------------------
