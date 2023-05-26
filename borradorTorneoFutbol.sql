@@ -2815,7 +2815,7 @@ FROM            Jugador CROSS JOIN
 
 SELECT * FROM Nacionalidad WHERE id_nacionalidad in 
 (SELECT * FROM NacionalidadJugador WHERE id_jugador = 410)
-
+select * from ProgramaPartido
 
 SELECT     Jugador.id_jugador , CONCAT(Jugador.nombre, Jugador.apellido_paterno, Jugador.apellido_materno) AS nombre_jugador, Nacionalidad.pais AS nacionalidad
 FROM            Jugador CROSS JOIN
@@ -2920,6 +2920,11 @@ FROM            DetalleAlineacion INNER JOIN
                          Evento ON DetalleAlineacion.id_detalle_alineacion = Evento.id_detalle_alineacion INNER JOIN
                          Goleo ON DetalleAlineacion.id_detalle_alineacion = Goleo.id_detalle_alineacion INNER JOIN
                          Jugador ON DetalleAlineacion.id_jugador = Jugador.id_jugador
+
+
+
+SELECT        Jugador.id_jugador, CAST( CONCAT(Jugador.nombre, ' ',Jugador.apellido_paterno, ' ',Jugador.apellido_materno) AS VARCHAR(160)) AS nombre_jugador
+FROM            Jugador
 
 
 select * from Evento
