@@ -142,6 +142,7 @@ GO
 CREATE TABLE [dbo].[DetalleAlineacion](
 	[id_detalle_alineacion] [int] IDENTITY(1,1) NOT NULL,
 	[posicion] [varchar](70) NULL,
+	[id_nacionalidad] [int] NULL,
 	[id_jugador] [int] NULL,
 	[id_alineacion] [int] NULL,
 PRIMARY KEY CLUSTERED 
@@ -370,6 +371,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PeriodoPartido](
 	[id_periodo_partido] [int] IDENTITY(1,1) NOT NULL,
+	[identificador_periodo] [int] NULL,
 	[hora_inicio] [time](0) NULL,
 	[hora_fin] [time](0) NULL,
 	[minutos_retraso] [int] NULL,
@@ -2899,7 +2901,8 @@ GO
 CREATE PROCEDURE [dbo].[AgregarDetalleAlineacion]
 AS
 BEGIN
-	DECLARE @id_jugador INT, @posicion VARCHAR(70), @id_alineacion INT
+	DECLARE @id_jugador INT, @posicion VARCHAR(70), @id_alineacion INT, @id_nacionalidad INT,
+	@nacionalidad VARCHAR(50)
 	DECLARE @posiciones TABLE (id INT IDENTITY(1,1), posiciones VARCHAR(70))
 	INSERT INTO @posiciones(posiciones)
 	VALUES ('Portero'),('Defensa central'),('Lateral derecho'),('Lateral izquierdo'),('Centrocampista defensivo'),('Centrocampista central'),('Centrocampista derecho'),('Centrocampista izquierdo'),('Delantero centro'),('Delantero derecho'),('Delantero izquierdo')
@@ -2922,9 +2925,16 @@ BEGIN
 		BEGIN
 			SELECT TOP 1 @id_jugador = id_jugador FROM EquipoJugador WHERE id_equipo in
 			(SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion) 
-			and posicion = @posicion ORDER BY NEWID()		
-			INSERT INTO DetalleAlineacion (posicion, id_jugador, id_alineacion)
-			VALUES (@posicion, @id_jugador, @id_alineacion)
+			and posicion = @posicion ORDER BY NEWID()	
+			
+			SELECT TOP 1 @id_nacionalidad = id_nacionalidad 
+			FROM NacionalidadJugador 
+			WHERE id_jugador = @id_jugador ORDER BY NEWID()
+			SELECT @nacionalidad = pais FROM Nacionalidad 
+			WHERE id_nacionalidad = @id_nacionalidad
+
+			INSERT INTO DetalleAlineacion (posicion, id_jugador, id_alineacion, id_nacionalidad)
+			VALUES (@posicion, @id_jugador, @id_alineacion, @id_nacionalidad)
 		FETCH NEXT FROM cursor_posicion INTO @posicion
 		END
 		CLOSE cursor_posicion
@@ -3188,22 +3198,22 @@ BEGIN
 	FETCH NEXT FROM cursor_partido INTO @id_programa_partido, @hora_programada
 	WHILE @@FETCH_STATUS = 0	
 	BEGIN
-		SET @hora_inicio = DATEADD(MINUTE, FLOOR(RAND()*(15-5+1)+5), @hora_programada)
-		SET @hora_fin = DATEADD(MINUTE, 45 + (FLOOR(RAND()*(5-1+1)+1)), @hora_inicio)
+		SET @hora_inicio = DATEADD(MINUTE, FLOOR(RAND()*(15-0+1)+0), @hora_programada)
+		SET @hora_fin = DATEADD(MINUTE, 45 + (FLOOR(RAND()*(7-0+1)+0)), @hora_inicio)
 		SET @minutos_retraso = DATEDIFF(MINUTE, @hora_programada, @hora_inicio)
 		SET @minutos_extras = (DATEDIFF(MINUTE, @hora_inicio, @hora_fin) - 45)
 
 
-		INSERT INTO PeriodoPartido(hora_inicio, hora_fin, minutos_retraso, minutos_extras, id_programa_partido
-		) VALUES(@hora_inicio, @hora_fin, @minutos_retraso, @minutos_extras, @id_programa_partido)
+		INSERT INTO PeriodoPartido(identificador_periodo, hora_inicio, hora_fin, minutos_retraso, minutos_extras, id_programa_partido
+		) VALUES(1, @hora_inicio, @hora_fin, @minutos_retraso, @minutos_extras, @id_programa_partido)
 		--------------------------------------------------------------------------------------------------------
-		SET @hora_inicio = DATEADD(MINUTE, FLOOR(RAND()*(15-5+1)+5), DATEADD(MINUTE, 15, @hora_fin))
-		SET @hora_fin = DATEADD(MINUTE, 45 + (FLOOR(RAND()*(5-1+1)+1)), @hora_inicio)
+		SET @hora_inicio = DATEADD(MINUTE, FLOOR(RAND()*(15-0+1)+0), DATEADD(MINUTE, 15, @hora_fin))
+		SET @hora_fin = DATEADD(MINUTE, 45 + (FLOOR(RAND()*(7-0+1)+0)), @hora_inicio)
 		SET @minutos_retraso = DATEDIFF(MINUTE, DATEADD(MINUTE, -15, @hora_inicio), @hora_inicio)
 		SET @minutos_extras = (DATEDIFF(MINUTE, @hora_inicio, @hora_fin) - 45)
 
-		INSERT INTO PeriodoPartido(hora_inicio, hora_fin, minutos_retraso, minutos_extras, id_programa_partido
-		) VALUES(@hora_inicio, @hora_fin, @minutos_retraso, @minutos_extras, @id_programa_partido)
+		INSERT INTO PeriodoPartido(identificador_periodo, hora_inicio, hora_fin, minutos_retraso, minutos_extras, id_programa_partido
+		) VALUES(2, @hora_inicio, @hora_fin, @minutos_retraso, @minutos_extras, @id_programa_partido)
 
 	FETCH NEXT FROM cursor_partido INTO @id_programa_partido, @hora_programada;
 	END
@@ -3465,7 +3475,8 @@ BEGIN
 	------------------------------------------------------------------------------------------------------- 
 	DECLARE @cambios INT, @cambio_local INT, @cambio_visitante INT, @id_alineacion_local INT, 
 	@id_alineacion_visitante INT, @id_jugador_salida INT, @id_jugador_entrada INT, @posicion VARCHAR(70), 
-	@id_cambio_jugador INT, @id_jugador INT, @duracion_partido INT, @minuto INT, @id_alineacion INT
+	@id_cambio_jugador INT, @id_jugador INT, @duracion_partido INT, @minuto INT, @id_alineacion INT,
+	@id_nacionalidad INT
 
 	DECLARE cursor_partido CURSOR FOR
 	SELECT cambios, id_alineacion_local, id_alineacion_visitante
@@ -3509,8 +3520,12 @@ BEGIN
 		WHERE id_jugador <> @id_jugador_salida AND posicion = @posicion AND id_equipo
 		in(SELECT id_equipo FROM Alineacion WHERE id_alineacion = @id_alineacion)
 
-		INSERT INTO DetalleAlineacion(posicion, id_jugador, id_alineacion)
-		VALUES(@posicion, @id_jugador, @id_alineacion)
+		SELECT TOP 1 @id_nacionalidad = id_nacionalidad 
+		FROM NacionalidadJugador 
+		WHERE id_jugador = @id_jugador ORDER BY NEWID()
+
+		INSERT INTO DetalleAlineacion(posicion, id_jugador, id_alineacion, id_nacionalidad)
+		VALUES(@posicion, @id_jugador, @id_alineacion, @id_nacionalidad)
 
 		SET @id_jugador_entrada = SCOPE_IDENTITY()
 
@@ -4005,6 +4020,8 @@ EXECUTE [dbo].[AgregarPlanillaEquipoB]
 GO
 EXECUTE [dbo].[AgregarTorneos]
 GO
+EXECUTE [dbo].[InsertarNacionalidadJugador]
+GO
 EXECUTE [dbo].[generar_alineacion_tecnico] 
 GO
 EXECUTE [dbo].[AgregarDetalleAlineacion]
@@ -4024,8 +4041,6 @@ GO
 EXECUTE [dbo].[AgregarEvento]
 GO
 EXECUTE [dbo].[InsertarCambioEstado]
-GO
-EXECUTE [dbo].[InsertarNacionalidadJugador]
 GO
 EXECUTE [dbo].[AgregarPosicion]
 GO

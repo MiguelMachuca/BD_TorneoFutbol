@@ -2859,7 +2859,7 @@ e.tiempo_jugado AS minutos_jugados,
 e.kilometros_recorridos, e.cantidad_pases AS pases, e.intercepciones, e.takles_ganados,
 COUNT(g.id_goleo) AS goles_anotados
 FROM Jugador AS j, Evento AS e, Alineacion AS a, ProgramaPartido p,
-DetalleAlineacion da--, Goleo g 
+DetalleAlineacion da
 LEFT JOIN Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion
 WHERE j.id_jugador = da.id_jugador AND da.id_detalle_alineacion = e.id_detalle_alineacion 
 AND a.id_alineacion = da.id_alineacion 
@@ -2927,4 +2927,307 @@ SELECT        Jugador.id_jugador, CAST( CONCAT(Jugador.nombre, ' ',Jugador.apell
 FROM            Jugador
 
 
-select * from Evento
+SELECT SUM(kilometros_recorridos) as kilometros_recorridos, SUM(intercepciones) as intercepciones,
+SUM(cantidad_pases) AS pases
+FROM Evento WHERE id_detalle_alineacion IN
+(SELECT id_detalle_alineacion FROM DetalleAlineacion WHERE id_jugador IN
+(SELECT id_jugador FROM Jugador WHERE id_jugador = 538))
+
+SELECT COUNT(*)
+FROM Goleo WHERE id_detalle_alineacion IN
+(SELECT id_detalle_alineacion FROM DetalleAlineacion WHERE id_jugador IN
+(SELECT id_jugador FROM Jugador WHERE id_jugador = 538))
+
+SELECT * FROM DetalleAlineacion
+
+ALTER TABLE DetalleAlineacion 
+ADD nacionalidad VARCHAR(50);
+
+DECLARE @id_nacionalidad INT, @nacionalidad VARCHAR(50)
+SELECT TOP 1 @id_nacionalidad = id_nacionalidad 
+FROM NacionalidadJugador 
+WHERE id_jugador = 320 ORDER BY NEWID()
+SELECT @nacionalidad = pais FROM Nacionalidad 
+WHERE id_nacionalidad = @id_nacionalidad
+
+SELECT        Jugador.id_jugador, CAST( CONCAT(Jugador.nombre, ' ',Jugador.apellido_paterno, ' ',Jugador.apellido_materno) AS VARCHAR(160)) AS nombre_jugador
+FROM            Jugador
+
+
+SELECT        Jugador.id_jugador, CAST( CONCAT(Jugador.nombre, ' ',Jugador.apellido_paterno, ' ',Jugador.apellido_materno) AS VARCHAR(160)) AS nombre_jugador, Nacionalidad.pais AS Nacionalidad
+FROM            Jugador INNER JOIN
+                         NacionalidadJugador ON Jugador.id_jugador = NacionalidadJugador.id_jugador INNER JOIN
+                         Nacionalidad ON NacionalidadJugador.id_nacionalidad = Nacionalidad.id_nacionalidad
+
+
+
+SELECT j.id_jugador, a.id_equipo, p.id_torneo, p.id_ubicacion_estadio as id_estadio,  
+CAST(a.fecha AS date) AS id_tiempo,
+e.tiempo_jugado AS minutos_jugados, 
+e.kilometros_recorridos, e.cantidad_pases AS pases, e.intercepciones, e.takles_ganados,
+COUNT(g.id_goleo) AS goles_anotados
+FROM Jugador AS j, Evento AS e, Alineacion AS a, ProgramaPartido p,
+DetalleAlineacion da 
+LEFT JOIN Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion
+WHERE j.id_jugador = da.id_jugador AND da.id_detalle_alineacion = e.id_detalle_alineacion 
+AND a.id_alineacion = da.id_alineacion 
+AND (p.id_alineacion_local = a.id_alineacion OR p.id_alineacion_visitante = a.id_alineacion) 
+GROUP BY j.id_jugador, a.id_equipo, p.id_torneo, p.id_ubicacion_estadio, a.fecha,
+e.tiempo_jugado, e.kilometros_recorridos, e.cantidad_pases, e.intercepciones, e.takles_ganados
+
+SELECT * FROM DetalleAlineacion
+
+SELECT id_nacionalidad FROM Nacionalidad WHERE pais IN
+(SELECT nacionalidad FROM DetalleAlineacion)
+
+SELECT        id_jugador, CAST(CONCAT(nombre, ' ', apellido_paterno, ' ', apellido_materno) AS VARCHAR(160)) AS nombre_jugador
+FROM            Jugador
+
+
+----------------------------------------------------------------------------------------------------
+SELECT j.id_jugador, a.id_equipo, p.id_torneo, p.id_ubicacion_estadio AS id_estadio, CAST(a.fecha AS date) AS id_tiempo, 
+CASE
+	WHEN da.nacionalidad = n.pais THEN n.id_nacionalidad
+	END AS id_nacionalidad, 
+e.tiempo_jugado AS minutos_jugados, e.kilometros_recorridos, e.cantidad_pases AS pases, 
+                         e.intercepciones, e.takles_ganados, COUNT(g.id_goleo) AS goles_anotados
+FROM Jugador AS j 
+	INNER JOIN
+	DetalleAlineacion AS da 
+	INNER JOIN
+	Jugador ON da.id_jugador = Jugador.id_jugador INNER JOIN
+	NacionalidadJugador ON Jugador.id_jugador = NacionalidadJugador.id_jugador INNER JOIN
+	Nacionalidad AS n ON NacionalidadJugador.id_nacionalidad = n.id_nacionalidad
+	LEFT OUTER JOIN
+	Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion ON j.id_jugador = da.id_jugador 
+	INNER JOIN
+	Evento AS e ON da.id_detalle_alineacion = e.id_detalle_alineacion 
+	INNER JOIN
+	Alineacion AS a ON da.id_alineacion = a.id_alineacion 
+	CROSS JOIN
+	ProgramaPartido AS p 	
+WHERE        (p.id_alineacion_local = a.id_alineacion) OR
+                         (p.id_alineacion_visitante = a.id_alineacion)
+GROUP BY j.id_jugador, a.id_equipo, p.id_torneo, 
+p.id_ubicacion_estadio, a.fecha, da.nacionalidad, n.pais,
+n.id_nacionalidad, e.tiempo_jugado, e.kilometros_recorridos,
+e.cantidad_pases, e.intercepciones, e.takles_ganados
+----------------------------------------------------------------------------------------------------
+
+SELECT DetalleAlineacion.id_detalle_alineacion, Nacionalidad.id_nacionalidad
+FROM DetalleAlineacion INNER JOIN
+	Jugador ON DetalleAlineacion.id_jugador = Jugador.id_jugador INNER JOIN
+	NacionalidadJugador ON Jugador.id_jugador = NacionalidadJugador.id_jugador INNER JOIN
+	Nacionalidad ON NacionalidadJugador.id_nacionalidad = Nacionalidad.id_nacionalidad
+
+
+----------------------------------------------------------------------------------------------------
+SELECT j.id_jugador, a.id_equipo, p.id_torneo, p.id_ubicacion_estadio AS id_estadio, CAST(a.fecha AS date) AS id_tiempo, 
+CASE
+	WHEN da.nacionalidad = n.pais THEN nacionalidad
+	ELSE NULL
+	END AS id_nacionalidad, 
+e.tiempo_jugado AS minutos_jugados, e.kilometros_recorridos, e.cantidad_pases AS pases, 
+                         e.intercepciones, e.takles_ganados, COUNT(g.id_goleo) AS goles_anotados
+FROM Jugador AS j 
+	INNER JOIN
+	DetalleAlineacion AS da 
+	LEFT OUTER JOIN
+	Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion ON j.id_jugador = da.id_jugador 
+	INNER JOIN
+	Evento AS e ON da.id_detalle_alineacion = e.id_detalle_alineacion 
+	INNER JOIN
+	Alineacion AS a ON da.id_alineacion = a.id_alineacion 
+	CROSS JOIN
+	ProgramaPartido AS p 
+	CROSS JOIN
+	Nacionalidad AS n	
+WHERE        (p.id_alineacion_local = a.id_alineacion) OR
+                         (p.id_alineacion_visitante = a.id_alineacion)
+GROUP BY j.id_jugador, a.id_equipo, p.id_torneo, 
+p.id_ubicacion_estadio, a.fecha, da.nacionalidad, n.pais,
+n.id_nacionalidad, e.tiempo_jugado, e.kilometros_recorridos,
+e.cantidad_pases, e.intercepciones, e.takles_ganados
+----------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------------
+SELECT da.id_jugador, a.id_equipo, pp.id_torneo, pp.id_ubicacion_estadio AS id_estadio, 
+da.id_nacionalidad, CAST(a.fecha AS date) AS id_tiempo, e.tiempo_jugado AS minutos_jugados,
+e.kilometros_recorridos, e.cantidad_pases AS pases, e.intercepciones, e.takles_ganados, 
+0 AS goles_anotados, 0 AS minuto_gol
+FROM            Alineacion AS a INNER JOIN
+                DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+                Evento AS e ON da.id_detalle_alineacion = e.id_detalle_alineacion INNER JOIN
+                ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local 
+				OR a.id_alineacion = pp.id_alineacion_visitante)
+UNION ALL
+SELECT da.id_jugador, a.id_equipo, pp.id_torneo, pp.id_ubicacion_estadio AS id_estadio, 
+da.id_nacionalidad, CAST(a.fecha AS date) AS id_tiempo, 0 AS minutos_jugados,
+0 AS kilometros_recorridos, 0 AS pases, 0 AS intercepciones, 0 AS takles_ganados, 
+1 AS goles_anotados, g.minuto AS minuto_gol
+FROM            Alineacion AS a INNER JOIN
+                DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+                Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion INNER JOIN
+                ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local 
+				OR a.id_alineacion = pp.id_alineacion_visitante)
+
+--------------------------------------------------------------------------------------------------------
+
+
+SELECT * FROM Goleo WHERE id_detalle_alineacion IN
+(SELECT id_detalle_alineacion FROM DetalleAlineacion WHERE id_jugador = 45)
+
+
+--------------------------------------------------------------------------------------------------------
+SELECT        Tecnico.id_tecnico, CAST(CONCAT(nombre, ' ', apellido_paterno, ' ', apellido_materno) AS VARCHAR(160)) AS nombre, TipoTecnico.tipo
+FROM            Tecnico INNER JOIN
+                         TipoTecnico ON Tecnico.id_tipo_tecnico = TipoTecnico.id_tipo_tecnico
+
+--------------------------------------------------------------------------------------------------------
+
+SELECT a.id_equipo, pp.id_torneo, tc.id_tecnico, a.fecha AS id_tiempo, 1 AS cantidad_alineacion, 
+CASE
+	WHEN pp.id_alineacion_local = a.id_alineacion AND pp.identificador_marcador = 0 THEN 1
+	WHEN pp.id_alineacion_visitante = a.id_alineacion AND pp.identificador_marcador = 1 THEN 1
+	ELSE 0
+	END AS partidos_ganados,
+1 AS partidos_disputados, 1 AS goles_jugadores
+FROM Alineacion  AS a INNER JOIN
+AlineacionTecnico AS atc ON a.id_alineacion = atc.id_alineacion INNER JOIN
+DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+Goleo g ON da.id_detalle_alineacion = g.id_detalle_alineacion INNER JOIN
+ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local OR 
+a.id_alineacion = pp.id_alineacion_visitante)
+INNER JOIN
+Tecnico tc ON atc.id_tecnico = tc.id_tecnico
+
+SELECT * FROM DetalleAlineacion
+SELECT * FROM Goleo
+
+SELECT PosicionEquipoTorneo.id_posicion, PosicionEquipoTorneo.id_equipo, PosicionEquipoTorneo.id_torneo, Posicion.cantidad_puntos, Posicion.partidos_ganados, Posicion.partidos_empatados, Posicion.goles_anotados, 
+                  Posicion.goles_encontra, Posicion.diferencia_goles
+FROM     Posicion INNER JOIN
+                  PosicionEquipoTorneo ON Posicion.id_posicion = PosicionEquipoTorneo.id_posicion
+
+-------------------------------------------------------------------------------------------------
+SELECT da.id_jugador, a.id_equipo, pp.id_torneo, pp.id_ubicacion_estadio AS id_estadio, 
+da.id_nacionalidad, CAST(a.fecha AS date) AS id_tiempo, e.tiempo_jugado AS minutos_jugados,
+e.kilometros_recorridos, e.cantidad_pases AS pases, e.intercepciones, e.takles_ganados
+FROM            Alineacion AS a INNER JOIN
+                DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+                Evento AS e ON da.id_detalle_alineacion = e.id_detalle_alineacion INNER JOIN
+                ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local 
+				OR a.id_alineacion = pp.id_alineacion_visitante)
+-------------------------------------------------------------------------------------------------
+SELECT        Jugador.id_jugador, CAST(CONCAT(Jugador.nombre, ' ', Jugador.apellido_paterno, ' ', Jugador.apellido_materno) AS VARCHAR(160)) AS nombre_jugador, EquipoJugador.posicion
+FROM            Jugador INNER JOIN
+                         EquipoJugador ON Jugador.id_jugador = EquipoJugador.id_jugador
+
+-------------------------------------------------------------------------------------------------
+SELECT da.id_jugador, a.id_equipo, pp.id_torneo, pp.id_ubicacion_estadio AS id_estadio, 
+da.id_nacionalidad, CAST(a.fecha AS date) AS id_tiempo,1 AS goles_anotados, 
+g.minuto AS minuto_gol
+FROM Alineacion AS a INNER JOIN
+DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion INNER JOIN
+ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local 
+OR a.id_alineacion = pp.id_alineacion_visitante)
+-------------------------------------------------------------------------------------------------
+SELECT PosicionEquipoTorneo.id_posicion, PosicionEquipoTorneo.id_equipo, 
+PosicionEquipoTorneo.id_torneo, Posicion.cantidad_puntos, 
+Posicion.partidos_ganados, Posicion.partidos_empatados, 
+Posicion.goles_anotados, Posicion.goles_encontra, 
+Posicion.diferencia_goles
+FROM Posicion INNER JOIN
+PosicionEquipoTorneo ON Posicion.id_posicion = PosicionEquipoTorneo.id_posicion
+-------------------------------------------------------------------------------------------------
+SELECT PosicionEquipoTorneo.id_equipo, PosicionEquipoTorneo.id_posicion, 
+PosicionEquipoTorneo.id_torneo, Posicion.cantidad_puntos, Posicion.partidos_ganados, 
+Posicion.partidos_empatados, Posicion.goles_anotados, 
+Posicion.goles_encontra, Posicion.diferencia_goles
+FROM Posicion INNER JOIN
+PosicionEquipoTorneo ON Posicion.id_posicion = PosicionEquipoTorneo.id_posicion
+-------------------------------------------------------------------------------------------------
+SELECT id_posicion, posicion_torneo
+FROM     Posicion
+-------------------------------------------------------------------------------------------------
+SELECT ProgramaPartido.id_ubicacion_estadio, ProgramaPartido.id_torneo, ProgramaPartido.fecha_programada, Designacion.id_arbitro, ProgramaPartido.id_programa_partido, 
+                  ProgramaPartido.tarjetas_amarillas + ProgramaPartido.tarjetas_rojas AS tarjetas, ProgramaPartido.faltas, 1 AS cantidad_partido, ProgramaPartido.penales, ProgramaPartido.tiros_libres
+FROM     Arbitro INNER JOIN
+                  Designacion ON Arbitro.id_arbitro = Designacion.id_arbitro INNER JOIN
+                  ProgramaPartido ON Designacion.id_programa_partido = ProgramaPartido.id_programa_partido INNER JOIN
+                  Rol ON Designacion.id_rol = Rol.id_rol AND Rol.nombre_rol = 'Árbitro principal'
+-------------------------------------------------------------------------------------------------
+SELECT pp.id_ubicacion_estadio AS id_estadio, pp.id_torneo, pp.fecha_programada AS id_fecha, 
+d.id_arbitro, pp.tarjetas_amarillas, pp.tarjetas_rojas, pp.faltas, pp.penales, pp.tiros_libres
+FROM Arbitro AS a INNER JOIN
+Designacion AS d ON a.id_arbitro = d.id_arbitro INNER JOIN
+ProgramaPartido AS pp ON d.id_programa_partido = pp.id_programa_partido INNER JOIN
+Rol AS r ON d.id_rol = r.id_rol AND r.nombre_rol = 'Árbitro principal'
+-------------------------------------------------------------------------------------------------
+select * from Designacion
+select * from ProgramaPartido
+select * from Arbitro
+-------------------------------------------------------------------------------------------------
+SELECT a.id_equipo, a.fecha AS id_tiempo, pp.id_torneo, da.id_jugador, 
+ISNULL(f.id_tarjeta, 0) as id_tarjeta, f.id_tipo_falta, 1 AS falta,
+CASE
+	WHEN f.id_tarjeta = 1 OR f.id_tarjeta = 2 THEN 1
+	ELSE 0
+	END AS cantidad_tarjetas,
+f.puntos_fair_play, f.minuto AS minuto_falta
+FROM Alineacion AS a INNER JOIN
+DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+Falta AS f ON da.id_detalle_alineacion = f.id_detalle_alineacion INNER JOIN
+ProgramaPartido AS pp ON a.id_alineacion = pp.id_alineacion_local OR 
+a.id_alineacion = pp.id_alineacion_visitante
+-------------------------------------------------------------------------------------------------
+select * from Falta
+
+
+SELECT da.id_jugador, a.id_equipo, pp.id_torneo, pp.id_ubicacion_estadio AS id_estadio, 
+da.id_nacionalidad, CAST(a.fecha AS date) AS id_tiempo,1 AS goles_anotados, 
+g.minuto AS minuto_gol
+FROM Alineacion AS a INNER JOIN
+DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion INNER JOIN
+ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local 
+OR a.id_alineacion = pp.id_alineacion_visitante)
+
+
+SELECT da.id_jugador, a.id_equipo, pp.id_torneo, pp.id_ubicacion_estadio AS id_estadio, 
+da.id_nacionalidad, CAST(a.fecha AS date) AS id_tiempo, e.tiempo_jugado AS minutos_jugados,
+e.kilometros_recorridos, e.cantidad_pases AS pases, e.intercepciones, e.takles_ganados
+FROM            Alineacion AS a INNER JOIN
+                DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+                Evento AS e ON da.id_detalle_alineacion = e.id_detalle_alineacion INNER JOIN
+                ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local 
+				OR a.id_alineacion = pp.id_alineacion_visitante)
+
+
+-------------------------------------------------------------------------------------------------
+SELECT a.id_equipo, pp.id_torneo, 
+pp.id_ubicacion_estadio AS id_estadio, ar.id_arbitro, 
+pt.identificador_periodo AS id_periodo, pp.fecha_programada AS id_tiempo,
+pt.minutos_retraso, pt.minutos_extras, 
+case when(pt.minutos_retraso > 0) then 1 else 0 end as cantidad_retrasos,
+case when(pt.minutos_extras > 0) then 1 else 0 end as cantidad_extras
+FROM Alineacion AS a INNER JOIN
+ProgramaPartido AS pp ON a.id_alineacion = pp.id_alineacion_local 
+or a.id_alineacion = pp.id_alineacion_visitante 
+INNER JOIN
+PeriodoPartido AS pt ON pp.id_programa_partido = pt.id_programa_partido
+INNER JOIN
+Designacion AS d ON d.id_programa_partido = pp.id_programa_partido 
+INNER JOIN
+Arbitro AS ar ON ar.id_arbitro = d.id_arbitro 
+INNER JOIN
+Rol AS r ON d.id_rol = r.id_rol AND r.nombre_rol = 'Árbitro principal'
+-------------------------------------------------------------------------------------------------
+
+
+
+SELECT * FROM PeriodoPartido
+
+SELECT DATEADD(MINUTE, FLOOR(RAND()*(15-0+1)+0), '13:00:00')

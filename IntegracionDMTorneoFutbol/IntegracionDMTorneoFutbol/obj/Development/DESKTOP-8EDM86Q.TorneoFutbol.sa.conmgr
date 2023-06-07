@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-8EDM86Q.TorneoFutbol.sa"
+  DTS:DTSID="{B328530E-7A6C-45F7-B1CB-B13EFC9715FB}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=DESKTOP-8EDM86Q;User ID=sa;Initial Catalog=TorneoFutbol;Application Name=SSIS-IntegracionDMTorneoFutbol-{B328530E-7A6C-45F7-B1CB-B13EFC9715FB}DESKTOP-8EDM86Q.TorneoFutbol.sa;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAG+yHzv/XtU6vEkau7zyL4wAAAAACAAAAAAAQZgAAAAEAACAAAABk2oN8qrGDGwUfnAsrCleZJ+3y5+CacgZ79Oqqw0JsLQAAAAAOgAAAAAIAACAAAAAUc+dGv3n/Buvjv6xer3CJel3twQOQTu0K+ezowr1QfHAAAACmkhCqpWCnui1i1rVyscOX0ODFDb89TJciq9nl5WbgIeyyFaBEDYDuO4DRbF2c14T4yomujN4yWMKzOlDxKoFgckCw88y5lz3Q9HZXsl5VzbzoBETmAXkXe4q2kOc6WwLYdCSSqytFRNBps2WiJZswQAAAABktEi9eKm80dyznYw8Shk1npY5XInNPTusIahZIwczAK7JG/jJCU5NN1hL7WGpOcSAgNhj4WWBhAi9chpJoyco=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
