@@ -1,0 +1,246 @@
+﻿<ConfigurationSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Database>
+    <DataSources>
+      <DataSource>
+        <ID>DW Torneo Futbol</ID>
+        <ConnectionString>Provider=SQLNCLI11.1;Data Source=DESKTOP-8EDM86Q;Password=;User ID=;Initial Catalog=DW_TorneoFutbol</ConnectionString>
+        <ImpersonationInfo>
+          <ImpersonationMode xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">ImpersonateServiceAccount</ImpersonationMode>
+          <ImpersonationInfoSecurity xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">Unchanged</ImpersonationInfoSecurity>
+        </ImpersonationInfo>
+      </DataSource>
+    </DataSources>
+    <Dimensions>
+      <Dimension>
+        <ID>Dim Torneo</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Estadio</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Equipo</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Equipo Local Visitante</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tiempo</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Jugador</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Torneo 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Estadio 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Equipo 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Nacionalidad</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tiempo 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Jugador 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Torneo 2</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Equipo 2</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Nacionalidad 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Estadio 2</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tiempo 2</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Equipo 3</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Torneo 3</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tipo Falta</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tarjeta</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tiempo 3</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Jugador 2</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Arbitro</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Torneo 4</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tiempo 4</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Estadio 3</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Estadio 4</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Arbitro 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Torneo 5</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Partido</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Periodo</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tiempo 5</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tiempo 6</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Tecnico</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Equipo 4</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Torneo 6</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Posicion</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Torneo 7</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Dim Equipo 5</ID>
+      </Dimension>
+    </Dimensions>
+    <Cubes>
+      <Cube>
+        <ID>cubeFactEquipo</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Fact Equipo</ID>
+            <Partitions>
+              <Partition>
+                <ID>Fact Equipo</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>cubeFactGol</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Fact Gol</ID>
+            <Partitions>
+              <Partition>
+                <ID>Fact Gol</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>cubeFactRendimientoJugador</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Fact Rendimiento Jugador</ID>
+            <Partitions>
+              <Partition>
+                <ID>Fact Rendimiento Jugador</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>cubeFactFairPlay</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Fact Fair Play</ID>
+            <Partitions>
+              <Partition>
+                <ID>Fact Fair Play</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>cubeFactArbitro</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Fact Arbitro</ID>
+            <Partitions>
+              <Partition>
+                <ID>Fact Arbitro</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>cubeFactCumplimientoDeTiempos</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Fact Cumplimiento De Tiempos</ID>
+            <Partitions>
+              <Partition>
+                <ID>Fact Cumplimiento De Tiempos</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>cubeFactTecnico</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Fact Tecnico</ID>
+            <Partitions>
+              <Partition>
+                <ID>Fact Tecnico</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>cubeFactPosicionEquipo</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Fact Posicion Equipo</ID>
+            <Partitions>
+              <Partition>
+                <ID>Fact Posicion Equipo</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+    </Cubes>
+    <DataSourceImpersonationInfo>
+      <ImpersonationMode xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">Default</ImpersonationMode>
+      <ImpersonationInfoSecurity xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">Unchanged</ImpersonationInfoSecurity>
+    </DataSourceImpersonationInfo>
+  </Database>
+</ConfigurationSettings>

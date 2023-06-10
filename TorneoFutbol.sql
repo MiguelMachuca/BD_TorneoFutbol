@@ -462,6 +462,7 @@ CREATE TABLE [dbo].[ProgramaPartido](
 	[tiros_libres] [int] NULL,
 	[duracion_partido] [int] NULL,
 	[identificador_marcador] [int] NULL,
+	[nombre_partido] [varchar](150) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_programa_partido] ASC
@@ -523,7 +524,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[TipoFalta](
 	[id_tipo_falta] [int] IDENTITY(1,1) NOT NULL,
-	[tip_falta] [varchar](75) NULL,
+	[tipo_falta] [varchar](75) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_tipo_falta] ASC
@@ -2464,6 +2465,8 @@ SET IDENTITY_INSERT [dbo].[Rol] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Tarjeta] ON 
 GO
+INSERT [dbo].[Tarjeta] ([id_tarjeta], [color_tarjeta]) VALUES (3, N'Sin Tarjeta')
+GO
 INSERT [dbo].[Tarjeta] ([id_tarjeta], [color_tarjeta]) VALUES (1, N'Tarjeta Roja')
 GO
 INSERT [dbo].[Tarjeta] ([id_tarjeta], [color_tarjeta]) VALUES (2, N'Tarjeta Amarilla')
@@ -2516,25 +2519,25 @@ SET IDENTITY_INSERT [dbo].[Tecnico] OFF
 GO
 SET IDENTITY_INSERT [dbo].[TipoFalta] ON 
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (1, N'Falta directa')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (1, N'Falta directa')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (2, N'Falta indirecta')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (2, N'Falta indirecta')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (3, N'Falta táctica')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (3, N'Falta táctica')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (4, N'Falta violenta')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (4, N'Falta violenta')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (5, N'Mano')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (5, N'Mano')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (6, N'Fuera de juego')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (6, N'Fuera de juego')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (7, N'Simulación o fingir una falta')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (7, N'Simulación o fingir una falta')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (8, N'Retrasar el juego')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (8, N'Retrasar el juego')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (9, N'Conducta antideportiva')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (9, N'Conducta antideportiva')
 GO
-INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tip_falta]) VALUES (10, N'Falta de respeto al arbitro')
+INSERT [dbo].[TipoFalta] ([id_tipo_falta], [tipo_falta]) VALUES (10, N'Falta de respeto al arbitro')
 GO
 SET IDENTITY_INSERT [dbo].[TipoFalta] OFF
 GO
@@ -3299,6 +3302,44 @@ BEGIN
 	DEALLOCATE cursor_planilla_equipo;
 END
 GO
+/****** Object:  StoredProcedure [dbo].[AgregarNombrePartido]    Script Date: 07/06/2023 16:08:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[AgregarNombrePartido]
+AS 
+BEGIN
+	DECLARE @nombre1 varchar(40), @nombre2 varchar(40), @nombre_torneo varchar(40), 
+	@nombre_partido varchar(150), @id_local INT, @id_visitante INT, @id_partido INT
+
+	DECLARE cursor_partido CURSOR FOR
+	SELECT id_programa_partido, id_alineacion_local, id_alineacion_visitante
+	FROM ProgramaPartido
+
+	OPEN cursor_partido
+	FETCH NEXT FROM cursor_partido INTO @id_partido, @id_local, @id_visitante
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		select @nombre1 = nombre_equipo from Equipo 
+		where id_equipo 
+		in(select id_equipo from Alineacion where id_alineacion = @id_local)
+
+		select @nombre2 = nombre_equipo from Equipo 
+		where id_equipo 
+		in(select id_equipo from Alineacion where id_alineacion = @id_visitante)
+
+		SET @nombre_partido = @nombre1 +'(L)'+ ' vs ' + @nombre2 +'(V)';
+
+		UPDATE ProgramaPartido SET nombre_partido = @nombre_partido
+		WHERE id_programa_partido = @id_partido
+
+	FETCH NEXT FROM cursor_partido INTO @id_partido, @id_local, @id_visitante
+	END
+	CLOSE cursor_partido
+	DEALLOCATE cursor_partido
+END
+GO
 /****** Object:  StoredProcedure [dbo].[AgregarPlantelA]    Script Date: 21/05/2023 18:56:34 ******/
 SET ANSI_NULLS ON
 GO
@@ -4049,6 +4090,8 @@ GO
 EXECUTE [dbo].[ActualizarPosiciones]
 GO
 EXECUTE [dbo].[ActualizarEstadisticaClubParteUno]
+GO
+EXECUTE [dbo].[AgregarNombrePartido]
 GO
 /****** Script para el comando SelectTopNRows de SSMS  ******/
 SELECT *

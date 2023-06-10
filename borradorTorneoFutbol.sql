@@ -3183,8 +3183,6 @@ Falta AS f ON da.id_detalle_alineacion = f.id_detalle_alineacion INNER JOIN
 ProgramaPartido AS pp ON a.id_alineacion = pp.id_alineacion_local OR 
 a.id_alineacion = pp.id_alineacion_visitante
 -------------------------------------------------------------------------------------------------
-select * from Falta
-
 
 SELECT da.id_jugador, a.id_equipo, pp.id_torneo, pp.id_ubicacion_estadio AS id_estadio, 
 da.id_nacionalidad, CAST(a.fecha AS date) AS id_tiempo,1 AS goles_anotados, 
@@ -3204,19 +3202,14 @@ FROM            Alineacion AS a INNER JOIN
                 Evento AS e ON da.id_detalle_alineacion = e.id_detalle_alineacion INNER JOIN
                 ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local 
 				OR a.id_alineacion = pp.id_alineacion_visitante)
-
-
 -------------------------------------------------------------------------------------------------
-SELECT a.id_equipo, pp.id_torneo, 
+SELECT pp.id_programa_partido AS id_partido, pp.id_torneo, 
 pp.id_ubicacion_estadio AS id_estadio, ar.id_arbitro, 
 pt.identificador_periodo AS id_periodo, pp.fecha_programada AS id_tiempo,
-pt.minutos_retraso, pt.minutos_extras, 
+pt.minutos_retraso AS minutos_ratrasos, 
 case when(pt.minutos_retraso > 0) then 1 else 0 end as cantidad_retrasos,
-case when(pt.minutos_extras > 0) then 1 else 0 end as cantidad_extras
-FROM Alineacion AS a INNER JOIN
-ProgramaPartido AS pp ON a.id_alineacion = pp.id_alineacion_local 
-or a.id_alineacion = pp.id_alineacion_visitante 
-INNER JOIN
+pt.minutos_extras, case when(pt.minutos_extras > 0) then 1 else 0 end as cantidad_extras
+FROM ProgramaPartido AS pp INNER JOIN
 PeriodoPartido AS pt ON pp.id_programa_partido = pt.id_programa_partido
 INNER JOIN
 Designacion AS d ON d.id_programa_partido = pp.id_programa_partido 
@@ -3225,9 +3218,68 @@ Arbitro AS ar ON ar.id_arbitro = d.id_arbitro
 INNER JOIN
 Rol AS r ON d.id_rol = r.id_rol AND r.nombre_rol = 'Árbitro principal'
 -------------------------------------------------------------------------------------------------
+SELECT id_programa_partido AS id_partido, nombre_partido 
+FROM ProgramaPartido
+-------------------------------------------------------------------------------------------------
+ALTER PROCEDURE AgregarNombrePartido
+AS 
+BEGIN
+	DECLARE @nombre1 varchar(40), @nombre2 varchar(40), @nombre_torneo varchar(40), 
+	@nombre_partido varchar(150), @id_local INT, @id_visitante INT, @id_partido INT
+
+	DECLARE cursor_partido CURSOR FOR
+	SELECT id_programa_partido, id_alineacion_local, id_alineacion_visitante
+	FROM ProgramaPartido
+
+	OPEN cursor_partido
+	FETCH NEXT FROM cursor_partido INTO @id_partido, @id_local, @id_visitante
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		select @nombre1 = nombre_equipo from Equipo 
+		where id_equipo 
+		in(select id_equipo from Alineacion where id_alineacion = @id_local)
+
+		select @nombre2 = nombre_equipo from Equipo 
+		where id_equipo 
+		in(select id_equipo from Alineacion where id_alineacion = @id_visitante)
+
+		SET @nombre_partido = @nombre1 +'(L)'+ ' vs ' + @nombre2 +'(V)';
+
+		UPDATE ProgramaPartido SET nombre_partido = @nombre_partido
+		WHERE id_programa_partido = @id_partido
+
+	FETCH NEXT FROM cursor_partido INTO @id_partido, @id_local, @id_visitante
+	END
+	CLOSE cursor_partido
+	DEALLOCATE cursor_partido
+END
+
+EXEC AgregarNombrePartido
 
 
-
+PRINT @nombre_partido
+-------------------------------------------------------------------------------------------------
+select * from ProgramaPartido
 SELECT * FROM PeriodoPartido
+SELECT id_tarjeta, color_tarjeta
+FROM     Tarjeta
 
-SELECT DATEADD(MINUTE, FLOOR(RAND()*(15-0+1)+0), '13:00:00')
+DECLARE @TablaTemporal 
+TABLE (id_periodo INT PRIMARY KEY IDENTITY(1,1), periodo VARCHAR(40))
+INSERT INTO @TablaTemporal(periodo)
+VALUES('1° Tiempo'),('2° Tiempo')
+SELECT id_periodo, periodo FROM @TablaTemporal
+
+-------------------------------------------------------------------------------------
+SELECT a.id_equipo, a.fecha AS id_tiempo, pp.id_torneo, da.id_jugador, 
+f.id_tarjeta, f.id_tipo_falta, 1 AS faltas,
+CASE
+	WHEN f.id_tarjeta = 1 OR f.id_tarjeta = 2 THEN 1
+	ELSE 0
+	END AS cantidad_tarjetas,
+f.puntos_fair_play AS puntos, f.minuto AS minuto_falta
+FROM Alineacion AS a INNER JOIN
+DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+Falta AS f ON da.id_detalle_alineacion = f.id_detalle_alineacion INNER JOIN
+ProgramaPartido AS pp ON a.id_alineacion = pp.id_alineacion_local OR 
+a.id_alineacion = pp.id_alineacion_visitante

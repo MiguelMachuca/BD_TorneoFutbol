@@ -1,0 +1,353 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="c6313d6d-4239-48b0-86c7-522f5f86cb5e" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>cubeFactPosicionEquipo</ID>
+  <Name>cubeFactPosicionEquipo</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="8" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-10378" scrolltop="16" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="95" x="28972" y="13150" backcolor="2434342" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="factPosicionEquipo" left="20" top="4279" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3731" height="4842" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000930e0000ea120000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_factPosicionEquipo" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimEquipo" left="311" top="0" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="3149" height="1879" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e00004d0c000057070000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_dimEquipo" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimPosicion" left="285" top="11521" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="3201" height="1879" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000810c000057070000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_dimPosicion" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimTorneo" left="6151" top="5760" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="3096" height="1879" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000180c000057070000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_dimTorneo" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="1486" top="8821" logicalid="5" controlid="5" masterid="0" hint1="0" hint2="0" width="799" height="3200" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[factPosicionEquipo-dimPosicion]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="3" destid="1" sourceattachpoint="4" destattachpoint="7" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="1885" y="11521" />
+              <point x="1885" y="9121" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="3451" top="6300" logicalid="6" controlid="6" masterid="0" hint1="0" hint2="0" width="3000" height="799" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[factPosicionEquipo-dimTorneo]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="4" destid="1" sourceattachpoint="12" destattachpoint="23" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="6151" y="6699" />
+              <point x="4951" y="6699" />
+              <point x="4951" y="6700" />
+              <point x="3751" y="6700" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="1486" top="1380" logicalid="7" controlid="7" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[factPosicionEquipo-dimEquipo]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="2" destid="1" sourceattachpoint="5" destattachpoint="6" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="1885" y="1879" />
+              <point x="1885" y="4279" />
+            </connector>
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-10378</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>16</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>95</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Dimensions>
+    <Dimension dwd:design-time-name="b1282eaa-88d9-4900-900d-659bb1923521">
+      <ID>Dim Posicion</ID>
+      <Name>Dim Posicion</Name>
+      <DimensionID>Dim Posicion</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="f4ffc00c-3dca-4df1-87c4-ab2392339512">
+          <AttributeID>Id Posicion</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="1a6d4957-dbc7-484f-9ed4-60b7d2aa34ff">
+          <AttributeID>Posicion Torneo</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="67e3bdfe-bfce-4351-a309-bda90a248828">
+      <ID>Dim Torneo 7</ID>
+      <Name>Dim Torneo 7</Name>
+      <DimensionID>Dim Torneo 7</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="38889a34-d2c4-4d24-9ce0-39e60e2a162d">
+          <AttributeID>Id Torneo</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a3f8ddd1-6cf9-4445-90a2-56d30d8606ea">
+          <AttributeID>Nombre Torneo</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="8e7cea72-a434-41c3-aaa7-5010bcceb106">
+      <ID>Dim Equipo 5</ID>
+      <Name>Dim Equipo 5</Name>
+      <DimensionID>Dim Equipo 5</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="b9c66556-e127-45fc-a47a-c96a37ee419e">
+          <AttributeID>Id Equipo</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="79765b96-6aab-4fff-8a37-a39f4ce15e92">
+          <AttributeID>Nombre Equipo</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="a188c542-2ea1-466e-b99e-893e004a554f">
+      <ID>Fact Posicion Equipo</ID>
+      <Name>Fact Posicion Equipo</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="a5e7050b-6ac7-4dd0-90bc-2149ebd222df">
+          <ID>Cantidad Puntos</ID>
+          <Name>Cantidad Puntos</Name>
+          <Source dwd:design-time-name="06cc1731-21e9-4327-82dd-d45adc79c1a9">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="9b2c7b31-0949-4296-91ad-6fb580813187">
+              <TableID>dbo_factPosicionEquipo</TableID>
+              <ColumnID>cantidad_puntos</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="49ec1750-0dab-4321-ac84-6ea9992211e9">
+          <ID>Partidos Ganados</ID>
+          <Name>Partidos Ganados</Name>
+          <Source dwd:design-time-name="29634dd3-5c56-4bf3-9205-66b7ecdaaa64">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="85fdf5b0-a475-48f2-b720-762ef97d21bf">
+              <TableID>dbo_factPosicionEquipo</TableID>
+              <ColumnID>partidos_ganados</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="83a56238-e276-4268-bc27-da107abeca32">
+          <ID>Partidos Empatados</ID>
+          <Name>Partidos Empatados</Name>
+          <Source dwd:design-time-name="2677bbe8-30b6-4048-92a8-d0b2c1a29419">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="6ccb1b12-00df-46bc-b722-293f64b7aa5c">
+              <TableID>dbo_factPosicionEquipo</TableID>
+              <ColumnID>partidos_empatados</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="2b1470a8-8842-4502-951a-e4c55483549f">
+          <ID>Goles Anotados</ID>
+          <Name>Goles Anotados</Name>
+          <Source dwd:design-time-name="d51e2eea-12be-4372-ad1f-09c609eb4cd1">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="002308bf-a370-40da-bf09-25b509d55805">
+              <TableID>dbo_factPosicionEquipo</TableID>
+              <ColumnID>goles_anotados</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="4a7a08db-fecf-4db9-aaff-74b5b3e2eb07">
+          <ID>Goles Encontra</ID>
+          <Name>Goles Encontra</Name>
+          <Source dwd:design-time-name="48a87a53-e4c9-418d-8ac2-8228c1b07005">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="2152a129-26f7-4746-866c-984f995626b5">
+              <TableID>dbo_factPosicionEquipo</TableID>
+              <ColumnID>goles_encontra</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="9e8d7c76-cb2f-4d84-a300-941db8c7e3c3">
+          <ID>Diferencia Goles</ID>
+          <Name>Diferencia Goles</Name>
+          <Source dwd:design-time-name="dca2ede6-10b7-4768-b4c2-754c79c1f3e3">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="c6acec08-bf98-4a79-8292-4367f534451e">
+              <TableID>dbo_factPosicionEquipo</TableID>
+              <ColumnID>diferencia_goles</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="5cd3c2fb-d268-47e4-9353-7b7166edc6d8">
+          <ID>Recuento Fact Posicion Equipo</ID>
+          <Name>Recuento Fact Posicion Equipo</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <Source dwd:design-time-name="ca58f1c1-41c5-4c45-8c10-7957e241f5b9">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="e08538f6-5e40-4470-a34a-15a459ef9b97">
+              <TableID>dbo_factPosicionEquipo</TableID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="1c38ca66-8192-401b-baf0-9637792a1ed9">
+          <CubeDimensionID>Dim Posicion</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="dc51b9e6-7636-4437-a724-4d63e3cf0f27">
+              <AttributeID>Id Posicion</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="6fc53a3a-b681-4208-8cee-3eef7cb677f1">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="f3021965-c1af-4194-9a75-0a0cc11ed56c">
+                    <TableID>dbo_factPosicionEquipo</TableID>
+                    <ColumnID>id_posicion</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="4aa388ac-8808-4838-8301-173acc44c0c0">
+          <CubeDimensionID>Dim Torneo 7</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="6a95fc53-fab2-484d-950f-f767099985d1">
+              <AttributeID>Id Torneo</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="3a5a16a6-b8db-4995-9c23-229d2d9bb683">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="b87ffc42-8da7-4861-9516-831b188aecd2">
+                    <TableID>dbo_factPosicionEquipo</TableID>
+                    <ColumnID>id_torneo</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="4a8bbce9-9c1e-46d2-ba65-ad285cac812d">
+          <CubeDimensionID>Dim Equipo 5</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="a5965c00-2686-46bc-a7ce-476264fccb00">
+              <AttributeID>Id Equipo</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="68e7eac1-f3ab-4858-ad3f-10eb333f6dd6">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="dbafb91c-c653-4f06-9b50-82aaadb91bc1">
+                    <TableID>dbo_factPosicionEquipo</TableID>
+                    <ColumnID>id_equipo</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="dc713727-03a3-44f2-accf-36cb87a895d0">
+    <DataSourceViewID>viewFactPosicionEquipo</DataSourceViewID>
+  </Source>
+</Cube>

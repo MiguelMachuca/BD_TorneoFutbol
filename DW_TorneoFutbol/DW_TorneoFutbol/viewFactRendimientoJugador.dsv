@@ -1,0 +1,595 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="95f028a6-2ab1-4b0c-a4eb-7c2875022525" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>viewFactRendimientoJugador</ID>
+  <Name>viewFactRendimientoJugador</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+      <Value></Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout>
+              <dds>
+                <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="16" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="566" scrolltop="6036" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="79" x="29501" y="14473" backcolor="2434342" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                  <font>
+                    <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+                  </font>
+                  <mouseicon>
+                    <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                  </mouseicon>
+                </diagram>
+                <layoutmanager>
+                  <ddsxmlobj />
+                </layoutmanager>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="factRendimientoJugador" left="11423" top="9855" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3836" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000fc0e000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_factRendimientoJugador" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimTiempo" left="2257" top="7191" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="5398" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e00001615000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_dimTiempo" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimEquipo" left="11811" top="4772" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="3149" height="1879" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e00004d0c000057070000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_dimEquipo" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimTorneo" left="19445" top="7562" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="3096" height="1879" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000180c000057070000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_dimTorneo" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimJugador" left="18297" top="15549" logicalid="5" controlid="5" masterid="0" hint1="0" hint2="0" width="3228" height="2302" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e00009c0c0000fe080000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_dimJugador" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimNacionalidad" left="12070" top="19070" logicalid="6" controlid="6" masterid="0" hint1="0" hint2="0" width="3175" height="1879" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000670c000057070000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_dimNacionalidad" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimEstadio" left="3428" top="16508" logicalid="7" controlid="7" masterid="0" hint1="0" hint2="0" width="3519" height="2302" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000bf0d0000fe080000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_dimEstadio" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="dimCiudad" left="3613" top="21210" logicalid="8" controlid="8" masterid="0" hint1="0" hint2="0" width="3149" height="1879" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e00004d0c000057070000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_dimCiudad" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline" left="4788" top="18510" logicalid="9" controlid="9" masterid="0" hint1="0" hint2="0" width="799" height="3200" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_dimEstadio_dimCiudad]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="8" destid="7" sourceattachpoint="4" destattachpoint="7" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="5187" y="21210" />
+                    <point x="5187" y="18810" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline" left="14959" top="14255" logicalid="10" controlid="10" masterid="0" hint1="0" hint2="0" width="3638" height="2295" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[factRendimientoJugador-dimJugador]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="5" destid="1" sourceattachpoint="10" destattachpoint="31" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="18297" y="16150" />
+                    <point x="16778" y="16150" />
+                    <point x="16778" y="14555" />
+                    <point x="15259" y="14555" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline" left="14959" top="8652" logicalid="11" controlid="11" masterid="0" hint1="0" hint2="0" width="4786" height="1803" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[factRendimientoJugador-dimTorneo]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="4" destid="1" sourceattachpoint="14" destattachpoint="15" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="19445" y="9051" />
+                    <point x="17352" y="9051" />
+                    <point x="17352" y="10155" />
+                    <point x="15259" y="10155" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline" left="11886" top="6152" logicalid="12" controlid="12" masterid="0" hint1="0" hint2="0" width="799" height="4003" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[factRendimientoJugador-dimEquipo]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="3" destid="1" sourceattachpoint="1" destattachpoint="2" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="12285" y="6651" />
+                    <point x="12285" y="8253" />
+                    <point x="12241" y="8253" />
+                    <point x="12241" y="9855" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline" left="12158" top="14555" logicalid="13" controlid="13" masterid="0" hint1="0" hint2="0" width="933" height="5015" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[factRendimientoJugador-dimNacionalidad]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="6" destid="1" sourceattachpoint="0" destattachpoint="5" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="12557" y="19070" />
+                    <point x="12557" y="16963" />
+                    <point x="12791" y="16963" />
+                    <point x="12791" y="14855" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline" left="6647" top="14255" logicalid="14" controlid="14" masterid="0" hint1="0" hint2="0" width="5076" height="3254" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[factRendimientoJugador-dimEstadio]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="7" destid="1" sourceattachpoint="15" destattachpoint="30" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="6947" y="17109" />
+                    <point x="9185" y="17109" />
+                    <point x="9185" y="14555" />
+                    <point x="11423" y="14555" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline" left="7355" top="9842" logicalid="15" controlid="15" masterid="0" hint1="0" hint2="0" width="4368" height="799" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="15856113" linestyle="0" linerender="2" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[factRendimientoJugador-dimTiempo]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="2" destid="1" sourceattachpoint="29" destattachpoint="14" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="7655" y="10241" />
+                    <point x="9539" y="10241" />
+                    <point x="9539" y="10155" />
+                    <point x="11423" y="10155" />
+                  </connector>
+                </ddscontrol>
+              </dds>
+</DiagramLayout>
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>566</DiagramViewPortLeft>
+            <DiagramViewPortTop>6036</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>79</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>DW Torneo Futbol</DataSourceID>
+  <Schema>
+    <xs:schema id="viewFactRendimientoJugador" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="viewFactRendimientoJugador" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="5980005e-d812-48cc-90b4-d3650a351250">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo_factRendimientoJugador" msprop:design-time-name="6396c77a-bf0e-4c6b-8cbd-1cb78258b3e9" msprop:FriendlyName="factRendimientoJugador" msprop:DbSchemaName="dbo" msprop:DbTableName="factRendimientoJugador" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="id_jugador" msprop:design-time-name="4dd18c9e-5153-4374-bf87-375e1b65092a" msprop:DbColumnName="id_jugador" msprop:FriendlyName="id_jugador" type="xs:int" minOccurs="0" />
+                  <xs:element name="id_equipo" msprop:design-time-name="0e73bd9f-bf29-46c4-989d-104cbab2949e" msprop:DbColumnName="id_equipo" msprop:FriendlyName="id_equipo" type="xs:int" minOccurs="0" />
+                  <xs:element name="id_torneo" msprop:design-time-name="4096398d-5a63-4a7a-87b2-f68896f01c00" msprop:DbColumnName="id_torneo" msprop:FriendlyName="id_torneo" type="xs:int" minOccurs="0" />
+                  <xs:element name="id_estadio" msprop:design-time-name="e4f94d23-92f1-47d0-9afe-9677ab2aa56a" msprop:DbColumnName="id_estadio" msprop:FriendlyName="id_estadio" type="xs:int" minOccurs="0" />
+                  <xs:element name="id_nacionalidad" msprop:design-time-name="aa5cf537-7bfb-4dc6-a326-a4bcb58a9cf6" msprop:DbColumnName="id_nacionalidad" msprop:FriendlyName="id_nacionalidad" type="xs:int" minOccurs="0" />
+                  <xs:element name="id_tiempo" msprop:design-time-name="bc06ca33-876a-456e-aa15-a128d6a814c0" msprop:DbColumnName="id_tiempo" msprop:FriendlyName="id_tiempo" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="minutos_jugados" msprop:design-time-name="7e14db1d-4c2d-4c4b-8719-3f469e851a41" msprop:DbColumnName="minutos_jugados" msprop:FriendlyName="minutos_jugados" type="xs:int" minOccurs="0" />
+                  <xs:element name="kilometros_recorridos" msprop:design-time-name="f00d355f-0c22-4adf-893e-49f5901ecb94" msprop:DbColumnName="kilometros_recorridos" msprop:FriendlyName="kilometros_recorridos" type="xs:int" minOccurs="0" />
+                  <xs:element name="pases" msprop:design-time-name="7a157fa5-d36d-4060-b7bc-2be3c4f636b1" msprop:DbColumnName="pases" msprop:FriendlyName="pases" type="xs:int" minOccurs="0" />
+                  <xs:element name="intercepciones" msprop:design-time-name="d1868bc5-90c0-4809-9851-bb9f2611a46e" msprop:DbColumnName="intercepciones" msprop:FriendlyName="intercepciones" type="xs:int" minOccurs="0" />
+                  <xs:element name="takles_ganados" msprop:design-time-name="9adfcfb0-353e-44bf-8ea6-4a03b1128b30" msprop:DbColumnName="takles_ganados" msprop:FriendlyName="takles_ganados" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_dimTiempo" msprop:design-time-name="1808a912-fea3-4400-b3a5-4667987dca06" msprop:FriendlyName="dimTiempo" msprop:DbSchemaName="dbo" msprop:DbTableName="dimTiempo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PK_Fecha" msprop:design-time-name="6081a2d5-bb98-4df2-a1ac-428284970aa3" msprop:DbColumnName="PK_Fecha" msprop:FriendlyName="PK_Fecha" type="xs:dateTime" />
+                  <xs:element name="Fecha_Nombre" msprop:design-time-name="470e0195-19ed-44e2-897f-98613ccbe475" msprop:DbColumnName="Fecha_Nombre" msprop:FriendlyName="Fecha_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Año" msprop:design-time-name="f5225df4-d1d8-4104-be3a-9b701efbea02" msprop:DbColumnName="Año" msprop:FriendlyName="Año" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Año_Nombre" msprop:design-time-name="c61d67a8-ece0-4fea-b586-b2e7684395e6" msprop:DbColumnName="Año_Nombre" msprop:FriendlyName="Año_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Semestre" msprop:design-time-name="64422297-bf70-4273-a66c-7f222fc53e9a" msprop:DbColumnName="Semestre" msprop:FriendlyName="Semestre" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Semestre_Nombre" msprop:design-time-name="c4f8efd4-8d76-4e3f-9553-ab48f24fed45" msprop:DbColumnName="Semestre_Nombre" msprop:FriendlyName="Semestre_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Trimestre" msprop:design-time-name="31ed5f76-f488-4a83-b955-5b9e13db43fa" msprop:DbColumnName="Trimestre" msprop:FriendlyName="Trimestre" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Trimestre_Nombre" msprop:design-time-name="5c6123f4-18f4-44ae-86b0-39e8e71b60ef" msprop:DbColumnName="Trimestre_Nombre" msprop:FriendlyName="Trimestre_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Mes" msprop:design-time-name="a40e17ec-d906-41c2-97da-f22aaf82be99" msprop:DbColumnName="Mes" msprop:FriendlyName="Mes" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Mes_Nombre" msprop:design-time-name="a10b9a91-c3ae-44bb-97d5-7c31fb6628a0" msprop:DbColumnName="Mes_Nombre" msprop:FriendlyName="Mes_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Semana" msprop:design-time-name="9528c809-1300-4a18-aa98-508242bd3242" msprop:DbColumnName="Semana" msprop:FriendlyName="Semana" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Semana_Nombre" msprop:design-time-name="90e9e699-5cd9-4968-b11a-be720037bd03" msprop:DbColumnName="Semana_Nombre" msprop:FriendlyName="Semana_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Día_Del_Año" msprop:design-time-name="c8aad7bb-5c03-4c51-a157-215fd11fb090" msprop:DbColumnName="Día_Del_Año" msprop:FriendlyName="Día_Del_Año" type="xs:int" minOccurs="0" />
+                  <xs:element name="Día_Del_Año_Nombre" msprop:design-time-name="417f3db7-e118-43f6-a081-360800a6afb6" msprop:DbColumnName="Día_Del_Año_Nombre" msprop:FriendlyName="Día_Del_Año_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Día_Del_Semestre" msprop:design-time-name="1706a62a-0030-4278-bd8e-cd6441f94a64" msprop:DbColumnName="Día_Del_Semestre" msprop:FriendlyName="Día_Del_Semestre" type="xs:int" minOccurs="0" />
+                  <xs:element name="Día_Del_Semestre_Nombre" msprop:design-time-name="e9df180b-4d47-4930-b43a-259a1b4f3ba7" msprop:DbColumnName="Día_Del_Semestre_Nombre" msprop:FriendlyName="Día_Del_Semestre_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Día_Del_Trimestre" msprop:design-time-name="8415eb94-426c-4ad5-9175-332b8972d4b1" msprop:DbColumnName="Día_Del_Trimestre" msprop:FriendlyName="Día_Del_Trimestre" type="xs:int" minOccurs="0" />
+                  <xs:element name="Día_Del_Trimestre_Nombre" msprop:design-time-name="8668dab5-612f-4993-98be-e718a728a3ff" msprop:DbColumnName="Día_Del_Trimestre_Nombre" msprop:FriendlyName="Día_Del_Trimestre_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Día_Del_Mes" msprop:design-time-name="16058b89-ecf6-432f-b432-0cb4e2f5c90f" msprop:DbColumnName="Día_Del_Mes" msprop:FriendlyName="Día_Del_Mes" type="xs:int" minOccurs="0" />
+                  <xs:element name="Día_Del_Mes_Nombre" msprop:design-time-name="4b9bd49f-22c5-4be2-a2aa-ca42a474c97f" msprop:DbColumnName="Día_Del_Mes_Nombre" msprop:FriendlyName="Día_Del_Mes_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Día_De_La_Semana" msprop:design-time-name="3435db15-cf0a-4ed2-a136-78403db913b4" msprop:DbColumnName="Día_De_La_Semana" msprop:FriendlyName="Día_De_La_Semana" type="xs:int" minOccurs="0" />
+                  <xs:element name="Día_De_La_Semana_Nombre" msprop:design-time-name="32e17721-84f4-4def-add5-e24bfb24a547" msprop:DbColumnName="Día_De_La_Semana_Nombre" msprop:FriendlyName="Día_De_La_Semana_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Semana_Del_Año" msprop:design-time-name="2e998124-296e-4d35-8dcc-44bc7cf97499" msprop:DbColumnName="Semana_Del_Año" msprop:FriendlyName="Semana_Del_Año" type="xs:int" minOccurs="0" />
+                  <xs:element name="Semana_Del_Año_Nombre" msprop:design-time-name="55b1be99-4854-407a-834d-02e8a37e482d" msprop:DbColumnName="Semana_Del_Año_Nombre" msprop:FriendlyName="Semana_Del_Año_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Mes_Del_Año" msprop:design-time-name="ab8674fd-07b5-43ff-ab69-c02beb1edfa0" msprop:DbColumnName="Mes_Del_Año" msprop:FriendlyName="Mes_Del_Año" type="xs:int" minOccurs="0" />
+                  <xs:element name="Mes_Del_Año_Nombre" msprop:design-time-name="79a21977-36ec-42b5-97c6-bf865e6d531d" msprop:DbColumnName="Mes_Del_Año_Nombre" msprop:FriendlyName="Mes_Del_Año_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Mes_Del_Semestre" msprop:design-time-name="e89bb9e4-6849-46e2-a6e9-f1fee273e2f7" msprop:DbColumnName="Mes_Del_Semestre" msprop:FriendlyName="Mes_Del_Semestre" type="xs:int" minOccurs="0" />
+                  <xs:element name="Mes_Del_Semestre_Nombre" msprop:design-time-name="39e6d40e-8986-4096-a466-1f07efe2b2f1" msprop:DbColumnName="Mes_Del_Semestre_Nombre" msprop:FriendlyName="Mes_Del_Semestre_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Mes_Del_Trimestre" msprop:design-time-name="60b97155-5e83-4d4f-84d7-bc80c032da48" msprop:DbColumnName="Mes_Del_Trimestre" msprop:FriendlyName="Mes_Del_Trimestre" type="xs:int" minOccurs="0" />
+                  <xs:element name="Mes_Del_Trimestre_Nombre" msprop:design-time-name="c6e39c4b-7568-4460-ad98-1a6370fbfbf0" msprop:DbColumnName="Mes_Del_Trimestre_Nombre" msprop:FriendlyName="Mes_Del_Trimestre_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Trimestre_Del_Año" msprop:design-time-name="223ac72c-1e98-4865-983b-c48ff168022e" msprop:DbColumnName="Trimestre_Del_Año" msprop:FriendlyName="Trimestre_Del_Año" type="xs:int" minOccurs="0" />
+                  <xs:element name="Trimestre_Del_Año_Nombre" msprop:design-time-name="3dba084a-e4a5-430f-931e-cd2a5080252b" msprop:DbColumnName="Trimestre_Del_Año_Nombre" msprop:FriendlyName="Trimestre_Del_Año_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Trimestre_Del_Semestre" msprop:design-time-name="6a9cb477-428c-4156-b654-9e43318b0674" msprop:DbColumnName="Trimestre_Del_Semestre" msprop:FriendlyName="Trimestre_Del_Semestre" type="xs:int" minOccurs="0" />
+                  <xs:element name="Trimestre_Del_Semestre_Nombre" msprop:design-time-name="5b2b4581-b4e6-489b-9bf7-5a5a848bdab2" msprop:DbColumnName="Trimestre_Del_Semestre_Nombre" msprop:FriendlyName="Trimestre_Del_Semestre_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Semestre_Del_Año" msprop:design-time-name="a5cf20bf-5776-4ddc-bfa5-8e2d357248e7" msprop:DbColumnName="Semestre_Del_Año" msprop:FriendlyName="Semestre_Del_Año" type="xs:int" minOccurs="0" />
+                  <xs:element name="Semestre_Del_Año_Nombre" msprop:design-time-name="5f03a236-e6f8-4fea-aca5-fbac17b49d6d" msprop:DbColumnName="Semestre_Del_Año_Nombre" msprop:FriendlyName="Semestre_Del_Año_Nombre" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_dimEquipo" msprop:design-time-name="7522d1d2-4535-4b6d-a244-3dae66c991e2" msprop:FriendlyName="dimEquipo" msprop:DbSchemaName="dbo" msprop:DbTableName="dimEquipo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="id_equipo" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="76291d89-0b19-4e5b-8601-f6aceec1aa89" msprop:DbColumnName="id_equipo" msprop:FriendlyName="id_equipo" type="xs:int" />
+                  <xs:element name="nombre_equipo" msprop:design-time-name="d229d74f-549f-44ee-ac8a-efd67bb46df0" msprop:DbColumnName="nombre_equipo" msprop:FriendlyName="nombre_equipo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_dimTorneo" msprop:design-time-name="81fb039c-d4d2-49da-bc96-2d82d2938e70" msprop:FriendlyName="dimTorneo" msprop:DbSchemaName="dbo" msprop:DbTableName="dimTorneo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="id_torneo" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="af117caa-7936-4c9e-bb3e-cb7f03defbbd" msprop:DbColumnName="id_torneo" msprop:FriendlyName="id_torneo" type="xs:int" />
+                  <xs:element name="nombre_torneo" msprop:design-time-name="8cee487c-9a33-4b92-994a-cd1561b8e365" msprop:DbColumnName="nombre_torneo" msprop:FriendlyName="nombre_torneo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_dimJugador" msprop:design-time-name="e1a00545-726d-49de-a734-21d2b01d3311" msprop:FriendlyName="dimJugador" msprop:DbSchemaName="dbo" msprop:DbTableName="dimJugador" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="id_jugador" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="498d6ee0-b32b-4934-adef-09c88441df7a" msprop:DbColumnName="id_jugador" msprop:FriendlyName="id_jugador" type="xs:int" />
+                  <xs:element name="nombre_jugador" msprop:design-time-name="e0beed88-61ce-4ec7-93d7-9e40b5347d4e" msprop:DbColumnName="nombre_jugador" msprop:FriendlyName="nombre_jugador" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="160" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="posicion" msprop:design-time-name="faf171a8-30cf-4178-95c2-bdf3fd30b0f3" msprop:DbColumnName="posicion" msprop:FriendlyName="posicion" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="70" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_dimNacionalidad" msprop:design-time-name="845d9a27-183e-444f-bd35-36b6a70a4ed5" msprop:FriendlyName="dimNacionalidad" msprop:DbSchemaName="dbo" msprop:DbTableName="dimNacionalidad" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="id_nacionalidad" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="80646049-8abf-44b7-a97c-56b5af5d2aac" msprop:DbColumnName="id_nacionalidad" msprop:FriendlyName="id_nacionalidad" type="xs:int" />
+                  <xs:element name="nacionalidad" msprop:design-time-name="aece9708-b67f-4953-ac61-a67f58e5dd7f" msprop:DbColumnName="nacionalidad" msprop:FriendlyName="nacionalidad" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="70" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_dimEstadio" msprop:design-time-name="98d0e9c1-c719-4d05-933a-3c37db60eff2" msprop:FriendlyName="dimEstadio" msprop:DbSchemaName="dbo" msprop:DbTableName="dimEstadio" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="id_estadio" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="7f5d79ac-faf6-4537-8693-003661fa0aeb" msprop:DbColumnName="id_estadio" msprop:FriendlyName="id_estadio" type="xs:int" />
+                  <xs:element name="nombre_ubicacion" msprop:design-time-name="1fdef35b-f630-4e58-8dbc-93a04286ccb4" msprop:DbColumnName="nombre_ubicacion" msprop:FriendlyName="nombre_ubicacion" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="80" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="id_ciudad" msprop:design-time-name="2b6759db-0235-4010-82bf-92f0b51ac837" msprop:DbColumnName="id_ciudad" msprop:FriendlyName="id_ciudad" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_dimCiudad" msprop:design-time-name="3c9b71e7-db74-4288-802a-a6e32eb885c1" msprop:FriendlyName="dimCiudad" msprop:DbSchemaName="dbo" msprop:DbTableName="dimCiudad" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="id_ciudad" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="9b42cf08-4212-4a24-b0c7-09ab9492f615" msprop:DbColumnName="id_ciudad" msprop:FriendlyName="id_ciudad" type="xs:int" />
+                  <xs:element name="nombre_ciudad" msprop:design-time-name="16618b99-49da-4b24-82ef-a3d20f0a7b9c" msprop:DbColumnName="nombre_ciudad" msprop:FriendlyName="nombre_ciudad" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_dimTiempo" />
+          <xs:field xpath="PK_Fecha" />
+        </xs:unique>
+        <xs:unique name="dbo_dimEquipo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_dimEquipo" />
+          <xs:field xpath="id_equipo" />
+        </xs:unique>
+        <xs:unique name="dbo_dimTorneo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_dimTorneo" />
+          <xs:field xpath="id_torneo" />
+        </xs:unique>
+        <xs:unique name="dbo_dimJugador_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_dimJugador" />
+          <xs:field xpath="id_jugador" />
+        </xs:unique>
+        <xs:unique name="dbo_dimNacionalidad_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_dimNacionalidad" />
+          <xs:field xpath="id_nacionalidad" />
+        </xs:unique>
+        <xs:unique name="dbo_dimEstadio_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_dimEstadio" />
+          <xs:field xpath="id_estadio" />
+        </xs:unique>
+        <xs:unique name="dbo_dimCiudad_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_dimCiudad" />
+          <xs:field xpath="id_ciudad" />
+        </xs:unique>
+        <xs:keyref name="FK_dimEstadio_dimCiudad" refer="dbo_dimCiudad_Constraint1">
+          <xs:selector xpath=".//dbo_dimEstadio" />
+          <xs:field xpath="id_ciudad" />
+        </xs:keyref>
+      </xs:element>
+      <xs:annotation>
+        <xs:appinfo>
+          <msdata:Relationship name="factRendimientoJugador-dimJugador" msdata:parent="dbo_dimJugador" msdata:child="dbo_factRendimientoJugador" msdata:parentkey="id_jugador" msdata:childkey="id_jugador" msprop:IsLogical="True" msprop:Description="" />
+          <msdata:Relationship name="factRendimientoJugador-dimTorneo" msdata:parent="dbo_dimTorneo" msdata:child="dbo_factRendimientoJugador" msdata:parentkey="id_torneo" msdata:childkey="id_torneo" msprop:IsLogical="True" msprop:Description="" />
+          <msdata:Relationship name="factRendimientoJugador-dimEquipo" msdata:parent="dbo_dimEquipo" msdata:child="dbo_factRendimientoJugador" msdata:parentkey="id_equipo" msdata:childkey="id_equipo" msprop:IsLogical="True" msprop:Description="" />
+          <msdata:Relationship name="factRendimientoJugador-dimNacionalidad" msdata:parent="dbo_dimNacionalidad" msdata:child="dbo_factRendimientoJugador" msdata:parentkey="id_nacionalidad" msdata:childkey="id_nacionalidad" msprop:IsLogical="True" msprop:Description="" />
+          <msdata:Relationship name="factRendimientoJugador-dimEstadio" msdata:parent="dbo_dimEstadio" msdata:child="dbo_factRendimientoJugador" msdata:parentkey="id_estadio" msdata:childkey="id_estadio" msprop:IsLogical="True" msprop:Description="" />
+          <msdata:Relationship name="factRendimientoJugador-dimTiempo" msdata:parent="dbo_dimTiempo" msdata:child="dbo_factRendimientoJugador" msdata:parentkey="PK_Fecha" msdata:childkey="id_tiempo" msprop:IsLogical="True" msprop:Description="" />
+        </xs:appinfo>
+      </xs:annotation>
+    </xs:schema>
+    <viewFactRendimientoJugador xmlns="" />
+  </Schema>
+</DataSourceView>
