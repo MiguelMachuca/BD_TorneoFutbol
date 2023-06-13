@@ -8,7 +8,7 @@
     <TransactionalDeployment>false</TransactionalDeployment>
     <PartitionDeployment>DeployPartitions</PartitionDeployment>
     <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
-    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <ProcessingOption>Default</ProcessingOption>
     <OutputScript></OutputScript>
     <ImpactAnalysisFile></ImpactAnalysisFile>
     <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
@@ -19,399 +19,399 @@
     <ObjectSnapshots>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
-        <TimeStamp>S35BRGkDyZK16vEEzl+ReKQVE88=09/06/2023 6:29:2309/06/2023 6:29:23</TimeStamp>
+        <TimeStamp>S35BRGkDyZK16vEEzl+ReKQVE88=09/06/2023 6:29:2310/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>DW Torneo Futbol</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>rAWO6SCGiHksRScnG4NA26CcyiY=09/06/2023 6:41:0009/06/2023 6:38:47</TimeStamp>
+        <TimeStamp>rAWO6SCGiHksRScnG4NA26CcyiY=09/06/2023 6:41:0010/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>viewFactEquipo</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>A4HKB12Xirnk5Xjimm5Hv+lCIDI=09/06/2023 6:52:1009/06/2023 6:48:54</TimeStamp>
+        <TimeStamp>A4HKB12Xirnk5Xjimm5Hv+lCIDI=09/06/2023 6:52:1010/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>viewFactGol</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>TYdcOPm16OaVF89ARO22Vw8PsVs=09/06/2023 7:33:3309/06/2023 7:11:16</TimeStamp>
+        <TimeStamp>TYdcOPm16OaVF89ARO22Vw8PsVs=09/06/2023 7:33:3310/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>viewFactRendimientoJugador</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>xwu4+MMsI5pwry3zBhR1aPy+Jgo=09/06/2023 7:51:0609/06/2023 7:33:33</TimeStamp>
+        <TimeStamp>xwu4+MMsI5pwry3zBhR1aPy+Jgo=09/06/2023 7:51:0610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>viewFactFairPlay</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>up5EEc8LKEmw2tRmIuAB/2zhmjs=09/06/2023 7:59:3509/06/2023 7:51:05</TimeStamp>
+        <TimeStamp>up5EEc8LKEmw2tRmIuAB/2zhmjs=09/06/2023 7:59:3510/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>viewFactArbitro</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>wZ0a7pQN+kyl1fxo0v7egF3AwvE=09/06/2023 9:43:2209/06/2023 7:59:35</TimeStamp>
+        <TimeStamp>wZ0a7pQN+kyl1fxo0v7egF3AwvE=09/06/2023 9:43:2210/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>viewFactCumplimientoDeTiempos</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>ccOnWphs+2CpecCxHFYcWld/dHw=09/06/2023 9:23:4209/06/2023 8:24:43</TimeStamp>
+        <TimeStamp>ccOnWphs+2CpecCxHFYcWld/dHw=09/06/2023 9:23:4210/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>viewFactTecnico</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>X4+J0bB99S29lcemcEo+waWil/M=09/06/2023 9:33:2409/06/2023 9:23:41</TimeStamp>
+        <TimeStamp>X4+J0bB99S29lcemcEo+waWil/M=09/06/2023 9:33:2410/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>viewFactPosicionEquipo</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>nXZgdXaLLCC8VZs+e2nuy1RbUwE=09/06/2023 6:56:5609/06/2023 6:40:59</TimeStamp>
+        <TimeStamp>nXZgdXaLLCC8VZs+e2nuy1RbUwE=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Torneo</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>eqxLgSFAzyrzFH1YgQPe6uMokfA=09/06/2023 6:56:5609/06/2023 6:40:59</TimeStamp>
+        <TimeStamp>eqxLgSFAzyrzFH1YgQPe6uMokfA=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Estadio</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>YdaggTIx2bNhArhqWdog5Dov76w=09/06/2023 6:56:5609/06/2023 6:40:59</TimeStamp>
+        <TimeStamp>YdaggTIx2bNhArhqWdog5Dov76w=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Equipo</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>o5SFMa7fxWBpTknjzreKLTBo9+c=09/06/2023 6:56:5609/06/2023 6:40:59</TimeStamp>
+        <TimeStamp>o5SFMa7fxWBpTknjzreKLTBo9+c=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Equipo Local Visitante</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>o2+29MC7x2Yh9ta+6gcO6QuwMLQ=09/06/2023 6:56:5609/06/2023 6:40:59</TimeStamp>
+        <TimeStamp>o2+29MC7x2Yh9ta+6gcO6QuwMLQ=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tiempo</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>MaWhYsc3N74+eJLb2K/x2ZNN/PA=09/06/2023 6:56:5609/06/2023 6:52:10</TimeStamp>
+        <TimeStamp>MaWhYsc3N74+eJLb2K/x2ZNN/PA=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Jugador</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>VFdWeLcOGsHlZDIKSf9w1UIbsQc=09/06/2023 6:56:5609/06/2023 6:52:10</TimeStamp>
+        <TimeStamp>VFdWeLcOGsHlZDIKSf9w1UIbsQc=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Torneo 1</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>+HMsb/dZPLLAW/BGuySyZzcvW7w=09/06/2023 6:56:5609/06/2023 6:52:10</TimeStamp>
+        <TimeStamp>+HMsb/dZPLLAW/BGuySyZzcvW7w=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Estadio 1</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>bqZ8ZizvrvDVkKSveLDI14EEvrU=09/06/2023 6:56:5609/06/2023 6:52:10</TimeStamp>
+        <TimeStamp>bqZ8ZizvrvDVkKSveLDI14EEvrU=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Equipo 1</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>+eQYD8kxUeKZxUjoUbZuVACOzKc=09/06/2023 6:56:5609/06/2023 6:52:10</TimeStamp>
+        <TimeStamp>+eQYD8kxUeKZxUjoUbZuVACOzKc=09/06/2023 6:56:5610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Nacionalidad</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>0Ysmy3mF4yIklOXawWEZAevNAvA=09/06/2023 6:56:5709/06/2023 6:52:10</TimeStamp>
+        <TimeStamp>0Ysmy3mF4yIklOXawWEZAevNAvA=09/06/2023 6:56:5710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tiempo 1</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>EInHiTBzgplcN2IN6Yv7xehnic4=09/06/2023 10:10:1709/06/2023 9:33:23</TimeStamp>
+        <TimeStamp>EInHiTBzgplcN2IN6Yv7xehnic4=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Jugador 1</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>3vEF3R8L84xO5urSjcOI3t9h31s=09/06/2023 10:10:1709/06/2023 9:33:24</TimeStamp>
+        <TimeStamp>3vEF3R8L84xO5urSjcOI3t9h31s=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Torneo 2</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>INRLxt9bRwSyjaTNjDgLoNqgdTo=09/06/2023 10:10:1709/06/2023 9:33:24</TimeStamp>
+        <TimeStamp>INRLxt9bRwSyjaTNjDgLoNqgdTo=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Equipo 2</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>keyMi9Ce9B3o5k4BI9+nqeLRDQM=09/06/2023 10:10:1709/06/2023 9:33:24</TimeStamp>
+        <TimeStamp>keyMi9Ce9B3o5k4BI9+nqeLRDQM=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Nacionalidad 1</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>ev8qR4IB/T3wfCDLFKmZKHCre3w=09/06/2023 10:10:1709/06/2023 9:33:24</TimeStamp>
+        <TimeStamp>ev8qR4IB/T3wfCDLFKmZKHCre3w=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Estadio 2</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>ZeK/HZAr/VzFNVPDJA1WwF2I2XY=09/06/2023 10:10:1709/06/2023 9:33:24</TimeStamp>
+        <TimeStamp>ZeK/HZAr/VzFNVPDJA1WwF2I2XY=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tiempo 2</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>11X97ydZ4+IXIoAWdGOZSI4luck=09/06/2023 10:10:1709/06/2023 9:38:38</TimeStamp>
+        <TimeStamp>11X97ydZ4+IXIoAWdGOZSI4luck=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Equipo 3</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>HLZ3BmRER1fabABZMAna0ZxWyzU=09/06/2023 16:52:1609/06/2023 9:38:38</TimeStamp>
+        <TimeStamp>HLZ3BmRER1fabABZMAna0ZxWyzU=09/06/2023 16:52:1610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Torneo 3</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>dz7hlTCnJPAx2TsPJOul0fFk864=09/06/2023 10:10:1709/06/2023 9:38:38</TimeStamp>
+        <TimeStamp>dz7hlTCnJPAx2TsPJOul0fFk864=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tipo Falta</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>2n/bLXM9U20HcIuwBH+fel91Jds=09/06/2023 10:10:1709/06/2023 9:38:38</TimeStamp>
+        <TimeStamp>2n/bLXM9U20HcIuwBH+fel91Jds=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tarjeta</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>nrp1pS7Oda1ygJaJfMvFxb7VXgE=09/06/2023 16:52:1709/06/2023 9:38:38</TimeStamp>
+        <TimeStamp>nrp1pS7Oda1ygJaJfMvFxb7VXgE=09/06/2023 16:52:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tiempo 3</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>7WqrqyUKGbqNcdYGUAp+nHzljw0=09/06/2023 10:10:1709/06/2023 9:38:38</TimeStamp>
+        <TimeStamp>7WqrqyUKGbqNcdYGUAp+nHzljw0=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Jugador 2</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>1El5tPh0K83lz7OQgQAD4LW9MvE=09/06/2023 10:10:1709/06/2023 9:40:55</TimeStamp>
+        <TimeStamp>1El5tPh0K83lz7OQgQAD4LW9MvE=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Arbitro</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>GlRBjIiUoBx64Ne/d1YbMX+E/Nk=09/06/2023 10:10:1709/06/2023 9:40:55</TimeStamp>
+        <TimeStamp>GlRBjIiUoBx64Ne/d1YbMX+E/Nk=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Torneo 4</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>muqOOGiRcHmYVu6F9PNa8xoWJS4=09/06/2023 10:10:1709/06/2023 9:40:55</TimeStamp>
+        <TimeStamp>muqOOGiRcHmYVu6F9PNa8xoWJS4=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tiempo 4</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>4XoP2kII2JEF/kQux/jxAezV3gQ=09/06/2023 10:10:1709/06/2023 9:40:55</TimeStamp>
+        <TimeStamp>4XoP2kII2JEF/kQux/jxAezV3gQ=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Estadio 3</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>pfkd7sD9ZMGLslHxdjqQn+pOt/0=09/06/2023 10:10:1709/06/2023 9:43:21</TimeStamp>
+        <TimeStamp>pfkd7sD9ZMGLslHxdjqQn+pOt/0=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Estadio 4</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>hnc02YfsXY4cbw3S6MAsoLpO1zk=09/06/2023 10:10:1709/06/2023 9:43:22</TimeStamp>
+        <TimeStamp>hnc02YfsXY4cbw3S6MAsoLpO1zk=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Arbitro 1</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>nBuTz9P0j9usmgMAZNFH/GZwhtM=09/06/2023 10:10:1709/06/2023 9:43:22</TimeStamp>
+        <TimeStamp>nBuTz9P0j9usmgMAZNFH/GZwhtM=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Torneo 5</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>J5HEbLQUtqQS1cW62rUCFHcFYpk=09/06/2023 10:10:1709/06/2023 9:43:22</TimeStamp>
+        <TimeStamp>J5HEbLQUtqQS1cW62rUCFHcFYpk=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Partido</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>TVXusP4TTnhMevzK8FVBEy4wIgc=09/06/2023 10:10:1709/06/2023 9:43:22</TimeStamp>
+        <TimeStamp>TVXusP4TTnhMevzK8FVBEy4wIgc=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Periodo</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>3GIxdFk9PfYAU39k7Cc2brZJFnI=09/06/2023 10:10:1709/06/2023 9:43:22</TimeStamp>
+        <TimeStamp>3GIxdFk9PfYAU39k7Cc2brZJFnI=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tiempo 5</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>d++ugdyyb2G5OjY6M/dY5XGm91I=09/06/2023 10:10:1709/06/2023 9:46:36</TimeStamp>
+        <TimeStamp>d++ugdyyb2G5OjY6M/dY5XGm91I=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tiempo 6</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>W0kM2YHZ1QinH7yCmPCR7JOw+b8=09/06/2023 10:10:1709/06/2023 9:46:36</TimeStamp>
+        <TimeStamp>W0kM2YHZ1QinH7yCmPCR7JOw+b8=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Tecnico</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>4otEBDe4lFIKJt+jwyOuHWWtvIk=09/06/2023 10:10:1709/06/2023 9:46:36</TimeStamp>
+        <TimeStamp>4otEBDe4lFIKJt+jwyOuHWWtvIk=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Equipo 4</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>8Z8GN46GyU8JKlflYh7VS3O5dNU=09/06/2023 10:10:1709/06/2023 9:46:36</TimeStamp>
+        <TimeStamp>8Z8GN46GyU8JKlflYh7VS3O5dNU=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Torneo 6</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>HUdW71/Rki7uocqbXSSQyZ2Jg0Y=09/06/2023 10:10:1709/06/2023 9:51:18</TimeStamp>
+        <TimeStamp>HUdW71/Rki7uocqbXSSQyZ2Jg0Y=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Posicion</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>OluCy7xxXCUCZzZ6FXTV2Y99+7Q=09/06/2023 10:10:1709/06/2023 9:51:18</TimeStamp>
+        <TimeStamp>OluCy7xxXCUCZzZ6FXTV2Y99+7Q=09/06/2023 10:10:1710/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Torneo 7</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>Uexyxw//WrvI0EV7wVG1CIRLoSs=09/06/2023 10:10:1609/06/2023 9:51:18</TimeStamp>
+        <TimeStamp>Uexyxw//WrvI0EV7wVG1CIRLoSs=09/06/2023 10:10:1610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>Dim Equipo 5</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>YfQfcrncgUw+s+6hxD0YGuFfWxU=09/06/2023 6:56:5609/06/2023 6:40:59viOh2sfyxxB/R/peRGRg9DtBV6w=09/06/2023 6:41:0009/06/2023 6:40:59</TimeStamp>
+        <TimeStamp>6hjCq7lefRYXp4CRYJVgdCp88nM=10/06/2023 22:22:0110/06/2023 15:11:57viOh2sfyxxB/R/peRGRg9DtBV6w=09/06/2023 6:41:0010/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>cubeFactEquipo</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>7IjRcT76RpBWERnIfYwxB9boELU=09/06/2023 15:42:0609/06/2023 6:52:10fE5OG0QEkHOLY6ptMXjjlvfj9aE=09/06/2023 6:52:1009/06/2023 6:52:10</TimeStamp>
+        <TimeStamp>7IjRcT76RpBWERnIfYwxB9boELU=09/06/2023 15:42:0610/06/2023 15:11:57fE5OG0QEkHOLY6ptMXjjlvfj9aE=09/06/2023 6:52:1010/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>cubeFactGol</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>9ksFFE3P+w8Lqg+eDlkmpleAm/c=09/06/2023 10:10:1709/06/2023 9:33:230agDZ+Tfou4EOnAJ9zFp4obUc1E=09/06/2023 9:33:2409/06/2023 9:33:23</TimeStamp>
+        <TimeStamp>9ksFFE3P+w8Lqg+eDlkmpleAm/c=09/06/2023 10:10:1710/06/2023 15:11:570agDZ+Tfou4EOnAJ9zFp4obUc1E=09/06/2023 9:33:2410/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>cubeFactRendimientoJugador</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>xgGLBA2Plre2pKSb/BH11MOX10s=09/06/2023 16:52:5209/06/2023 9:38:389KFH09b2EoXLQMMzE5c3O2FNyVw=09/06/2023 9:38:3809/06/2023 9:38:38</TimeStamp>
+        <TimeStamp>xgGLBA2Plre2pKSb/BH11MOX10s=09/06/2023 16:52:5210/06/2023 15:11:579KFH09b2EoXLQMMzE5c3O2FNyVw=09/06/2023 9:38:3810/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>cubeFactFairPlay</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>wO0eII1rtNo58PVCXSiF7glGE2c=09/06/2023 10:10:1709/06/2023 9:40:55D5hqMLiim/N3VWsrSHtylFmMzUU=09/06/2023 9:40:5509/06/2023 9:40:55</TimeStamp>
+        <TimeStamp>wO0eII1rtNo58PVCXSiF7glGE2c=09/06/2023 10:10:1710/06/2023 15:11:57D5hqMLiim/N3VWsrSHtylFmMzUU=09/06/2023 9:40:5510/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>cubeFactArbitro</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>3CU2p+XRaJFQ9zei65/CfusHIPI=09/06/2023 10:10:1709/06/2023 9:43:21+KFtx4Jap0rmFXqBvQJZvdKntOc=09/06/2023 9:43:2209/06/2023 9:43:21</TimeStamp>
+        <TimeStamp>3CU2p+XRaJFQ9zei65/CfusHIPI=09/06/2023 10:10:1710/06/2023 15:11:57+KFtx4Jap0rmFXqBvQJZvdKntOc=09/06/2023 9:43:2210/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>cubeFactCumplimientoDeTiempos</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>ADxBr6niD49WQzOfL9TqvbETFpM=09/06/2023 10:10:1709/06/2023 9:46:368Cs/XoSOcA/lHPs2FBHtm0fEu9E=09/06/2023 9:46:3609/06/2023 9:46:36</TimeStamp>
+        <TimeStamp>ADxBr6niD49WQzOfL9TqvbETFpM=09/06/2023 10:10:1710/06/2023 15:11:578Cs/XoSOcA/lHPs2FBHtm0fEu9E=09/06/2023 9:46:3610/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>cubeFactTecnico</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>x7aTFGw8SkcWjBc4elqCJCLAFb0=09/06/2023 10:10:1709/06/2023 9:51:17woYBf7Ew7huiqOmgG7ZqoR8UHbI=09/06/2023 9:51:1809/06/2023 9:51:17</TimeStamp>
+        <TimeStamp>x7aTFGw8SkcWjBc4elqCJCLAFb0=09/06/2023 10:10:1710/06/2023 15:11:57woYBf7Ew7huiqOmgG7ZqoR8UHbI=09/06/2023 9:51:1810/06/2023 15:11:57</TimeStamp>
         <ID>
           <String>cubeFactPosicionEquipo</String>
         </ID>
@@ -419,7 +419,7 @@
     </ObjectSnapshots>
     <DatabaseSnapshot>
       <Type>Microsoft.AnalysisServices.Database</Type>
-      <TimeStamp>JYP2qP5rFZGm0oJhNU/H6qe773U=09/06/2023 6:31:2209/06/2023 6:28:27</TimeStamp>
+      <TimeStamp>JYP2qP5rFZGm0oJhNU/H6qe773U=09/06/2023 6:31:2210/06/2023 15:11:57</TimeStamp>
       <ID>
         <String>DW_TorneoFutbol</String>
       </ID>
@@ -428,5 +428,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2023-06-10T19:09:15.513333Z</LastDeployed>
+  <LastDeployed>2023-06-11T02:22:04.456667Z</LastDeployed>
 </DeploymentSnapshot>

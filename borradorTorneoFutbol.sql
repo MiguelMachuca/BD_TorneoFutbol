@@ -3283,3 +3283,14 @@ DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
 Falta AS f ON da.id_detalle_alineacion = f.id_detalle_alineacion INNER JOIN
 ProgramaPartido AS pp ON a.id_alineacion = pp.id_alineacion_local OR 
 a.id_alineacion = pp.id_alineacion_visitante
+
+
+
+SELECT da.id_jugador, a.id_equipo, pp.id_torneo, pp.id_ubicacion_estadio AS id_estadio, 
+da.id_nacionalidad, CAST(a.fecha AS date) AS id_tiempo,1 AS goles_anotados, 
+g.minuto AS minuto_gol
+FROM Alineacion AS a INNER JOIN
+DetalleAlineacion AS da ON a.id_alineacion = da.id_alineacion INNER JOIN
+Goleo AS g ON da.id_detalle_alineacion = g.id_detalle_alineacion INNER JOIN
+ProgramaPartido AS pp ON (a.id_alineacion = pp.id_alineacion_local 
+OR a.id_alineacion = pp.id_alineacion_visitante)
